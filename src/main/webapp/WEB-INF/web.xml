@@ -39,15 +39,17 @@
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	
-	<!-- <resource-ref>
-		<description>Students DataSource</description>
-		<res-ref-name>jdbc/students_con</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref> -->
-	
-	
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bootstrap</param-value>
+	</context-param>
+
+	<!-- <resource-ref> <description>Students DataSource</description> <res-ref-name>jdbc/students_con</res-ref-name> 
+		<res-type>javax.sql.DataSource</res-type> <res-auth>Container</res-auth> 
+		</resource-ref> -->
+
+
 
 </web-app>
 	
