@@ -1,5 +1,7 @@
 package com.fpe.statsTrader.entity;
 
+import static org.hamcrest.CoreMatchers.is;
+
 import java.io.IOException;
 
 import javax.faces.bean.ManagedBean;
@@ -11,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fpe.statsTrader.utils.IsValidEmail;
 
 @Entity
 @Table(name="trader")
@@ -206,7 +210,19 @@ public class Trader {
 	
 
 	public String submitUserResponse() throws IOException{
-		return "enviarcodver?faces-redirect=true";
+		
+		//TODO
+		//comprobar si la dirección de email contiene un dominio de email temporal
+		//compronar si el nombre de usuario ya está siendo usado por otro usuario
+		//comprobar si dicha dirección de email ya esta en uso
+		//comprobar esto en cuando haya acceso a la base de datos
+		IsValidEmail isValidEmail = new IsValidEmail();
+		boolean emailValido = isValidEmail.isValidEmailAddress(email);
+		if (emailValido){
+			return "enviarcodver?faces-redirect=true";
+		} else {
+			return "emailinvalido?faces-redirect=true";
+		}
 	}  
 	
 }
