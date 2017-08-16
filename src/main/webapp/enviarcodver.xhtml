@@ -6,39 +6,60 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Verificar Código</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Verificar Código</title>
 </h:head>
 
 <h:body>
+
+	<ui:param name="traderEmail" value="#{trader.email}"></ui:param>
+	<ui:param name="user" value="#{trader.user}"></ui:param>
+	
 	<p:layout fullPage="true">
 	
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
-			<h:outputText value = "Cabecera" />
+			<h:outputText value="Cabecera" />
 		</p:layoutUnit>
-	
+
 		<p:layoutUnit position="west" size="200" header="Menu Aplicación">
 			<h:form>
 				<p:menu>
 					<p:submenu label="Usuario">
-			            <p:menuitem value="Iniciar Sesión" outcome="login" icon="ui-icon-star"/>
-			            <p:menuitem value="Cerrar Sesión" outcome="logout" icon="ui-icon-star"/>
-			            <p:menuitem value="Crear Cuenta" outcome="crearcuenta" icon="ui-icon-star"/>
-			            <p:menuitem value="Modificar Cuenta" outcome="modificarcuenta" icon="ui-icon-star"/>
-		        	</p:submenu>
-				
+						<p:menuitem value="Iniciar Sesión" outcome="login"
+							icon="ui-icon-star" />
+						<p:menuitem value="Cerrar Sesión" outcome="logout"
+							icon="ui-icon-star" />
+						<p:menuitem value="Crear Cuenta" outcome="crearcuenta"
+							icon="ui-icon-star" />
+						<p:menuitem value="Modificar Cuenta" outcome="modificarcuenta"
+							icon="ui-icon-star" />
+					</p:submenu>
+
 				</p:menu>
-			
+
 			</h:form>
 		</p:layoutUnit>
-	
+
 		<p:layoutUnit position="center">
-	        <h:outputText value = "Sólicitar código de verificación a #{trader.email}" />
-	        
-	        
-	    </p:layoutUnit>
-	
-	</p:layout>	
+			<p>
+				<h:outputText
+					value="Sólicitar código de verificación para #{trader.user} a #{trader.email}" />
+				<br />
+			</p>
+
+			<h:form>
+				<p:commandButton value="Solicitar Código"
+					actionListener="#{generaCodigoAleatorio.giveMetheCode}" 
+					action="#{generaCodigoAleatorio.enviaCodigoPorEmail(traderEmail, user)}"/>
+			</h:form>
+
+			<br />
+			<br />
+
+
+		</p:layoutUnit>
+
+	</p:layout>
 
 </h:body>
 
