@@ -1,11 +1,13 @@
 package com.fpe.statsTrader.utils;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.stereotype.Component;
 
-import com.fpe.statsTrader.entity.Trader;
+import com.fpe.statsTrader.jpa.CreaCuentaTraderVerificado;
 
 @Component
 @ManagedBean
@@ -39,8 +41,27 @@ public class GeneraCodigoAleatorio {
 			System.out.println("Texto mensaje:\n" + textoEmail);
 			sendEmail.send(email, "Statstrader codigo de verificacion.", textoEmail);	
 			System.out.println("email enviado...");
+			showMessageExito(email);
 		} catch (Exception e) {
 			System.out.println("Excepción enviando codigo de verificación: " + codigoVerificacion +" a " + email);
+			showMessageNoExito(email);
+		}
+		
+	}
+	
+	public String verificaCodigo(String userCode) {
+		
+		System.out.println("codigo introducido por el usuario " + userCode);
+		if (userCode.equals(this.getCodigoVerificacion())){
+			System.out.println("Código correctamente verificado");
+			//añadamos el trader verificado a la BD
+			CreaCuentaTraderVerificado creaCuentaTraderVerificado = new CreaCuentaTraderVerificado();
+			creaCuentaTraderVerificado.saveTrader();
+			return "creacuentaverificada?faces-redirect=true";
+		} else {
+			System.out.println("Código incorrectamente verificado");
+			showMessageCódigoInvalido();
+			return null;
 		}
 		
 	}
@@ -53,5 +74,19 @@ public class GeneraCodigoAleatorio {
 		this.codigoVerificacion = codigoVerificacion;
 	}
 	
+	public void showMessageExito(String email) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Éxito!", "Email enviado a " + email));
+    }
+	
+	public void showMessageNoExito(String email) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Error!", "No se pudo enviar el email a " + email));
+    }
+	
+	public void showMessageCódigoInvalido() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Error!", "El código introducido es erroneo"));
+    }
 
 }

@@ -7,16 +7,22 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Verificar Código</title>
+	<title>Crear Cuenta Usuario</title>
+
+	<style>
+.error {
+	color: red;
+}
+.fuenteMenor {
+	color: blue;
+	font-size: 12px;
+}
+</style>
 </h:head>
 
 <h:body>
-
-	<ui:param name="traderEmail" value="#{trader.email}"></ui:param>
-	<ui:param name="user" value="#{trader.user}"></ui:param>
-	
 	<p:layout fullPage="true">
-	
+
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
 			<h:outputText value="Cabecera" />
 		</p:layoutUnit>
@@ -41,37 +47,9 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<p>
-				<h:outputText
-					value="Sólicitar código de verificación para #{trader.user} a #{trader.email}" />
-				<br />
-			</p>
-
-			<h:form>
-				<p:growl id="growl" showDetail="true" sticky="true" />
-				<p:commandButton value="Solicitar Código"
-					actionListener="#{generaCodigoAleatorio.giveMetheCode}" 
-					action="#{generaCodigoAleatorio.enviaCodigoPorEmail(traderEmail, user)}"
-					update="growl vericodform" />
-					
-					
-			</h:form>
-			<br />
-			<br />
-			<h:form id="vericodform">
-				<p:growl id="growl2" showDetail="true" sticky="true" />
-				<h:outputLabel for="idCodigo" value="Código Verificación: " /><br/>
-				<p:inputText binding="#{inputcode}" id="idCodigo" label="Código Verificación"
-					required="true">
-					<f:validateLength minimum="5" maximum="253"/>
-				</p:inputText>
-				<br/>
-				<p:commandButton value="Verificar Código"
-					action="#{generaCodigoAleatorio.verificaCodigo(inputcode.value)}"
-					update="growl2" />
-			</h:form>
 			
-
+			<h3 style="text-align: center; color: blue;">Cuenta verificada correctamente</h3>
+				
 
 		</p:layoutUnit>
 

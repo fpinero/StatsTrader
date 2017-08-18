@@ -1,6 +1,5 @@
 package com.fpe.statsTrader.entity;
 
-import static org.hamcrest.CoreMatchers.is;
 
 import java.io.IOException;
 
@@ -199,7 +198,7 @@ public class Trader {
 	public void setMaxPerdidasMensual(Double maxPerdidasMensual) {
 		this.maxPerdidasMensual = maxPerdidasMensual;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Trader [id=" + id + ", nombre=" + nombre + ", user=" + user + ", password=" + password + ", email="
@@ -219,6 +218,9 @@ public class Trader {
 		IsValidEmail isValidEmail = new IsValidEmail();
 		boolean emailValido = isValidEmail.isValidEmailAddress(email);
 		if (emailValido){
+			//añadamos el objeto Trader a un attributo de la sesion 
+			//para que sea accesible desde otras clases
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("thisTrader", this);
 			return "enviarcodver?faces-redirect=true";
 		} else {
 			return "emailinvalido?faces-redirect=true";
