@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+/* Util para mostar los formularios centrados cuando sean necesarios */
+
+.panelGridCenter {
+    margin: 0 auto;
+}
+
+/* color rojo para los mensajes de error */
+.error {
+	color: red;
+}
+
+/* fuente menor para la pagina de crear cuenta */
+
+.fuenteMenor {
+	color: green;
+	font-size: 12px;
+}
+
+/* fuente menor para los placeholder */
+
+.placeHolder::-webkit-input-placeholder {
+  font-size: 12px;
+}
+
+.placeHolder:-ms-input-placeholder {
+  font-size: 12px;
+}
+
+.placeHolder:-moz-placeholder {
+  font-size: 12px;
+}
+
+.placeHolder::-moz-placeholder {
+  font-size: 12px;
+}
