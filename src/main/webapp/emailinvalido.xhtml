@@ -17,6 +17,13 @@
 </h:head>
 
 <h:body>
+
+	<!-- SI EL EMAIL ES INVALIDO, AÚN NO EXISTE EL PARAMETRO TRADER EN LA SESION, ASI Q ESTA COMPROBACIÓN SOBRA EN EST PAGINA -->
+	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
+	<!-- <f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderExists}" />
+	</f:metadata> -->
+
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
@@ -43,12 +50,11 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<h:outputText
-				value="El email #{trader.email} no cumple los requisitos de una dirección válida"
+			<h:outputText value="#{trader.textoErrorEmailInvalido}"
 				styleClass="error" />
-			<br />
+			<br /> <br />
 			<h:outputText
-				value="Por favor pulse el botón retroceder y modifique la dirección de email"
+				value="Por favor pulse el botón retroceder y modifique dicho campo"
 				styleClass="error" />
 			<br />
 			<br />

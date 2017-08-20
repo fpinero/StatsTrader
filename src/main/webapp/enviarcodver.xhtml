@@ -17,6 +17,11 @@
 
 <h:body>
 
+	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
+	<f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderExists}" />
+	</f:metadata>
+
 	<ui:param name="traderEmail" value="#{trader.email}"></ui:param>
 	<ui:param name="user" value="#{trader.user}"></ui:param>
 	

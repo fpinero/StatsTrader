@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fpe.statsTrader.utils.IsValidEmail;
 
@@ -73,6 +74,9 @@ public class Trader {
 	
 	@Column(name="max_perdidas_mensual")
 	private Double maxPerdidasMensual;
+	
+	@Transient  //indica que no es un campo de la tabla
+	private String textoErrorEmailInvalido;
 
 	public Trader() {
 		
@@ -199,6 +203,14 @@ public class Trader {
 		this.maxPerdidasMensual = maxPerdidasMensual;
 	}
 	
+	public String getTextoErrorEmailInvalido() {
+		return textoErrorEmailInvalido;
+	}
+
+	public void setTextoErrorEmailInvalido(String textoErrorEmailInvalido) {
+		this.textoErrorEmailInvalido = textoErrorEmailInvalido;
+	}
+
 	@Override
 	public String toString() {
 		return "Trader [id=" + id + ", nombre=" + nombre + ", user=" + user + ", password=" + password + ", email="
@@ -210,19 +222,32 @@ public class Trader {
 
 	public String submitUserResponse() throws IOException{
 		
-		//TODO
-		//comprobar si la dirección de email contiene un dominio de email temporal
-		//compronar si el nombre de usuario ya está siendo usado por otro usuario
-		//comprobar si dicha dirección de email ya esta en uso
-		//comprobar esto en cuando haya acceso a la base de datos
 		IsValidEmail isValidEmail = new IsValidEmail();
+		//comprobar si la dirección de email contiene un dominio de email temporal
+		if (isValidEmail.isAnEmailDisposable(email)) {
+			setTextoErrorEmailInvalido("La dirección de email " + email + " no supera las reglas del firewall");
+			return "emailinvalido?faces-redirect=true";
+		}
+		//compronar si el nombre de usuario ya está siendo usado por otro usuario
+		if (isValidEmail.nombreUsuarioYaEnUso(user)) {
+			setTextoErrorEmailInvalido("El nombre de usuario: " + user + " no está disponible");
+			return "emailinvalido?faces-redirect=true";
+		}
+		//comprobar si dicha dirección de email ya esta en uso
+		if (isValidEmail.EmailYaEnUso(email)) {
+			setTextoErrorEmailInvalido("El email: " + email + " ya está en uso por otro usuario");
+			return "emailinvalido?faces-redirect=true";
+		}
+		//comprobar si la dirección de email es válida
 		boolean emailValido = isValidEmail.isValidEmailAddress(email);
 		if (emailValido){
 			//añadamos el objeto Trader a un attributo de la sesion 
 			//para que sea accesible desde otras clases
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("thisTrader", this);
+			setTextoErrorEmailInvalido("");
 			return "enviarcodver?faces-redirect=true";
 		} else {
+			setTextoErrorEmailInvalido("El email " + email + " no cumple los requisitos de una dirección válida");
 			return "emailinvalido?faces-redirect=true";
 		}
 	}  

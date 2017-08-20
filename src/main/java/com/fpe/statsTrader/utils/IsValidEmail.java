@@ -4,6 +4,10 @@ import javax.faces.bean.ManagedBean;
 
 import org.springframework.context.annotation.ComponentScan;
 
+import com.fpe.statsTrader.jpa.QueryEmailYaEnUso;
+import com.fpe.statsTrader.jpa.QueryForbidenDomains;
+import com.fpe.statsTrader.jpa.QueryNombreUsuarioYaEnUso;
+
 @ComponentScan
 @ManagedBean
 public class IsValidEmail {
@@ -20,5 +24,33 @@ public class IsValidEmail {
         System.out.println("Email válido: " + m.matches());
         return m.matches();
  }
+	
+	public boolean isAnEmailDisposable(String email) {
+		
+		QueryForbidenDomains qfd = new QueryForbidenDomains();
+		
+		boolean emailInvalido = qfd.isEmailDisposable(email);
+		
+		return emailInvalido;
+		
+	}
+	
+	public boolean nombreUsuarioYaEnUso(String userName) {
+		
+		QueryNombreUsuarioYaEnUso qnu = new QueryNombreUsuarioYaEnUso();
+		
+		boolean usuarioYaEnUso = qnu.isUsernameInUse(userName);
+		
+		return usuarioYaEnUso;
+	}
+	
+	public boolean EmailYaEnUso(String email) {
+		
+		QueryEmailYaEnUso qeu = new QueryEmailYaEnUso();
+		
+		boolean emailYaEnUso = qeu.isEmailInUse(email);
+		
+		return emailYaEnUso;
+	}
 	
 }

@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.fpe.statsTrader.entity.ForbidenDomains;
 import com.fpe.statsTrader.entity.Trader;
 
 public class WebApplicationInitializer implements org.springframework.web.WebApplicationInitializer {
@@ -35,6 +36,7 @@ public class WebApplicationInitializer implements org.springframework.web.WebApp
 			GlobalVars.factory = new Configuration()
 					.configure("hibernate.cfg.xml")
 					.addAnnotatedClass(Trader.class) /* Aquí habrá q ir añadiendo las demás Entities */
+					.addAnnotatedClass(ForbidenDomains.class)
 					.buildSessionFactory();
 		}
 		
