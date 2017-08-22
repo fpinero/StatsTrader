@@ -12,16 +12,10 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<h:outputStylesheet library="css" name="mystyle.css" />
-	<title>Login StatsTrader</title>
+	<title>Recuperar Password StatsTrader</title>
 </h:head>
 
 <h:body>
-
-	<!-- Solo debe estar aquí si el objeto Trader NO existe, si existe se le reenvía a modificarcuenta -->
-	<f:metadata>
-		<f:viewAction action="#{checkParams.checkTraderAlreadyExists}" />
-	</f:metadata>
-
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
@@ -48,38 +42,12 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-
-			<p:panelGrid columns="1" styleClass="panelGridCenter">
-					<h:form>
-						<p:growl id="growl" showDetail="false" />
-						<h3 style="text-align: center; color: blue;">Login Usuario</h3>
-						<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
-							<h:outputLabel for="idUser" value="User: " />
-							<p:inputText id="idUser" value="#{trader.user}" label="User"
-								required="true" placeholder="nombre de usuario"
-								styleClass="placeHolder">
-								<f:validateLength minimum="5" maximum="253" />
-							</p:inputText>
-
-							<h:outputLabel for="idPwd" value="Password: " />
-							<p:password id="idPwd" value="#{trader.password}"
-								label="Password" required="true"
-								placeholder="Indica tu password" styleClass="placeHolder">
-								<f:validateLength minimum="5" maximum="25" />
-							</p:password>
-
-						</p:panelGrid>
-						<br />
-						<div align="center">
-							<p:commandButton value="Iniciar Sesión" id="ajax" update="growl" />
-							<!-- action="#{trader.submitUserResponse()}" -->
-							<br /> <br />
-							<p:link style="font-size: 12px; color:blue;"
-								value="Olvidé la contraseña" outcome="recuperarpwd" />
-							<br /> <br />
-						</div>
-					</h:form>
-			</p:panelGrid>
+			<h:outputText value="Recuperar password" />
+			<h:outputText value="Recuperar password" />
+			<h:outputText value="Recuperar password" />
+			<h:outputText value="Recuperar password" />
+			<h:outputText value="Recuperar password" />
+			<h:outputText value="Recuperar password" />
 
 		</p:layoutUnit>
 

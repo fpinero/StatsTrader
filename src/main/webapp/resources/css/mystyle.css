@@ -35,3 +35,11 @@
 .placeHolder::-moz-placeholder {
   font-size: 12px;
 }
+
+/* centra el contenido de un panelgrid, util para el form del login */
+
+.panelGridCenter {
+    margin: 0 auto;
+}
+
+

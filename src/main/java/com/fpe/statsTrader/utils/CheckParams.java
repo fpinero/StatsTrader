@@ -1,5 +1,6 @@
 package com.fpe.statsTrader.utils;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -47,5 +48,27 @@ public class CheckParams {
 			return null;
 		}
 	}
+	
+	//Si la cuenta ha sido correctamente creada destruimos el parametro thisTrader y reenviamos a login
+		public String checkTraderCorrectamenteCreado() {
+			System.out.println(">>>>> Comprobando si thisTrader existe en checkTraderCorrectamenteCreado");
+			Trader thisTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
+			if (thisTrader != null) {
+				System.out.println("thisTrader no es null.. \n" + thisTrader.toString() + "\n" + 
+							"Procedemos a establecerlo a null");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("thisTrader", null);
+				showMessage();
+				return "login?faces-redirect=true";
+			} else {
+				return null;
+			}
+		}
+		
+		public void showMessage() {
+			System.out.println("enviando el mensaje de exito al crear la cuenta...");
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, new FacesMessage("Cuenta de usuario creada exitosamente!", "La cuenta de usuario ha sido creada correctamente"));
+	    }
+	
 
 }

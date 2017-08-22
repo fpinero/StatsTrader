@@ -18,11 +18,15 @@
 
 <h:body>
 
+	<p:growl showDetail="true" autoUpdate="true" sticky="true"/> 
+	
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
+	<!-- Si el trader ha sido exitosamente creado mostramos un mensaje growl y se le reenvía a login -->	
+		<f:viewAction action="#{checkParams.checkTraderCorrectamenteCreado}" />
 	</f:metadata>
-
+	
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
