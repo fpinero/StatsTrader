@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.jpa.QueryLogin;
+import com.fpe.statsTrader.jpa.QueryNombreUsuario;
 
 @ManagedBean
 @Component
@@ -54,8 +55,20 @@ public class CheckLogin {
 		}
 	}
 	
+	public void recuperarPwd() {
+		// comprobemos si el nombre de usuario existe
+		QueryNombreUsuario qnu = new QueryNombreUsuario();
+		boolean usuarioCorrecto = qnu.existeElUsuario(user);
+		//si todo fue bien le mostramos el mensaje de email enviado
+		if (usuarioCorrecto) {
+			showMessage("Éxito! Revise su correo para recuperar la contraseña.");
+		} else {
+		//en caso contrario le mostramos un error de usuario no existe
+			showMessage("Error! El nombre de usuario " + user +" no existe en StatsTrader.");
+		}
+	}
+	
 	public void showMessage(String msg) {
-		System.out.println("enviando el mensaje de exito o no del login");
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(msg, msg));
     }

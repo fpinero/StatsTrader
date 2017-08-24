@@ -16,6 +16,12 @@
 </h:head>
 
 <h:body>
+
+	<!-- Solo debe estar aquí si el objeto Trader NO existe, si existe se le reenvía a modificarcuenta -->
+	<f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderAlreadyExists}" />
+	</f:metadata>
+
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
@@ -42,12 +48,30 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<h:outputText value="Recuperar password" />
-			<h:outputText value="Recuperar password" />
-			<h:outputText value="Recuperar password" />
-			<h:outputText value="Recuperar password" />
-			<h:outputText value="Recuperar password" />
-			<h:outputText value="Recuperar password" />
+			<p:panelGrid columns="1" styleClass="panelGridCenter">
+					<h:form>
+						<p:growl id="growl" showDetail="false" sticky="false" life="4000"/>
+						<h3 style="text-align: center; color: blue;">Recuperar contraseña usuario</h3>
+						<h4 style="text-align: center; color: blue;">Indica tu nombre de usuario y recibirás en tu email 
+						la contraseña</h4>
+						<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
+							<h:outputLabel for="idUser" value="User: " />
+							<p:inputText id="idUser" value="#{checkLogin.user}" label="User"
+								required="true" placeholder="Nombre de usuario"
+								styleClass="placeHolder">
+								<f:validateLength minimum="5" maximum="253" />
+							</p:inputText>
+
+						</p:panelGrid>
+						<br />
+						<div align="center">
+							<p:commandButton value="Solicitar Contraseña" id="ajax" update="growl" 
+							 action="#{checkLogin.recuperarPwd}" />
+							<br /> <br />
+							
+						</div>
+					</h:form>
+			</p:panelGrid>
 
 		</p:layoutUnit>
 
