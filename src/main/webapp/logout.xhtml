@@ -16,6 +16,12 @@
 </h:head>
 
 <h:body>
+
+	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
+	<f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderExists}" />
+	</f:metadata>
+
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
@@ -42,12 +48,24 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<h:outputText value="Aqui va el contenido de la aplicación" />
-			<h:outputText value="Aqui va el contenido de la aplicación" />
-			<h:outputText value="Aqui va el contenido de la aplicación" />
-			<h:outputText value="Aqui va el contenido de la aplicación" />
-			<h:outputText value="Aqui va el contenido de la aplicación" />
-			<h:outputText value="Aqui va el contenido de la aplicación" />
+			<p:panelGrid columns="1" styleClass="panelGridCenter">
+				<h:form>
+					<h3 style="text-align: center; color: blue;">Cerrar sesión
+						usuario</h3>
+
+					<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
+						<h:outputText value="¿Desea cerrar la sesión?" />
+					</p:panelGrid>
+					<br />
+					<div align="center">
+						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" />
+						&nbsp;&nbsp;
+						<p:commandButton value="No" action="#{cerrarSesion.noCierraSesion}" />
+						<br /> <br />
+
+					</div>
+				</h:form>
+			</p:panelGrid>
 
 		</p:layoutUnit>
 
