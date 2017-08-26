@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fpe.statsTrader.utils.IsValidEmail;
 
 @Entity
@@ -37,7 +39,7 @@ public class Trader {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	private Integer id;
 	
 	@Column(name="nombre")
 	private String nombre;
@@ -99,11 +101,11 @@ public class Trader {
 		this.maxPerdidasMensual = maxPerdidasMensual;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -251,5 +253,26 @@ public class Trader {
 			return "emailinvalido?faces-redirect=true";
 		}
 	}  
+	
+	@Autowired
+	public void destruyeThisTrader() {
+		//se usa a la hora de cerrar la sesión
+		this.id = null;
+		this.nombre = null;
+		this.user = null;
+		this.password = null;
+		this.email = null;
+		this.BP = null;
+		this.costoPlataforma = null;
+		this.Saldo = null;
+		this.objetivoFase = null;
+		this.objetivoSemanal = null;
+		this.objetivoMensual = null;
+		this.maxPerdidasSemanal = null;
+		this.maxPerdidasMensual = null;
+		
+		System.out.println("Objeto Trader set a null todos sus campos...");
+		
+	}
 	
 }

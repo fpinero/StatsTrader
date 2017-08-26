@@ -58,12 +58,22 @@
 					</p:panelGrid>
 					<br />
 					<div align="center">
-						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" />
+						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" 
+							 actionListener="#{trader.destruyeThisTrader}" /> 
+						
+						<!-- Esto también funciona en JSF 2.2 por mucho que eclipse muestra un error en el binding	 -->
+						<!-- This is the consequence of the new EL 2.2 feature of calling a method in a value expression via 
+						the #{bean.method()} syntax instead of only referencing a property via the #{bean.property} -->
+						
+						<!-- <p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}">
+							<f:actionListener binding="#{trader.destruyeThisTrader()}" />
+						</p:commandButton>	 -->
+						
 						&nbsp;&nbsp;
 						<p:commandButton value="No" action="#{cerrarSesion.noCierraSesion}" />
 						<br /> <br />
 
-					</div>
+					</div> 
 				</h:form>
 			</p:panelGrid>
 

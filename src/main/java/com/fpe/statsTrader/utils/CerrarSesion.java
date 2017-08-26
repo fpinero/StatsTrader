@@ -1,14 +1,14 @@
 package com.fpe.statsTrader.utils;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.stereotype.Component;
 
 @ManagedBean
 @Component
-@SessionScoped
+@RequestScoped
 public class CerrarSesion {
 	
 	public CerrarSesion() {
