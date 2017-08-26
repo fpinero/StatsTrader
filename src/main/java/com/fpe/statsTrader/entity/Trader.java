@@ -14,14 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.fpe.statsTrader.utils.IsValidEmail;
 
 @Entity
 @Table(name="trader")
-@ManagedBean
 @SessionScoped
+@ManagedBean
 public class Trader {
 	
 	// annotate the class as an entity and map to db table
@@ -254,7 +252,6 @@ public class Trader {
 		}
 	}  
 	
-	@Autowired
 	public void destruyeThisTrader() {
 		//se usa a la hora de cerrar la sesión
 		this.id = null;

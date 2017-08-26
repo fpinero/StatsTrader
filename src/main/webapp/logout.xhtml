@@ -58,8 +58,9 @@
 					</p:panelGrid>
 					<br />
 					<div align="center">
-						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" 
-							 actionListener="#{trader.destruyeThisTrader}" /> 
+						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" />
+						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
+							 <!-- actionListener="#{trader.destruyeThisTrader}" />  -->
 						
 						<!-- Esto también funciona en JSF 2.2 por mucho que eclipse muestra un error en el binding	 -->
 						<!-- This is the consequence of the new EL 2.2 feature of calling a method in a value expression via 

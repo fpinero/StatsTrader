@@ -106,6 +106,13 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<!-- CDI bean injections because managedBean is deprecated -->
+		<!-- **** CDI no funciona con PrimeFaces. hay q seguir usando ManagedBean **** -->
+		<!-- <dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>2.0</version>
+		</dependency> -->
 	</dependencies>
 
 	<build>
