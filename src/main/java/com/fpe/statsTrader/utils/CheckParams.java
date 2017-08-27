@@ -2,6 +2,7 @@ package com.fpe.statsTrader.utils;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -16,12 +17,19 @@ public class CheckParams {
 	
 	private Trader thisTrader;
 	
+	@ManagedProperty(value="#{trader}")
+	Trader beanTrader;
+	
 	public CheckParams() {
 		
 	}
 
 	public Trader getThisTrader() {
 		return thisTrader;
+	}
+	
+	public void setBeanTrader(Trader beanTrader) {
+		this.beanTrader = beanTrader;
 	}
 
 	public void setThisTrader(Trader thisTrader) {
@@ -57,6 +65,7 @@ public class CheckParams {
 				System.out.println("thisTrader no es null.. \n" + thisTrader.toString() + "\n" + 
 							"Procedemos a establecerlo a null");
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("thisTrader", null);
+				beanTrader.destruyeThisTrader();
 				showMessage();
 				return "login?faces-redirect=true";
 			} else {

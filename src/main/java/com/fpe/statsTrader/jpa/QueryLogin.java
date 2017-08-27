@@ -2,14 +2,32 @@ package com.fpe.statsTrader.jpa;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.Trader;
 
+@Component
+@ManagedBean
+@SessionScoped
 public class QueryLogin {
+	
+//	@ManagedProperty(value="trader")
+//	private Trader traderBean;
+//	
+//	public Trader getTraderBean() {
+//		return traderBean;
+//	}
+//
+//	public void setTraderBean(Trader traderBean) {
+//		this.traderBean = traderBean;
+//	}
 	
 	//retorna true si las credenciales son válidas
 	public boolean isUserPwdCorrecto(String user, String pwd) {
@@ -40,11 +58,12 @@ public class QueryLogin {
 			} else {
 				//existe un trader con esas credenciales
 				Trader trader = traders.get(0);  //solo puede haber uno, asi q siempre es el index 0.
-				System.out.println("Trader localizado: " + trader.toString());
-				System.out.println("Id del trader=" + traders.get(0).getId());
-				trader.setId(traders.get(0).getId());
+				
 				//añadamos el trader al parametro de la sesion
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("thisTrader", trader);
+				
+				System.out.println("Trader localizado: " + trader.toString());
+				
 				credencialesValidas = true;
 			}
 			
@@ -57,5 +76,7 @@ public class QueryLogin {
 		return credencialesValidas;
 		
 	}
+
+	
 
 }

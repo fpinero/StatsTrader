@@ -77,13 +77,13 @@ public class Trader {
 	
 	@Transient  //indica que no es un campo de la tabla
 	private String textoErrorEmailInvalido;
-
+	
 	public Trader() {
 		
 	}
 
 	public Trader(String nombre, String user, String password, String email, Double bP, Double costoPlataforma,
-			Double obejtivoSemanal, Double objetivoMensual, Double saldo, String objetivoFase,
+			Double objetivoSemanal, Double objetivoMensual, Double saldo, String objetivoFase,
 			Double maxPerdidasSemanal, Double maxPerdidasMensual) {
 		this.nombre = nombre;
 		this.user = user;
@@ -91,7 +91,7 @@ public class Trader {
 		this.email = email;
 		this.BP = bP;
 		this.costoPlataforma = costoPlataforma;
-		this.objetivoSemanal = obejtivoSemanal;
+		this.objetivoSemanal = objetivoSemanal;
 		this.objetivoMensual = objetivoMensual;
 		this.Saldo = saldo;
 		this.objetivoFase = objetivoFase;
@@ -104,6 +104,7 @@ public class Trader {
 	}
 
 	public void setId(Integer id) {
+		System.out.println("Setting Trader id to: " + id);
 		this.id = id;
 	}
 
@@ -120,6 +121,7 @@ public class Trader {
 	}
 
 	public void setUser(String user) {
+		System.out.println("Setting Trader user to: " + user);
 		this.user = user;
 	}
 
@@ -159,8 +161,8 @@ public class Trader {
 		return objetivoSemanal;
 	}
 
-	public void setObejtivoSemanal(Double obejtivoSemanal) {
-		this.objetivoSemanal = obejtivoSemanal;
+	public void setObejtivoSemanal(Double objetivoSemanal) {
+		this.objetivoSemanal = objetivoSemanal;
 	}
 
 	public Double getObjetivoMensual() {
@@ -271,5 +273,32 @@ public class Trader {
 		System.out.println("Objeto Trader set a null todos sus campos...");
 		
 	}
+	
+	//Se encarga de cargar los datos del atributo de la sesion thisTrader en esta clase y que así se
+	//muestren en el formulario de modificar cuenta usuario.
+	public void initAfterLogin(){
+		System.out.println("inicializando Trader si existe el parametro thisTrader en esta sesion...");
+        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader") != null) {
+        	
+        	Trader currentTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
+        	System.out.println("El parametro de sesion thisTrader NO es nulo, contiene este trader:\n" + currentTrader.toString());
+        	
+        	this.id = currentTrader.id;
+        	this.nombre = currentTrader.nombre;
+    		this.user = currentTrader.user;
+    		this.password = currentTrader.password;
+    		this.email = currentTrader.email;
+    		this.BP = currentTrader.BP;
+    		this.costoPlataforma = currentTrader.costoPlataforma;
+    		this.objetivoSemanal = currentTrader.objetivoSemanal;
+    		this.objetivoMensual = currentTrader.objetivoMensual;
+    		this.Saldo = currentTrader.Saldo;
+    		this.objetivoFase = currentTrader.objetivoFase;
+    		this.maxPerdidasSemanal = currentTrader.maxPerdidasSemanal;
+    		this.maxPerdidasMensual = currentTrader.maxPerdidasMensual;
+        } else {
+        	System.out.println("El parametro de sesion thisTrader es aún nulo...");
+        }
+    }
 	
 }

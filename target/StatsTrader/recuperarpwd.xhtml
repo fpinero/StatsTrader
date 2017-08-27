@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<h:outputStylesheet library="css" name="mystyle.css" />
+	<title>Recuperar Password StatsTrader</title>
+</h:head>
+
+<h:body>
+
+	<!-- Solo debe estar aquí si el objeto Trader NO existe, si existe se le reenvía a modificarcuenta -->
+	<f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderAlreadyExists}" />
+	</f:metadata>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" header="StatsTrader">
+			<h:outputText value="Cabecera" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="200" header="Menu Aplicación">
+			<h:form>
+				<p:menu>
+					<p:submenu label="Usuario">
+						<p:menuitem value="Iniciar Sesión" outcome="login"
+							icon="ui-icon-star" />
+						<p:menuitem value="Cerrar Sesión" outcome="logout"
+							icon="ui-icon-star" />
+						<p:menuitem value="Crear Cuenta" outcome="crearcuenta"
+							icon="ui-icon-star" />
+						<p:menuitem value="Modificar Cuenta" outcome="modificarcuenta"
+							icon="ui-icon-star" />
+					</p:submenu>
+
+				</p:menu>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<p:panelGrid columns="1" styleClass="panelGridCenter">
+					<h:form>
+						<p:growl id="growl" showDetail="false" sticky="false" life="4000"/>
+						<h3 style="text-align: center; color: blue;">Recuperar contraseña usuario</h3>
+						<h4 style="text-align: center; color: blue;">Indica tu nombre de usuario y recibirás en tu email 
+						la contraseña</h4>
+						<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
+							<h:outputLabel for="idUser" value="User: " />
+							<p:inputText id="idUser" value="#{checkLogin.user}" label="User"
+								required="true" placeholder="Nombre de usuario"
+								styleClass="placeHolder">
+								<f:validateLength minimum="5" maximum="253" />
+							</p:inputText>
+
+						</p:panelGrid>
+						<br />
+						<div align="center">
+							<p:commandButton value="Solicitar Contraseña" id="ajax" update="growl" 
+							 action="#{checkLogin.recuperarPwd}" />
+							<br /> <br />
+							
+						</div>
+					</h:form>
+			</p:panelGrid>
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<h:outputStylesheet library="css" name="mystyle.css" />
+	<title>StatsTrader</title>
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" header="StatsTrader">
+			<h:outputText value="Cabecera" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="200" header="Menu Aplicación">
+			<h:form>
+				<p:menu>
+					<p:submenu label="Usuario">
+						<p:menuitem value="Iniciar Sesión" outcome="login"
+							icon="ui-icon-star" />
+						<p:menuitem value="Cerrar Sesión" outcome="logout"
+							icon="ui-icon-star" />
+						<p:menuitem value="Crear Cuenta" outcome="crearcuenta"
+							icon="ui-icon-star" />
+						<p:menuitem value="Modificar Cuenta" outcome="modificarcuenta"
+							icon="ui-icon-star" />
+					</p:submenu>
+
+				</p:menu>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<h:outputText value="Aqui va el contenido de la aplicación" />
+			<h:outputText value="Aqui va el contenido de la aplicación" />
+			<h:outputText value="Aqui va el contenido de la aplicación" />
+			<h:outputText value="Aqui va el contenido de la aplicación" />
+			<h:outputText value="Aqui va el contenido de la aplicación" />
+			<h:outputText value="Aqui va el contenido de la aplicación" />
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+
+</html>
