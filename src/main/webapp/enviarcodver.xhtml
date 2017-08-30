@@ -27,8 +27,19 @@
 
 	<p:layout fullPage="true">
 
-		<p:layoutUnit position="north" size="100" header="StatsTrader">
-			<h:outputText value="Cabecera" />
+		<p:layoutUnit position="north" size="62"
+			header="StatsTrader #{thisVersionApp.versionApp}">
+			<div>
+				<div class="toTheLeft">
+					<h:outputLabel value="Usuario: " />
+				</div>
+				<div class="toTheLeftAndBold">
+					<h:outputText value="&nbsp;#{thisTrader.user}" />
+				</div>
+				<div class="toTheRight">
+					<p:clock pattern="HH:mm:ss dd.MM.yyyy" />
+				</div>
+			</div>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="west" size="200" header="Menu Aplicación">

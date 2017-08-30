@@ -10,6 +10,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import com.fpe.statsTrader.entity.ForbidenDomains;
 import com.fpe.statsTrader.entity.Trader;
+import com.fpe.statsTrader.utils.VersionApp;
 
 public class WebApplicationInitializer implements org.springframework.web.WebApplicationInitializer {
 
@@ -38,6 +39,9 @@ public class WebApplicationInitializer implements org.springframework.web.WebApp
 					.addAnnotatedClass(Trader.class) /* Aquí habrá q ir añadiendo las demás Entities */
 					.addAnnotatedClass(ForbidenDomains.class)
 					.buildSessionFactory();
+			
+		// inicialicemos el string de la version, luego en CheckParams hay un método que carga el objeto en thisVersionApp
+			GlobalVars.version = "0.5";
 		}
 		
 		System.out.println("Variables globales inicializadas...");

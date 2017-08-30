@@ -13,6 +13,6 @@ import org.springframework.stereotype.Component;
 public class GlobalVars {
 	
 	public static SessionFactory factory;
-	
+	public static String version;
 
 }

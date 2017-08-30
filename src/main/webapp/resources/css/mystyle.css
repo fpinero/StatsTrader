@@ -21,25 +21,38 @@
 /* fuente menor para los placeholder */
 
 .placeHolder::-webkit-input-placeholder {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .placeHolder:-ms-input-placeholder {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .placeHolder:-moz-placeholder {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .placeHolder::-moz-placeholder {
-  font-size: 12px;
+  font-size: 10px;
 }
 
-/* centra el contenido de un panelgrid, util para el form del login */
+/* posiciona el contenido a la izquierda */
 
-.panelGridCenter {
-    margin: 0 auto;
-}
+.toTheLeft {
+    float: left;
+} 
+
+.toTheLeftAndBold {
+    float: left;
+    font-weight: bold;
+} 
+
+
+/* posiciona el contenido a la derecha */
+
+.toTheRight {
+    float: right;
+} 
+
 
 

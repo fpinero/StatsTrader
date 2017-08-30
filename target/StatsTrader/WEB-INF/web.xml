@@ -42,7 +42,7 @@
 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>aftermoon</param-value>
+		<param-value>afternoon</param-value>
 	</context-param>
 
 	<!-- <resource-ref> <description>Students DataSource</description> <res-ref-name>jdbc/students_con</res-ref-name> 

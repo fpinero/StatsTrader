@@ -38,7 +38,7 @@ public class ModificaTrader {
 		if (exito) {
 			showMessage("Exito!! Datos de la cuenta actualizados correctamente.");
 		}else {
-			showMessage("Error!! No ha sido posible modificar los datos de cla cuenta.");
+			showMessage("Error!! No ha sido posible modificar los datos de la cuenta.");
 		}
 		
 		return null;

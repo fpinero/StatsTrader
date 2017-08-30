@@ -1,10 +1,13 @@
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/entity/Trader.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/QueryNombreUsuario.java
+/Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/ModificaTrader.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/CheckParams.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/IsValidEmail.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/QueryEmailYaEnUso.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/CerrarSesion.java
+/Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/VersionApp.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/CheckLogin.java
+/Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/UpdateDatosCuentaTrader.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/TestJdbc.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/WebApplicationInitializer.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/SimpleMail.java

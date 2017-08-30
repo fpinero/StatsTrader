@@ -20,6 +20,10 @@
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
+		
+	<!-- Carga los valores del atributo de la sesion thisTrader en la clase Trader
+	de este modo, el formulario aparece con los datos actuales de la cuenta del usuario	 -->
+		<f:viewAction action="#{trader.initAfterLogin}" />
 	</f:metadata>
 
 	<p:layout fullPage="true">
@@ -48,97 +52,128 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			
-			<h:form>
-			<h3 style="text-align: center; color: blue;">Modificar Cuenta Usuario</h3>
-				<h:panelGrid id="grid" columns="3" cellpadding="2">
-					<h:outputLabel for="idNombre" value="Nombre Completo: " />
-					<p:inputText id="idNombre" value="#{trader.nombre}"
-						label="Nombre Completo" required="true" placeholder="Indica tu nombre real" styleClass="placeHolder">
-						<f:validateLength minimum="8" />
-					</p:inputText>
-					<h:message for="idNombre" display="text" styleClass="error"></h:message>
 
-					<h:outputLabel for="idPwd" value="Password: " />
-					<p:inputText id="idPwd" value="#{trader.password}" label="Password"
-						required="true" placeholder="Elige tu password. Mínimo 5 caracteres" styleClass="placeHolder">
-						<f:validateLength minimum="5" maximum="25"/>
-					</p:inputText>
-					<h:message for="idPwd" display="text" styleClass="error"></h:message>
+			<p:panelGrid columns="1" styleClass="panelGridCenter">
+				<h:form>
+				<p:growl id="growl" showDetail="false" sticky="false" autoUpdate="true" life="4500"/>
+					<h3 style="text-align: center; color: blue;">Modificar Cuenta
+						Usuario&nbsp;#{trader.user}</h3>
+					<h:panelGrid id="grid" columns="3" cellpadding="2">
+						<h:outputLabel for="idNombre" value="Nombre Completo: " />
+						<p:inputText id="idNombre" value="#{trader.nombre}"
+							label="Nombre Completo" required="true"
+							placeholder="Indica tu nombre real" styleClass="placeHolder">
+							<f:validateLength minimum="8" />
+						</p:inputText>
+						<h:message for="idNombre" display="text" styleClass="error"></h:message>
 
-					<h:outputLabel for="idEmail" value="Email: " />
-					<p:inputText id="idEmail" value="#{trader.email}" label="Email"
-						required="true" placeholder="Indica tu email" styleClass="placeHolder">
-						<f:validateLength minimum="5" maximum="253"/>
-					</p:inputText>
-					<h:message for="idEmail" display="text" styleClass="error"></h:message>
+						<h:outputLabel for="idPwd" value="Password: " />
+						<p:inputText id="idPwd" value="#{trader.password}"
+							label="Password" required="true"
+							placeholder="Elige tu password. Mínimo 5 caracteres"
+							styleClass="placeHolder">
+							<f:validateLength minimum="5" maximum="25" />
+						</p:inputText>
+						<h:message for="idPwd" display="text" styleClass="error"></h:message>
 
-					<h:outputLabel for="idBp" value="Buying Power: " />
-					<p:inputText id="idBp" value="#{trader.BP}" label="Buying Power"
-						required="true" placeholder="Indica aprox. tu Buying Power" styleClass="placeHolder">
-						<f:validateDoubleRange minimum="1000" maximum="999999999" />
-					</p:inputText>
-					<h:message for="idBp" display="text" styleClass="error"></h:message>
-					
-					<h:outputLabel for="idCostoPlataforma" value="Costo Plataforma: " />
-					<p:inputText id="idCostoPlataforma" value="#{trader.costoPlataforma}" label="Costo Plataforma"
-						required="true" placeholder="Costo aprox. de tu plataforma" styleClass="placeHolder">
-						<f:validateDoubleRange minimum="0" maximum="999999999" />
-					</p:inputText>
-					<h:message for="idCostoPlataforma" display="text" styleClass="error"></h:message>
-					
-					<h:outputLabel for="idObjetivoSemanal" value="Objetivo Semanal: " />
-					<p:inputText id="idObjetivoSemanal" value="#{trader.obejtivoSemanal}" label="Objetivo Semanal"
-						required="true" placeholder="Indica tu objetivo Semanal" styleClass="placeHolder">
-						<f:validateDoubleRange minimum="0" maximum="999999999" />
-					</p:inputText>
-					<h:message for="idObjetivoSemanal" display="text" styleClass="error"></h:message>
-					
-					<h:outputLabel for="idObjetivoMensual" value="Objetivo Mensual: " />
-					<p:inputText id="idObjetivoMensual" value="#{trader.objetivoMensual}" label="Objetivo Mensual"
-						required="true" placeholder="Indica tu objetivo mensual" styleClass="placeHolder">
-						<f:validateDoubleRange minimum="0" maximum="999999999" />
-					</p:inputText>
-					<h:message for="idObjetivoMensual" display="text" styleClass="error"></h:message>
-					
-					<h:outputLabel for="idSaldo" value="Saldo Actual: " />
-					<p:inputText id="idSaldo" value="#{trader.saldo}" label="Saldo Actual"
-						required="true" placeholder="Indica aprox. tu saldo actual" styleClass="placeHolder">
-						<f:validateDoubleRange minimum="0" maximum="999999999" />
-					</p:inputText>
-					<h:message for="idSaldo" display="text" styleClass="error"></h:message>
-					
-					<h:outputLabel for="idObjetivoFase" value="Objetivo Fase: " />
-					<p:inputText id="idObjetivoFase" value="#{trader.objetivoFase}" label="Objetivo Fase"
-						required="true" placeholder="tu objetivo en palabras" styleClass="placeHolder">
-						<f:validateLength minimum="5" maximum="253"/>
-					</p:inputText>
-					<h:message for="idObjetivoFase" display="text" styleClass="error"></h:message>
-					
-					<h:outputLabel for="idMaxPerdidasSemanal" value="Máx. Perdidas Semanal: " />
-					<p:inputText id="idMaxPerdidasSemanal" value="#{trader.maxPerdidasSemanal}" label="Máx. Perdidas Semanal"
-						required="true" placeholder="Indica en negativo tus perdidas máx. semanales" styleClass="placeHolder">
-						<f:validateDoubleRange minimum="-99999" maximum="-1" />
-					</p:inputText>
-					<h:message for="idMaxPerdidasSemanal" display="text" styleClass="error"></h:message>
-					
-					<h:outputLabel for="idMaxPerdidasMensual" value="Máx. Perdidas Mensual: " />
-					<p:inputText id="idMaxPerdidasMensual" value="#{trader.maxPerdidasMensual}" label="Máx. Perdidas Mensual"
-						required="true" placeholder="Indica en negativo tus perdidas máx. mensuales" styleClass="placeHolder">
-						<f:validateDoubleRange minimum="-99999" maximum="-1" />
-					</p:inputText>
-					<h:message for="idMaxPerdidasMensual" display="text" styleClass="error"></h:message>
+						<h:outputLabel for="idEmail" value="Email: " />
+						<p:inputText id="idEmail" value="#{trader.email}" label="Email"
+							required="true" placeholder="Indica tu email"
+							styleClass="placeHolder">
+							<f:validateLength minimum="5" maximum="253" />
+						</p:inputText>
+						<h:message for="idEmail" display="text" styleClass="error"></h:message>
 
-				</h:panelGrid>
-				<br/>
-				<p:commandButton value="Modificar Cuenta" id="ajax" update="grid" />
-				<!-- action="#{trader.submitUserResponse()}" /> -->
-					
-					
+						<h:outputLabel for="idBp" value="Buying Power: " />
+						<p:inputText id="idBp" value="#{trader.BP}" label="Buying Power"
+							required="true" placeholder="Indica aprox. tu Buying Power"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="1000" maximum="999999999" />
+						</p:inputText>
+						<h:message for="idBp" display="text" styleClass="error"></h:message>
 
+						<h:outputLabel for="idCostoPlataforma" value="Costo Plataforma: " />
+						<p:inputText id="idCostoPlataforma"
+							value="#{trader.costoPlataforma}" label="Costo Plataforma"
+							required="true" placeholder="Costo aprox. de tu plataforma"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="0" maximum="999999999" />
+						</p:inputText>
+						<h:message for="idCostoPlataforma" display="text"
+							styleClass="error"></h:message>
 
-			</h:form>
+						<h:outputLabel for="idObjetivoSemanal" value="Objetivo Semanal: " />
+						<p:inputText id="idObjetivoSemanal"
+							value="#{trader.obejtivoSemanal}" label="Objetivo Semanal"
+							required="true" placeholder="Indica tu objetivo Semanal"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="0" maximum="999999999" />
+						</p:inputText>
+						<h:message for="idObjetivoSemanal" display="text"
+							styleClass="error"></h:message>
 
+						<h:outputLabel for="idObjetivoMensual" value="Objetivo Mensual: " />
+						<p:inputText id="idObjetivoMensual"
+							value="#{trader.objetivoMensual}" label="Objetivo Mensual"
+							required="true" placeholder="Indica tu objetivo mensual"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="0" maximum="999999999" />
+						</p:inputText>
+						<h:message for="idObjetivoMensual" display="text"
+							styleClass="error"></h:message>
+
+						<h:outputLabel for="idSaldo" value="Saldo Actual: " />
+						<p:inputText id="idSaldo" value="#{trader.saldo}"
+							label="Saldo Actual" required="true"
+							placeholder="Indica aprox. tu saldo actual"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="0" maximum="999999999" />
+						</p:inputText>
+						<h:message for="idSaldo" display="text" styleClass="error"></h:message>
+
+						<h:outputLabel for="idObjetivoFase" value="Objetivo Fase: " />
+						<p:inputText id="idObjetivoFase" value="#{trader.objetivoFase}"
+							label="Objetivo Fase" required="true"
+							placeholder="tu objetivo en palabras" styleClass="placeHolder">
+							<f:validateLength minimum="5" maximum="253" />
+						</p:inputText>
+						<h:message for="idObjetivoFase" display="text" styleClass="error"></h:message>
+
+						<h:outputLabel for="idMaxPerdidasSemanal"
+							value="Máx. Perdidas Semanal: " />
+						<p:inputText id="idMaxPerdidasSemanal"
+							value="#{trader.maxPerdidasSemanal}"
+							label="Máx. Perdidas Semanal" required="true"
+							placeholder="Indica en negativo tus perdidas máx. semanales"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="-99999" maximum="-1" />
+						</p:inputText>
+						<h:message for="idMaxPerdidasSemanal" display="text"
+							styleClass="error"></h:message>
+
+						<h:outputLabel for="idMaxPerdidasMensual"
+							value="Máx. Perdidas Mensual: " />
+						<p:inputText id="idMaxPerdidasMensual"
+							value="#{trader.maxPerdidasMensual}"
+							label="Máx. Perdidas Mensual" required="true"
+							placeholder="Indica en negativo tus perdidas máx. mensuales"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="-99999" maximum="-1" />
+						</p:inputText>
+						<h:message for="idMaxPerdidasMensual" display="text"
+							styleClass="error"></h:message>
+
+					</h:panelGrid>
+
+					<br />
+					<div align="center">
+						<p:commandButton value="Modificar Cuenta" id="ajax" update="grid" 
+							 action="#{modificaTrader.modificaThisTrader}" /> 
+						<br/><br/>
+					</div>
+
+				</h:form>
+			</p:panelGrid>
 		</p:layoutUnit>
 
 	</p:layout>
