@@ -42,11 +42,12 @@
     float: left;
 } 
 
+/* posiciona el contenido a la izquierda y en negrita */
+
 .toTheLeftAndBold {
     float: left;
     font-weight: bold;
 } 
-
 
 /* posiciona el contenido a la derecha */
 
@@ -54,5 +55,10 @@
     float: right;
 } 
 
+/* clase para usar en el atributo columnClasses de panelGrid si no quieres que tenga bordes */
+
+.no-border {
+    border-style: hidden !important ;
+}
 
 

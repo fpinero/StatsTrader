@@ -18,7 +18,8 @@
 <h:body>
 	<p:layout fullPage="true">
 
-		<p:layoutUnit position="north" size="62" header="StatsTrader #{thisVersionApp}">
+		<p:layoutUnit position="north" size="62"
+			header="StatsTrader #{thisVersionApp.versionApp}">
 			<div>
 				<div class="toTheLeft">
 					<h:outputLabel value="Usuario: " />
@@ -30,7 +31,6 @@
 					<p:clock pattern="HH:mm:ss dd.MM.yyyy" />
 				</div>
 			</div>
-			
 		</p:layoutUnit>
 
 		<p:layoutUnit position="west" size="200" header="Menu Aplicación">
@@ -54,7 +54,7 @@
 
 		<p:layoutUnit position="center">
 			<h:outputText value="Aqui va el contenido content" />
-			
+
 
 		</p:layoutUnit>
 

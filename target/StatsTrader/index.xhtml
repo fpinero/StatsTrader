@@ -16,6 +16,16 @@
 </h:head>
 
 <h:body>
+
+	<f:metadata>
+		<!-- Establece el parametro de sesion thisVersionApp para que esté disponible en toda al app	 -->
+		<f:viewAction action="#{checkParams.inicializaParamVersionApp}" />
+		
+		<!-- si el usuario ya está logueado, se le reenvia a content
+		en caso contrario se le reenvía a login -->
+		<f:viewAction action="#{checkParams.checkIndexPage}" />
+	</f:metadata>
+
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" size="100" header="StatsTrader">
