@@ -75,7 +75,11 @@
 						<p:commandButton value="Solicitar Código"
 							actionListener="#{generaCodigoAleatorio.giveMetheCode}"
 							action="#{generaCodigoAleatorio.enviaCodigoPorEmail(traderEmail, user)}"
-							update="growl vericodform" />
+							update="growl vericodform insidePanelCampoCodVer ">
+						<!-- NO ES NECESARIO USAR AJAX, EL UPDATE DE insidePanelCampoCodVer DISPARA EL RENDERED DEL PANEL -->
+							<!-- <p:ajax event="click" update="toUpdate" /> -->
+							<!-- <f:ajax render="toUpdate" /> -->
+						</p:commandButton>
 					</div>
 
 				</h:form>
@@ -83,24 +87,28 @@
 			</p:panelGrid>
 			<br />
 			<br />
-			<p:panelGrid columns="1" styleClass="panelGridCenter">
+			<p:panelGrid id="panelCampoCodVer" columns="1" columnClasses="no-border" 
+				styleClass="panelGridCenter">
 
-				<h:form id="vericodform">
-					<p:growl id="growl2" showDetail="true" sticky="true" />
-					<div align="center">
-						<h:outputLabel for="idCodigo" value="Código Verificación: " />
-						<br /><br />
-						<p:inputText binding="#{inputcode}" id="idCodigo"
-							label="Código Verificación" required="true">
-							<f:validateLength minimum="5" maximum="253" />
-						</p:inputText>
-						<br /> <br />
-						<p:commandButton value="Verificar Código"
-							action="#{generaCodigoAleatorio.verificaCodigo(inputcode.value)}"
-							update="growl2" />
-					</div>
-				</h:form>
-
+				<p:outputPanel id="toUpdate" autoUpdate="true" >
+					<p:panel id="insidePanelCampoCodVer" rendered="#{generaCodigoAleatorio.rendered}" >
+					<h:form id="vericodform">
+						<p:growl id="growl2" showDetail="true" sticky="true" />
+						<div align="center">
+							<h:outputLabel for="idCodigo" value="Código Verificación: " />
+							<br /> <br />
+							<p:inputText binding="#{inputcode}" id="idCodigo"
+								label="Código Verificación" required="true">
+								<f:validateLength minimum="5" maximum="253" />
+							</p:inputText>
+							<br /> <br />
+							<p:commandButton value="Verificar Código"
+								action="#{generaCodigoAleatorio.verificaCodigo(inputcode.value)}"
+								update="growl2" />
+						</div>
+					</h:form>
+					</p:panel>
+				</p:outputPanel>
 			</p:panelGrid>
 
 		</p:layoutUnit>

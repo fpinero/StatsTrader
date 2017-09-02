@@ -15,6 +15,7 @@ import com.fpe.statsTrader.jpa.CreaCuentaTraderVerificado;
 public class GeneraCodigoAleatorio {
 	
 	private String codigoVerificacion;
+	private boolean rendered = false;
 	
 	public GeneraCodigoAleatorio() {
 		
@@ -28,6 +29,12 @@ public class GeneraCodigoAleatorio {
 		setCodigoVerificacion(codigo);
 	}
 	
+	
+	public boolean getRendered() {
+		System.out.println("rendered esta ahora mismo a " + rendered);
+		return rendered;
+	}
+
 	public void enviaCodigoPorEmail(String email, String user) {
 		
 		
@@ -42,6 +49,11 @@ public class GeneraCodigoAleatorio {
 			sendEmail.send(email, "Statstrader codigo de verificacion.", textoEmail);	
 			System.out.println("email enviado...");
 			showMessageExito(email);
+			
+			System.out.println("-----> Estableciendo rendered a true para mostrar el panel "
+					+ "para introducir el cod. de verificacion enviado");
+			rendered = true;
+			
 		} catch (Exception e) {
 			System.out.println("Excepción enviando codigo de verificación: " + codigoVerificacion +" a " + email);
 			showMessageNoExito(email);
