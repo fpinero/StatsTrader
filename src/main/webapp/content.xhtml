@@ -16,6 +16,12 @@
 </h:head>
 
 <h:body>
+
+	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
+	<f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderExists}" />
+	</f:metadata>
+
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" size="62"
@@ -44,6 +50,14 @@
 						<p:menuitem value="Crear Cuenta" outcome="crearcuenta"
 							icon="ui-icon-star" />
 						<p:menuitem value="Modificar Cuenta" outcome="modificarcuenta"
+							icon="ui-icon-star" />
+					</p:submenu>
+					<p:submenu label="Operaciones">
+						<p:menuitem value="Imputar Trade" outcome="inputope"
+							icon="ui-icon-star" />
+						<p:menuitem value="Consulta Trades" outcome="consultaopes"
+							icon="ui-icon-star" />
+						<p:menuitem value="Estadísticas" outcome="content"
 							icon="ui-icon-star" />
 					</p:submenu>
 

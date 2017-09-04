@@ -12,7 +12,7 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<h:outputStylesheet library="css" name="mystyle.css" />
-	<title>Verificar Código</title>
+	<title>StatsTrader</title>
 </h:head>
 
 <h:body>
@@ -21,9 +21,6 @@
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
 	</f:metadata>
-
-	<ui:param name="traderEmail" value="#{trader.email}"></ui:param>
-	<ui:param name="user" value="#{trader.user}"></ui:param>
 
 	<p:layout fullPage="true">
 
@@ -43,7 +40,6 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="west" size="200" header="Menu Aplicación">
-
 			<h:form>
 				<p:menu>
 					<p:submenu label="Usuario">
@@ -71,52 +67,33 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-
-			<h3 style="text-align: center; color: blue;">Sólicitar código de
-				verificación para #{trader.user} a #{trader.email}</h3>
-			<br />
-
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 				<h:form>
-					<p:growl id="growl" showDetail="true" sticky="true" />
+					<h3 style="text-align: center; color: blue;">Consulta y Gestión de Trades</h3>
+
+					<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
+						bla, bla, bla
+					</p:panelGrid>
+					<br />
 					<div align="center">
-						<p:commandButton value="Solicitar Código"
-							actionListener="#{generaCodigoAleatorio.giveMetheCode}"
-							action="#{generaCodigoAleatorio.enviaCodigoPorEmail(traderEmail, user)}"
-							update="growl vericodform insidePanelCampoCodVer ">
-						<!-- NO ES NECESARIO USAR AJAX, EL UPDATE DE insidePanelCampoCodVer DISPARA EL RENDERED DEL PANEL -->
-							<!-- <p:ajax event="click" update="toUpdate" /> -->
-							<!-- <f:ajax render="toUpdate" /> -->
-						</p:commandButton>
-					</div>
+						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" />
+						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
+							 <!-- actionListener="#{trader.destruyeThisTrader}" />  -->
+						
+						<!-- Esto también funciona en JSF 2.2 por mucho que eclipse muestra un error en el binding	 -->
+						<!-- This is the consequence of the new EL 2.2 feature of calling a method in a value expression via 
+						the #{bean.method()} syntax instead of only referencing a property via the #{bean.property} -->
+						
+						<!-- <p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}">
+							<f:actionListener binding="#{trader.destruyeThisTrader()}" />
+						</p:commandButton>	 -->
+						
+						&nbsp;&nbsp;
+						
+						<br /> <br />
 
+					</div> 
 				</h:form>
-
-			</p:panelGrid>
-			<br />
-			<br />
-			<p:panelGrid id="panelCampoCodVer" columns="1" columnClasses="no-border" 
-				styleClass="panelGridCenter">
-
-				<p:outputPanel id="toUpdate" autoUpdate="true" >
-					<p:panel id="insidePanelCampoCodVer" rendered="#{generaCodigoAleatorio.rendered}" >
-					<h:form id="vericodform">
-						<p:growl id="growl2" showDetail="true" sticky="true" />
-						<div align="center">
-							<h:outputLabel for="idCodigo" value="Código Verificación: " />
-							<br /> <br />
-							<p:inputText binding="#{inputcode}" id="idCodigo"
-								label="Código Verificación" required="true">
-								<f:validateLength minimum="5" maximum="253" />
-							</p:inputText>
-							<br /> <br />
-							<p:commandButton value="Verificar Código"
-								action="#{generaCodigoAleatorio.verificaCodigo(inputcode.value)}"
-								update="growl2" />
-						</div>
-					</h:form>
-					</p:panel>
-				</p:outputPanel>
 			</p:panelGrid>
 
 		</p:layoutUnit>
