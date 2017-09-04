@@ -10,7 +10,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import com.fpe.statsTrader.entity.ForbidenDomains;
 import com.fpe.statsTrader.entity.Trader;
-import com.fpe.statsTrader.utils.VersionApp;
+import com.fpe.statsTrader.entity.TradersOpes;
 
 public class WebApplicationInitializer implements org.springframework.web.WebApplicationInitializer {
 
@@ -38,6 +38,7 @@ public class WebApplicationInitializer implements org.springframework.web.WebApp
 					.configure("hibernate.cfg.xml")
 					.addAnnotatedClass(Trader.class) /* Aquí habrá q ir añadiendo las demás Entities */
 					.addAnnotatedClass(ForbidenDomains.class)
+					.addAnnotatedClass(TradersOpes.class)
 					.buildSessionFactory();
 			
 		// inicialicemos el string de la version, luego en CheckParams hay un método que carga el objeto en thisVersionApp
