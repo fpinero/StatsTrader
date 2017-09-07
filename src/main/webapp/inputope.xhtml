@@ -20,6 +20,8 @@
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
+		
+		<f:viewAction action="#{tradersOpes.initTraderId}" />
 	</f:metadata>
 
 	<p:layout fullPage="true">
@@ -70,13 +72,75 @@
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 				<h:form>
 					<h3 style="text-align: center; color: blue;">Imputar un Trade</h3>
+					<p:growl id="growl" sticky="true" autoUpdate="true" />
 
 					<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
-						bla bla bla
+						
+						<h:outputLabel for="idSymbol" value="Symbol: " />
+						<p:inputText id="idSymbol" value="#{tradersOpes.symbolTrade}"
+							label="Symbol" required="true"
+							placeholder="Symbol negociado" styleClass="placeHolder">
+							<f:validateLength minimum="1" maximum="10"/>
+						</p:inputText>
+						
+						<h:outputLabel for="idSide" value="Side: " />
+						<p:selectOneMenu id="idSide" value="#{tradersOpes.sideTrade}" required="true">
+			                <p:ajax listener="#{tradersOpes.onSideChange}" update="idPatron1m idPatron15m" />
+			                <f:selectItem itemLabel="Side" itemValue="" noSelectionOption="true" />
+			                <f:selectItems value="#{tradersOpes.sideItems}" />
+		            	</p:selectOneMenu>
+		            	
+		            	<h:outputLabel for="idResultado" value="Resultado: " />
+						<p:selectOneMenu id="idResultado" value="#{tradersOpes.resultadoTrade}" required="true">
+			                <!-- <p:ajax listener="#{dropdownView.onCountryChange}" update="city" /> -->
+			                <f:selectItem itemLabel="Resultado" itemValue="" noSelectionOption="true" />
+			                <f:selectItems value="#{tradersOpes.resultadoItems}" />
+		            	</p:selectOneMenu>
+		            	
+		            	<h:outputLabel for="idPatron15m" value="Patrón en 15m: " />
+						<p:selectOneMenu id="idPatron15m" value="#{tradersOpes.patronTrade15m}" required="true">
+			                <f:selectItem itemLabel="Patrón en 15m" itemValue="" noSelectionOption="true" />
+			                <f:selectItems value="#{tradersOpes.patrones15m}" />
+		            	</p:selectOneMenu>
+		            	
+		            	<h:outputLabel for="idPatron1m" value="Patrón en 1m: " />
+						<p:selectOneMenu id="idPatron1m" value="#{tradersOpes.patronTrade1m}" required="true">
+			                <f:selectItem itemLabel="Patrón en 1m" itemValue="" noSelectionOption="true" />
+			                <f:selectItems value="#{tradersOpes.patrones1m}" />
+		            	</p:selectOneMenu>
+		            	
+		            	<h:outputLabel for="idShares" value="Shares Trade: " />
+						<p:inputText id="idShares"
+							value="#{tradersOpes.sharesTrade}" label="Shares Trade"
+							required="true" placeholder="Lote del trade"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="1" maximum="99999999" />
+						</p:inputText>
+						
+						<h:outputLabel for="idBruto" value="Resultado Bruto: " />
+						<p:inputText id="idBruto"
+							value="#{tradersOpes.brutoOpe}" label="Resultado Bruto"
+							required="true" placeholder="usa el . para decimales"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="-999999" maximum="9999999" />
+						</p:inputText>
+						
+						<h:outputLabel for="idNeto" value="Resultado Neto: " />
+						<p:inputText id="idNeto"
+							value="#{tradersOpes.netoOpe}" label="Resultado Neto"
+							required="true" placeholder="usa el . para decimales"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="-999999" maximum="9999999" />
+						</p:inputText>
+						
+						<h:outputLabel for="idFecha" value="Fecha Trade: " />
+						<p:calendar id="idFecha" value="#{tradersOpes.fechaTrade}" pattern="dd-MM-yyyy" 
+						mask="true" required="true" />
+		            	
 					</p:panelGrid>
 					<br />
 					<div align="center">
-						<p:commandButton value="Aceptar" action="#{cerrarSesion.cierraSesion}" />
+						<p:commandButton value="Aceptar" action="#{tradersOpes.test}" />
 						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
 							 <!-- actionListener="#{trader.destruyeThisTrader}" />  -->
 						
