@@ -75,7 +75,7 @@ public class TradersOpes {
 		private Integer centsTrade;
 		
 		@Column(name="todo_100_plan")
-		private boolean todo100plan;
+		private String todo100plan;
 		
 		@Column(name="stop_evitable")
 		private String stopEvitable;
@@ -183,19 +183,19 @@ public class TradersOpes {
 			dataSegunSide15m.put("Corto", patronCortoTrade15mItems);
 			
 			todo100PlanItems = new ArrayList<>();
-			todo100PlanItems.add("Sí");
-			todo100PlanItems.add("No");
+			todo100PlanItems.add("SI");
+			todo100PlanItems.add("NO");
 			
 			stopEvitableItems = new ArrayList<>();
 			stopEvitableItems.add("No fue stop");
-			stopEvitableItems.add("Si");
-			stopEvitableItems.add("No");
+			stopEvitableItems.add("SI");
+			stopEvitableItems.add("NO");
 			
 		}
 
 		public TradersOpes(Integer traderId, String symbolTrade, String sideTrade, String resultadoTrade,
 				String patronTrade1m, String patronTrade15m, Integer sharesTrade, Double brutoOpe, Double netoOpe,
-				Date fechaTrade, Integer centsTrade, boolean todo100plan, String observaciones) {
+				Date fechaTrade, Integer centsTrade, String todo100plan, String observaciones) {
 			this.traderId = traderId;
 			this.symbolTrade = symbolTrade;
 			this.sideTrade = sideTrade;
@@ -309,11 +309,11 @@ public class TradersOpes {
 			this.centsTrade = centsTrade;
 		}
 
-		public boolean isTodo100plan() {
+		public String getTodo100plan() {
 			return todo100plan;
 		}
 
-		public void setTodo100plan(boolean todo100plan) {
+		public void setTodo100plan(String todo100plan) {
 			this.todo100plan = todo100plan;
 		}
 
@@ -347,6 +347,14 @@ public class TradersOpes {
 		
 		public List<String> getResultadoItems() {
 			return resultadoItems;
+		}
+		
+		public List<String> getTodo100PlanItems() {
+			return todo100PlanItems;
+		}
+
+		public List<String> getStopEvitableItems() {
+			return stopEvitableItems;
 		}
 
 		@Override
