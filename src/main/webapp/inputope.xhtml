@@ -21,7 +21,13 @@
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
 
+	<!-- carga el traderId en el objeto tradersOpes -->
 		<f:viewAction action="#{tradersOpes.initTraderId}" />
+		
+	<!-- Cuando la ope es correctamente insertada en la DB, para que se muestre el mensaje de éxito, este es 
+	almacenado en un parametro de la sesion, aqui comprobamos si regresa a la página tras una operación 
+	exitosa y le mostramos el mensaje -->
+		<f:viewAction action="#{tradersOpes.verificaSiHayMsgExito}" />
 	</f:metadata>
 
 	<p:layout fullPage="true">
@@ -170,32 +176,20 @@
 
 					</p:panelGrid>
 					<br />
-					<br />
+					
 					<div align="center">
 						<h:outputLabel
 							value="¿Alguna Observación o link a la captura? (Opcional)"
-							styleClass="" />
-						<br />
-						<p:textEditor widgetVar="idObserv"
-							value="#{tradersOpes.observaciones}" height="180">
-
-							<!-- para eliminar el menú del editor -->
-							<f:facet name="toolbar">
-								<span class="ql-formats" >
-									
-								</span>
-								<span class="ql-formats"> 
-								
-								</span>
-							</f:facet>
-
-						</p:textEditor>
+							style="font-weight: bold" />
+						<br /> <br/>
+						<p:inputTextarea rows="5" cols="50" autoResize="false"
+							required="false" value="#{tradersOpes.observaciones}" />
 					</div>
 
 
 					<br />
 					<div align="center">
-						<p:commandButton value="Aceptar" action="#{tradersOpes.test}" />
+						<p:commandButton value="Aceptar" action="#{tradersOpes.salvaOpe}" />
 						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
 						<!-- actionListener="#{trader.destruyeThisTrader}" />  -->
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -17,6 +18,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fpe.statsTrader.jpa.InsertaTraderOpe;
 
 @Entity
 @Table(name="traders_opes")
@@ -401,8 +404,54 @@ public class TradersOpes {
 				patrones15m = new ArrayList<>();
 			}
 			
+		}
+		
+		public String salvaOpe() {
 			
+			InsertaTraderOpe insertaTraderOpe = new InsertaTraderOpe();
+			if (insertaTraderOpe.saveOpe(this)) {
+				
+				//pongo todos los campos a cero por si quiere imputar otro trade
+				this.symbolTrade = null;
+				this.sideTrade = null;
+				this.resultadoTrade = null;
+				this.patronTrade1m = null;
+				this.patronTrade15m = null;
+				this.sharesTrade = null;
+				this.brutoOpe = null;
+				this.netoOpe = null;
+				this.fechaTrade = null;
+				this.centsTrade = null;
+				this.todo100plan = null;
+				this.stopEvitable = null;
+				this.observaciones = null;
+				
+				System.out.println("Objeto TradersOpes set a null todos sus campos...");
+				
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("inputOpeMsgExito", "Exito!! Operación correctamente procesada.");
+				
+				return "inputope?faces-redirect=true";  //fuerza el refresco del formulario
+			} else {
+				showMessage("Error!! No ha sido posible añadir la operación a base de datos.");
+				return null;
+			}
 			
 		}
+
+		public void verificaSiHayMsgExito() {
+			
+			if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("inputOpeMsgExito") != null) {
+				String msg = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("inputOpeMsgExito");
+				showMessage(msg);
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("inputOpeMsgExito", null);
+			}
+			
+		}
+		
+		public void showMessage(String msg) {
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, new FacesMessage(msg, msg));
+	    }
+		
 		
 }
