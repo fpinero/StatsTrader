@@ -20,6 +20,10 @@
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
+		
+		<f:event listener="#{consultaOpesHelper.loadTradersOpes()}"
+		type="preRenderView"></f:event>
+		
 	</f:metadata>
 
 	<p:layout fullPage="true">
@@ -71,28 +75,71 @@
 				<h:form>
 					<h3 style="text-align: center; color: blue;">Consulta y Gestión de Trades</h3>
 
-					<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
-						bla, bla, bla
-					</p:panelGrid>
-					<br />
-					<div align="center">
-						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" />
-						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
-							 <!-- actionListener="#{trader.destruyeThisTrader}" />  -->
+					<p:dataTable var="trop" value="#{consultaOpesHelper.tradersOpes}" resizableColumns="true" 
+						scrollable="true" scrollWidth="90%" scrollHeight="400">
+						<p:column headerText="Id" >
+							<h:outputText value="#{trop.id}" />
+						</p:column>
 						
-						<!-- Esto también funciona en JSF 2.2 por mucho que eclipse muestra un error en el binding	 -->
-						<!-- This is the consequence of the new EL 2.2 feature of calling a method in a value expression via 
-						the #{bean.method()} syntax instead of only referencing a property via the #{bean.property} -->
+						<p:column headerText="TraderId" >
+							<h:outputText value="#{trop.traderId}" />
+						</p:column>
 						
-						<!-- <p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}">
-							<f:actionListener binding="#{trader.destruyeThisTrader()}" />
-						</p:commandButton>	 -->
+						<p:column headerText="Fecha">
+							<h:outputText value="#{trop.fechaTrade}" >
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:outputText>
+						</p:column>
+					
+						<p:column headerText="Symbol">
+							<h:outputText value="#{trop.symbolTrade}" />
+						</p:column>
 						
-						&nbsp;&nbsp;
+						<p:column headerText="Side">
+							<h:outputText value="#{trop.sideTrade}" />
+						</p:column>
 						
-						<br /> <br />
-
-					</div> 
+						<p:column headerText="Resultado">
+							<h:outputText value="#{trop.resultadoTrade}" />
+						</p:column>
+						
+						<p:column headerText="Patrón 1m">
+							<h:outputText value="#{trop.patronTrade1m}" />
+						</p:column>
+						
+						<p:column headerText="Patrón 15m">
+							<h:outputText value="#{trop.patronTrade15m}" />
+						</p:column>
+						
+						<p:column headerText="Shares">
+							<h:outputText value="#{trop.sharesTrade}" />
+						</p:column>
+						
+						<p:column headerText="Bruto">
+							<h:outputText value="#{trop.brutoOpe}" />
+						</p:column>
+						
+						<p:column headerText="Neto">
+							<h:outputText value="#{trop.netoOpe}" />
+						</p:column>
+						
+						<p:column headerText="Cents Trade">
+							<h:outputText value="#{trop.centsTrade}" />
+						</p:column>
+						
+						<p:column headerText="100% Plan">
+							<h:outputText value="#{trop.todo100plan}" />
+						</p:column>
+						
+						<p:column headerText="Stop Evitable">
+							<h:outputText value="#{trop.stopEvitable}" />
+						</p:column>
+						
+						<p:column headerText="Observaciones">
+							<h:outputText value="#{trop.observaciones}" />
+						</p:column>
+					
+					</p:dataTable>
 				</h:form>
 			</p:panelGrid>
 
