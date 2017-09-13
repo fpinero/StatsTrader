@@ -61,4 +61,14 @@
     border-style: hidden !important ;
 }
 
+/* para que la tabla de operaciones del trader aparezca en una sola línea */
+.singleLine
+{
+    /* text-wrap:none; */
+    white-space:normal; 
+    overflow:scroll;
+    font-size: 10px;
+}
+
+
 
