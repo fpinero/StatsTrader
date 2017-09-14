@@ -82,9 +82,10 @@
 					
 
 					<p:dataTable var="trop" value="#{consultaOpesHelper.tradersOpes}" resizableColumns="true" 
-						scrollable="true" scrollWidth="130%" scrollHeight="400" >
+						scrollable="true" scrollWidth="130%" scrollHeight="400" sortBy="#{trop.fechaTrade}" 
+						 sortOrder="ascending">
 						
-						<p:column headerText="Fecha" width="35" styleClass="singleLine">
+						<p:column headerText="Fecha" width="35" styleClass="singleLine" sortBy="#{trop.fechaTrade}">
 							<h:outputText value="#{trop.fechaTrade}" >
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 							</h:outputText>
