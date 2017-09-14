@@ -20,10 +20,12 @@
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
-		
+
+		<!-- <f:viewAction action="#{consultaOpesHelper.loadTradersOpes}" /> -->
+
 		<f:event listener="#{consultaOpesHelper.loadTradersOpes()}"
-		type="preRenderView"></f:event>
-		
+			type="preRenderView"></f:event>
+
 	</f:metadata>
 
 	<p:layout fullPage="true">
@@ -73,83 +75,129 @@
 		<p:layoutUnit position="center">
 			<!-- <p:panelGrid columns="1" styleClass="panelGridCenter"> -->
 			<div align="center">
-				<h3 style="text-align: center; color: blue;">Consulta y Gestión de Trades</h3>
+				<h3 style="text-align: center; color: blue;">Consulta y Gestión
+					de Trades</h3>
 			</div>
 			<!-- </p:panelGrid> -->
-		
+
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 				<h:form>
-					
 
-					<p:dataTable var="trop" value="#{consultaOpesHelper.tradersOpes}" resizableColumns="true" 
-						scrollable="true" scrollWidth="130%" scrollHeight="400" sortBy="#{trop.fechaTrade}" 
-						 sortOrder="ascending">
-						
-						<p:column headerText="Fecha" width="35" styleClass="singleLine" sortBy="#{trop.fechaTrade}">
-							<h:outputText value="#{trop.fechaTrade}" >
+
+					<p:dataTable id="trops" var="trop"
+						value="#{consultaOpesHelper.tradersOpes}" resizableColumns="true"
+						scrollable="true" scrollWidth="130%" scrollHeight="400"
+						sortBy="#{trop.fechaTrade}" sortOrder="ascending"
+						rowKey="#{trop.id}" selection="#{consultaOpesHelper.selectedOpe}"
+						selectionMode="single">
+
+						<p:column headerText="Fecha" width="35" styleClass="singleLine"
+							sortBy="#{trop.fechaTrade}">
+							<h:outputText value="#{trop.fechaTrade}">
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 							</h:outputText>
 						</p:column>
-					
+
 						<p:column headerText="Symbol" width="25" styleClass="singleLine">
 							<h:outputText value="#{trop.symbolTrade}" />
 						</p:column>
-						
+
 						<p:column headerText="Side" width="25" styleClass="singleLine">
 							<h:outputText value="#{trop.sideTrade}" />
 						</p:column>
-						
-						<p:column headerText="Resultado" width="35" styleClass="singleLine">
+
+						<p:column headerText="Resultado" width="35"
+							styleClass="singleLine">
 							<h:outputText value="#{trop.resultadoTrade}" />
 						</p:column>
-						
-						<p:column headerText="Patrón 1m" width="90" styleClass="singleLine">
+
+						<p:column headerText="Patrón 1m" width="90"
+							styleClass="singleLine">
 							<h:outputText value="#{trop.patronTrade1m}" />
 						</p:column>
-						
-						<p:column headerText="Patrón 15m" width="105" styleClass="singleLine">
+
+						<p:column headerText="Patrón 15m" width="105"
+							styleClass="singleLine">
 							<h:outputText value="#{trop.patronTrade15m}" />
 						</p:column>
-						
+
 						<p:column headerText="Shares" width="25" styleClass="singleLine">
-							<h:outputText value="#{trop.sharesTrade}" style="float:right"/>
+							<h:outputText value="#{trop.sharesTrade}" style="float:right" />
 						</p:column>
-						
+
 						<p:column headerText="Bruto" width="25" styleClass="singleLine">
-							<h:outputText value="#{trop.brutoOpe}" style="float:right"/>
+							<h:outputText value="#{trop.brutoOpe}" style="float:right" />
 						</p:column>
-						
+
 						<p:column headerText="Neto" width="25" styleClass="singleLine">
-							<h:outputText value="#{trop.netoOpe}" style="float:right"/>
+							<h:outputText value="#{trop.netoOpe}" style="float:right" />
 						</p:column>
-						
-						<p:column headerText="Cents Trade" width="25" styleClass="singleLine">
-							<h:outputText value="#{trop.centsTrade}" style="float:right"/>
+
+						<p:column headerText="Cents Trade" width="25"
+							styleClass="singleLine">
+							<h:outputText value="#{trop.centsTrade}" style="float:right" />
 						</p:column>
-						
-						<p:column headerText="100% Plan" width="25" styleClass="singleLine">
-							<div align="center"><h:outputText value="#{trop.todo100plan}" /></div>
+
+						<p:column headerText="100% Plan" width="25"
+							styleClass="singleLine">
+							<div align="center">
+								<h:outputText value="#{trop.todo100plan}" />
+							</div>
 						</p:column>
-						
-						<p:column headerText="Stop Evitable" width="35" styleClass="singleLine">
+
+						<p:column headerText="Stop Evitable" width="35"
+							styleClass="singleLine">
 							<h:outputText value="#{trop.stopEvitable}" />
 						</p:column>
-						
+
 						<p:column headerText="Observaciones" styleClass="singleLine">
 							<h:outputText value="#{trop.observaciones}" />
 						</p:column>
-						
+
 						<p:column headerText="Id" width="5" styleClass="singleLine">
 							<h:outputText value="#{trop.id}" />
 						</p:column>
-						
+
 						<p:column headerText="TraderId" styleClass="singleLine" width="5">
 							<h:outputText value="#{trop.traderId}" />
 						</p:column>
-					
+
 					</p:dataTable>
-				</h:form>
+
+			<p:contextMenu for="trops">
+				<p:menuitem value="View" update="opeDetail" icon="ui-icon-search"
+					oncomplete="PF('opeDialog').show()" />
+				<!-- <p:menuitem value="Delete" update="cars" icon="ui-icon-close"
+							actionListener="#{dtContextMenuView.deleteCar}" /> -->
+			</p:contextMenu>
+
+			<p:dialog header="Info del Trade seleccionado" widgetVar="opeDialog" modal="false"
+				showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="opeDetail" style="text-align:center;">
+					<p:panelGrid columns="2"
+						rendered="#{not empty consultaOpesHelper.selectedOpe}"
+						columnClasses="label,value">
+
+						<h:outputText value="Id:" />
+						<h:outputText value="#{consultaOpesHelper.selectedOpe.id}" />
+
+						<h:outputText value="Symbol:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.symbolTrade}" />
+
+						<h:outputText value="Fecha:" />
+						<h:outputText value="#{consultaOpesHelper.selectedOpe.fechaTrade}" />
+
+						<h:outputText value="Resultado:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.resultadoTrade}" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+			</h:form>
 			</p:panelGrid>
+
 
 		</p:layoutUnit>
 

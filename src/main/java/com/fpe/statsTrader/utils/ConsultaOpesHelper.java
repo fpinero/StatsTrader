@@ -1,12 +1,11 @@
 package com.fpe.statsTrader.utils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.stereotype.Component;
@@ -17,9 +16,12 @@ import com.fpe.statsTrader.jpa.QueryListaOpesTrader;
 
 @ManagedBean
 @Component
+@ViewScoped
 public class ConsultaOpesHelper {
 	
 	private List<TradersOpes> tradersOpes;
+	
+	private TradersOpes selectedOpe;
 	
 	public ConsultaOpesHelper() {
 		
@@ -35,11 +37,16 @@ public class ConsultaOpesHelper {
 		return tradersOpes;
 	}
 	
-//	public String getMyFormattedDate(int index) {
-//		Date fechaThisOpe = tradersOpes.iterator().
-//        return new SimpleDateFormat("dd-MM-yyyy").format(myDate);
-//    }
-	
+	public TradersOpes getSelectedOpe() {
+		System.out.println("getSelectedOpe="+selectedOpe);
+		return selectedOpe;
+	}
+
+	public void setSelectedOpe(TradersOpes selectedOpe) {
+		this.selectedOpe = selectedOpe;
+		System.out.println("setSelectedOpe="+selectedOpe);
+	}
+
 	public void loadTradersOpes() {
 		
 		Trader currentTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
@@ -47,10 +54,10 @@ public class ConsultaOpesHelper {
 		tradersOpes = qlot.getTradersOpes(currentTrader);
 		
 		//provisional
-		System.out.println(">>>>> operaciones del trader logueado <<<<<<");
-		for (TradersOpes to : tradersOpes){
-			System.out.println(to);
-		}
+//		System.out.println(">>>>> operaciones del trader logueado <<<<<<");
+//		for (TradersOpes to : tradersOpes){
+//			System.out.println(to);
+//		}
 		
 	}
 	
