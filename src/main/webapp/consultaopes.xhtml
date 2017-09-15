@@ -178,19 +178,59 @@
 						rendered="#{not empty consultaOpesHelper.selectedOpe}"
 						columnClasses="label,value">
 
-						<h:outputText value="Id:" />
-						<h:outputText value="#{consultaOpesHelper.selectedOpe.id}" />
+						<h:outputText value="Fecha:" />
+						<h:outputText value="#{consultaOpesHelper.selectedOpe.fechaTrade}" >
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
 
 						<h:outputText value="Symbol:" />
 						<h:outputText
 							value="#{consultaOpesHelper.selectedOpe.symbolTrade}" />
-
-						<h:outputText value="Fecha:" />
-						<h:outputText value="#{consultaOpesHelper.selectedOpe.fechaTrade}" />
+						
+						<h:outputText value="Side:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.sideTrade}" />
 
 						<h:outputText value="Resultado:" />
 						<h:outputText
 							value="#{consultaOpesHelper.selectedOpe.resultadoTrade}" />
+							
+						<h:outputText value="Patrón 1m:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.patronTrade1m}" />
+						
+						<h:outputText value="Patrón 15m:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.patronTrade15m}" />
+						
+						<h:outputText value="Shares:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.sharesTrade}" />
+						
+						<h:outputText value="Bruto:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.brutoOpe}" />
+							
+						<h:outputText value="Neto:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.netoOpe}" />
+							
+						<h:outputText value="Centavos 1:1" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.centsTrade}" />
+							
+						<h:outputText value="¿100% Plan?:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.todo100plan}" />
+							
+						<h:outputText value="Stop Evitable:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.stopEvitable}" />
+							
+						<h:outputText value="Observaciones:" />
+						<h:outputText
+							value="#{consultaOpesHelper.selectedOpe.observaciones}" />
+							
 					</p:panelGrid>
 				</p:outputPanel>
 			</p:dialog>
