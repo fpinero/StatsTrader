@@ -81,9 +81,22 @@
 			<!-- </p:panelGrid> -->
 
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
-				<h:form>
+				<h:form id="formTable">
+					<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
+						<p:calendar id="fechaIni" value="#{consultaOpesHelper.fechaInicial}"
+							pattern="dd-MM-yyyy" mask="true" required="true" size="10"/>
+					
+					&nbsp;&nbsp;
+					
+					<h:outputLabel for="fechaFin" value="Fecha Final: " />
+						<p:calendar id="fechaFin" value="#{consultaOpesHelper.fechaFinal}"
+							pattern="dd-MM-yyyy" mask="true" required="true" size="10"/>
+							
+					&nbsp;&nbsp;
+							
+					<p:commandButton value="Buscar Trades" update="trops"/>		
 
-
+					<br/><br/>
 					<p:dataTable id="trops" var="trop"
 						value="#{consultaOpesHelper.tradersOpes}" resizableColumns="true"
 						scrollable="true" scrollWidth="130%" scrollHeight="400"
