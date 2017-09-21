@@ -26,6 +26,8 @@
 		<f:event listener="#{consultaOpesHelper.loadTradersOpes()}"
 			type="preRenderView"></f:event>
 
+		<f:viewAction action="#{consultaOpesHelper.verificaSiHayMsgExito}" />
+
 	</f:metadata>
 
 	<p:layout fullPage="true">
@@ -83,20 +85,22 @@
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 				<h:form id="formTable">
 					<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
-						<p:calendar id="fechaIni" value="#{consultaOpesHelper.fechaInicial}"
-							pattern="dd-MM-yyyy" mask="true" required="true" size="10"/>
+					<p:calendar id="fechaIni"
+						value="#{consultaOpesHelper.fechaInicial}" pattern="dd-MM-yyyy"
+						mask="true" required="true" size="10" />
 					
 					&nbsp;&nbsp;
 					
 					<h:outputLabel for="fechaFin" value="Fecha Final: " />
-						<p:calendar id="fechaFin" value="#{consultaOpesHelper.fechaFinal}"
-							pattern="dd-MM-yyyy" mask="true" required="true" size="10"/>
+					<p:calendar id="fechaFin" value="#{consultaOpesHelper.fechaFinal}"
+						pattern="dd-MM-yyyy" mask="true" required="true" size="10" />
 							
 					&nbsp;&nbsp;
 							
-					<p:commandButton value="Buscar Trades" update="trops"/>		
+					<p:commandButton value="Buscar Trades" update="trops" />
 
-					<br/><br/>
+					<br />
+					<br />
 					<p:dataTable id="trops" var="trop"
 						value="#{consultaOpesHelper.tradersOpes}" resizableColumns="true"
 						scrollable="true" scrollWidth="130%" scrollHeight="400"
@@ -177,81 +181,81 @@
 
 					</p:dataTable>
 
-			<p:contextMenu for="trops">
-				<p:menuitem value="View" update="opeDetail" icon="ui-icon-search"
-					oncomplete="PF('opeDialog').show()" />
-				<p:menuitem value="Modificar" update="trops" icon="ui-icon-wrench"
-							actionListener="#{tradersOpes.initForModify(consultaOpesHelper.selectedOpe)}" 
-							action="modiope"/>
-				<!-- <p:menuitem value="Delete" update="cars" icon="ui-icon-close"
+					<p:contextMenu for="trops">
+						<p:menuitem value="View" update="opeDetail" icon="ui-icon-search"
+							oncomplete="PF('opeDialog').show()" />
+						<p:menuitem value="Modificar" update="trops" icon="ui-icon-wrench"
+							actionListener="#{tradersOpes.initForModify(consultaOpesHelper.selectedOpe)}"
+							action="modiope" />
+						<!-- <p:menuitem value="Delete" update="cars" icon="ui-icon-close"
 							actionListener="#{dtContextMenuView.deleteCar}" /> -->
-			</p:contextMenu>
+					</p:contextMenu>
 
-			<p:dialog header="Info del Trade seleccionado" widgetVar="opeDialog" modal="false"
-				showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="opeDetail" style="text-align:center;">
-					<p:panelGrid columns="2"
-						rendered="#{not empty consultaOpesHelper.selectedOpe}"
-						columnClasses="label,value">
+					<p:dialog header="Info del Trade seleccionado"
+						widgetVar="opeDialog" modal="false" showEffect="fade"
+						hideEffect="fade" resizable="false">
+						<p:outputPanel id="opeDetail" style="text-align:center;">
+							<p:panelGrid columns="2"
+								rendered="#{not empty consultaOpesHelper.selectedOpe}"
+								columnClasses="label,value">
 
-						<h:outputText value="Fecha:" />
-						<h:outputText value="#{consultaOpesHelper.selectedOpe.fechaTrade}" >
-							<f:convertDateTime pattern="dd-MM-yyyy" />
-						</h:outputText>
+								<h:outputText value="Fecha:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.fechaTrade}">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:outputText>
 
-						<h:outputText value="Symbol:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.symbolTrade}" />
-						
-						<h:outputText value="Side:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.sideTrade}" />
+								<h:outputText value="Symbol:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.symbolTrade}" />
 
-						<h:outputText value="Resultado:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.resultadoTrade}" />
-							
-						<h:outputText value="Patrón 1m:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.patronTrade1m}" />
-						
-						<h:outputText value="Patrón 15m:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.patronTrade15m}" />
-						
-						<h:outputText value="Shares:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.sharesTrade}" />
-						
-						<h:outputText value="Bruto:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.brutoOpe}" />
-							
-						<h:outputText value="Neto:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.netoOpe}" />
-							
-						<h:outputText value="Centavos 1:1" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.centsTrade}" />
-							
-						<h:outputText value="¿100% Plan?:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.todo100plan}" />
-							
-						<h:outputText value="Stop Evitable:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.stopEvitable}" />
-							
-						<h:outputText value="Observaciones:" />
-						<h:outputText
-							value="#{consultaOpesHelper.selectedOpe.observaciones}" />
-							
-					</p:panelGrid>
-				</p:outputPanel>
-			</p:dialog>
+								<h:outputText value="Side:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.sideTrade}" />
 
-			</h:form>
+								<h:outputText value="Resultado:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.resultadoTrade}" />
+
+								<h:outputText value="Patrón 1m:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.patronTrade1m}" />
+
+								<h:outputText value="Patrón 15m:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.patronTrade15m}" />
+
+								<h:outputText value="Shares:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.sharesTrade}" />
+
+								<h:outputText value="Bruto:" />
+								<h:outputText value="#{consultaOpesHelper.selectedOpe.brutoOpe}" />
+
+								<h:outputText value="Neto:" />
+								<h:outputText value="#{consultaOpesHelper.selectedOpe.netoOpe}" />
+
+								<h:outputText value="Centavos 1:1" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.centsTrade}" />
+
+								<h:outputText value="¿100% Plan?:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.todo100plan}" />
+
+								<h:outputText value="Stop Evitable:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.stopEvitable}" />
+
+								<h:outputText value="Observaciones:" />
+								<h:outputText
+									value="#{consultaOpesHelper.selectedOpe.observaciones}" />
+
+							</p:panelGrid>
+						</p:outputPanel>
+					</p:dialog>
+
+				</h:form>
 			</p:panelGrid>
 
 

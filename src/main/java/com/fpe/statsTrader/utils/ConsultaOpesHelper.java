@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -90,6 +91,22 @@ public class ConsultaOpesHelper {
 //			System.out.println(to);
 //		}
 		
+	}
+	
+	public void verificaSiHayMsgExito() {
+
+		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("inputOpeMsgExito") != null) {
+			String msg = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+					.get("inputOpeMsgExito");
+			showMessage(msg);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("inputOpeMsgExito", null);
+		}
+
+	}
+	
+	public void showMessage(String msg) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(msg, msg));
 	}
 	
 
