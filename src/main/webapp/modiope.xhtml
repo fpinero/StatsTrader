@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<h:outputStylesheet library="css" name="mystyle.css" />
+	<title>StatsTrader</title>
+</h:head>
+
+<h:body>
+
+	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
+	<f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderExists}" />
+
+	<!-- carga el traderId en el objeto tradersOpes -->
+		<!-- <f:viewAction action="#{tradersOpes.initTraderId}" /> -->
+		
+	<!-- Cuando la ope es correctamente insertada en la DB, para que se muestre el mensaje de éxito, este es 
+	almacenado en un parametro de la sesion, aqui comprobamos si regresa a la página tras una operación 
+	exitosa y le mostramos el mensaje -->
+		<f:viewAction action="#{tradersOpes.verificaSiHayMsgExito}" />
+	</f:metadata>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="62"
+			header="StatsTrader #{thisVersionApp.versionApp}">
+			<div>
+				<div class="toTheLeft">
+					<h:outputLabel value="Usuario: " />
+				</div>
+				<div class="toTheLeftAndBold">
+					<h:outputText value="&nbsp;#{thisTrader.user}" />
+				</div>
+				<div class="toTheRight">
+					<p:clock pattern="HH:mm:ss dd.MM.yyyy" />
+				</div>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="200" header="Menu Aplicación">
+			<h:form>
+				<p:menu>
+					<p:submenu label="Usuario">
+						<p:menuitem value="Iniciar Sesión" outcome="login"
+							icon="ui-icon-star" />
+						<p:menuitem value="Cerrar Sesión" outcome="logout"
+							icon="ui-icon-star" />
+						<p:menuitem value="Crear Cuenta" outcome="crearcuenta"
+							icon="ui-icon-star" />
+						<p:menuitem value="Modificar Cuenta" outcome="modificarcuenta"
+							icon="ui-icon-star" />
+					</p:submenu>
+					<p:submenu label="Operaciones">
+						<p:menuitem value="Imputar Trade" outcome="inputope"
+							icon="ui-icon-star" />
+						<p:menuitem value="Consulta Trades" outcome="consultaopes"
+							icon="ui-icon-star" />
+						<p:menuitem value="Estadísticas" outcome="content"
+							icon="ui-icon-star" />
+					</p:submenu>
+
+				</p:menu>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<p:panelGrid columns="1" styleClass="panelGridCenter">
+				<h:form>
+					<h3 style="text-align: center; color: blue;">Modificar Trade</h3>
+					<p:growl id="growl" sticky="true" autoUpdate="true" />
+
+					<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
+
+						<h:outputLabel for="idSymbol" value="Symbol: " />
+						<p:inputText id="idSymbol" value="#{tradersOpes.symbolTrade}"
+							label="Symbol" required="true" placeholder="Symbol negociado"
+							styleClass="placeHolder">
+							<f:validateLength minimum="1" maximum="10" />
+						</p:inputText>
+
+						<h:outputLabel for="idSide" value="Side: " />
+						<p:selectOneMenu id="idSide" value="#{tradersOpes.sideTrade}"
+							required="true">
+							<p:ajax listener="#{tradersOpes.onSideChange}"
+								update="idPatron1m idPatron15m" />
+							<!-- <f:selectItem itemLabel="Side" Value="#{tradersOpes.sideTrade}"
+								 /> -->
+							<f:selectItems value="#{tradersOpes.sideItems}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="idResultado" value="Resultado: " />
+						<p:selectOneMenu id="idResultado"
+							value="#{tradersOpes.resultadoTrade}" required="true">
+							<!-- <p:ajax listener="#{dropdownView.onCountryChange}" update="city" /> -->
+							<!-- <f:selectItem itemLabel="Resultado" Value="#{tradersOpes.resultadoTrade}"
+								 /> -->
+							<f:selectItems value="#{tradersOpes.resultadoItems}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="idPatron15m" value="Patrón en 15m: " />
+						<p:selectOneMenu id="idPatron15m"
+							value="#{tradersOpes.patronTrade15m}" required="true">
+							<!-- <f:selectItem itemLabel="Patrón en 15m" Value="#{tradersOpes.patronTrade15m}"
+								 /> -->
+							<f:selectItems value="#{tradersOpes.patrones15m}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="idPatron1m" value="Patrón en 1m: " />
+						<p:selectOneMenu id="idPatron1m"
+							value="#{tradersOpes.patronTrade1m}" required="true">
+							<!-- <f:selectItem itemLabel="Patrón en 1m" Value="#{tradersOpes.patronTrade1m}"
+								 /> -->
+							<f:selectItems value="#{tradersOpes.patrones1m}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="idShares" value="Shares Trade: " />
+						<p:inputText id="idShares" value="#{tradersOpes.sharesTrade}"
+							label="Shares Trade" required="true" placeholder="Lote del trade"
+							styleClass="placeHolder">
+							<f:validateDoubleRange minimum="1" maximum="99999999" />
+						</p:inputText>
+
+						<h:outputLabel for="idBruto" value="Resultado Bruto: " />
+						<p:inputText id="idBruto" value="#{tradersOpes.brutoOpe}"
+							label="Resultado Bruto" required="true"
+							placeholder="usa la coma para decimales" styleClass="placeHolder">
+							<f:convertNumber pattern="#,##0.00" />
+							<f:validateDoubleRange minimum="-999999" maximum="9999999" />
+						</p:inputText>
+
+						<h:outputLabel for="idNeto" value="Resultado Neto: " />
+						<p:inputText id="idNeto" value="#{tradersOpes.netoOpe}"
+							label="Resultado Neto" required="true"
+							placeholder="usa la coma para decimales" styleClass="placeHolder">
+							<f:convertNumber pattern="#,##0.00" />
+							<f:validateDoubleRange minimum="-999999" maximum="9999999" />
+						</p:inputText>
+
+						<h:outputLabel for="idFecha" value="Fecha Trade: " />
+						<p:calendar id="idFecha" value="#{tradersOpes.fechaTrade}"
+							pattern="dd-MM-yyyy" mask="true" required="true" />
+
+						<h:outputLabel for="idCentsTrade" value="Centavos del Trade: " />
+						<p:inputText id="idCentsTrade" value="#{tradersOpes.centsTrade}"
+							label="Centavos del Trade:" required="true"
+							placeholder="Centavos hasta el 1:1" styleClass="placeHolder">
+							<f:validateDoubleRange minimum="1" maximum="99999" />
+						</p:inputText>
+
+						<h:outputLabel for="idTodo100Plan" value="¿Todo acorde al plan? " />
+						<p:selectOneMenu id="idTodo100Plan"
+							value="#{tradersOpes.todo100plan}" required="true">
+							<!-- <f:selectItem itemLabel="¿Todo acorde al plan?" value="#{tradersOpes.todo100plan}"
+								 /> -->
+							<f:selectItems value="#{tradersOpes.todo100PlanItems}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="idStopEvitable" value="¿Stop Evitable? " />
+						<p:selectOneMenu id="idStopEvitable"
+							value="#{tradersOpes.stopEvitable}" required="true">
+							<!-- <f:selectItem itemLabel="¿Stop Evitable?" Value="#{tradersOpes.stopEvitable}"
+								 /> -->
+							<f:selectItems value="#{tradersOpes.stopEvitableItems}" />
+						</p:selectOneMenu>
+
+					</p:panelGrid>
+					<br />
+					
+					<div align="center">
+						<h:outputLabel
+							value="¿Alguna Observación o link a la captura? (Opcional)"
+							style="font-weight: bold" />
+						<br /> <br/>
+						<p:inputTextarea rows="5" cols="50" autoResize="false"
+							required="false" value="#{tradersOpes.observaciones}" />
+					</div>
+
+
+					<br />
+					<div align="center">
+						<p:commandButton value="Aceptar" action="#{tradersOpes.salvaOpe}" />
+						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
+						<!-- actionListener="#{trader.destruyeThisTrader}" />  -->
+
+						<!-- Esto también funciona en JSF 2.2 por mucho que eclipse muestra un error en el binding	 -->
+						<!-- This is the consequence of the new EL 2.2 feature of calling a method in a value expression via 
+						the #{bean.method()} syntax instead of only referencing a property via the #{bean.property} -->
+
+						<!-- <p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}">
+							<f:actionListener binding="#{trader.destruyeThisTrader()}" />
+						</p:commandButton>	 -->
+
+						<br /> <br />
+
+					</div>
+				</h:form>
+			</p:panelGrid>
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+
+</html>

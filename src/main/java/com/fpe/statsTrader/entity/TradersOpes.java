@@ -438,6 +438,29 @@ public class TradersOpes {
 			
 		}
 
+		public void initForModify(TradersOpes opeAmodificar){
+			System.out.println("Estableciendo los datos de la operación a modificar...");
+			System.out.println("ope a modificar=" + opeAmodificar);
+			
+        	this.id = opeAmodificar.id;
+        	this.traderId = opeAmodificar.traderId;
+    		this.symbolTrade = opeAmodificar.symbolTrade;
+    		this.sideTrade = opeAmodificar.sideTrade;
+    		this.resultadoTrade = opeAmodificar.resultadoTrade;
+    		this.patronTrade1m = opeAmodificar.patronTrade1m;
+    		this.patronTrade15m = opeAmodificar.patronTrade15m;
+    		this.sharesTrade = opeAmodificar.sharesTrade;
+    		this.brutoOpe = opeAmodificar.brutoOpe;
+    		this.netoOpe = opeAmodificar.netoOpe;
+    		this.fechaTrade = opeAmodificar.fechaTrade;
+    		this.centsTrade = opeAmodificar.centsTrade;
+    		this.todo100plan = opeAmodificar.todo100plan;
+    		this.stopEvitable = opeAmodificar.stopEvitable;
+    		this.observaciones = opeAmodificar.observaciones;
+    		onSideChange();
+	        
+	    }
+		
 		public void verificaSiHayMsgExito() {
 			
 			if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("inputOpeMsgExito") != null) {
