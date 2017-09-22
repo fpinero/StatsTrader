@@ -21,10 +21,10 @@
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
 
-		<!-- <f:viewAction action="#{consultaOpesHelper.loadTradersOpes}" /> -->
+		<f:viewAction action="#{consultaOpesHelper.loadTradersOpes}" />
 
-		<f:event listener="#{consultaOpesHelper.loadTradersOpes()}"
-			type="preRenderView"></f:event>
+		<!-- <f:event listener="#{consultaOpesHelper.loadTradersOpes()}"
+			type="preRenderView"></f:event> -->
 
 		<f:viewAction action="#{consultaOpesHelper.verificaSiHayMsgExito}" />
 
@@ -84,6 +84,7 @@
 
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 				<h:form id="formTable">
+				<p:growl id="growl" showDetail="false" sticky="false" autoUpdate="true" life="4500"/>
 					<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
 					<p:calendar id="fechaIni"
 						value="#{consultaOpesHelper.fechaInicial}" pattern="dd-MM-yyyy"

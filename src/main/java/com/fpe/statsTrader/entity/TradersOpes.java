@@ -488,7 +488,7 @@ public class TradersOpes {
 			System.out.println("Objeto TradersOpes set a null todos sus campos...");
 
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("inputOpeMsgExito",
-					"Exito!! Operación correctamente modificada.");
+					"Exito!! Trade correctamente modificada.");
 
 			return "consultaopes?faces-redirect=true"; // fuerza el refresco del
 													// formulario

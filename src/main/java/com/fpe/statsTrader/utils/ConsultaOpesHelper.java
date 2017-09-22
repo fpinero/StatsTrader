@@ -95,6 +95,7 @@ public class ConsultaOpesHelper {
 	
 	public void verificaSiHayMsgExito() {
 
+		System.out.println("Verificando en ConsultaOpesHelper si hay mensaje de éxito que mostrar");
 		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("inputOpeMsgExito") != null) {
 			String msg = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 					.get("inputOpeMsgExito");
@@ -105,6 +106,7 @@ public class ConsultaOpesHelper {
 	}
 	
 	public void showMessage(String msg) {
+		System.out.println("mensaje a mostrar=" + msg);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(msg, msg));
 	}
