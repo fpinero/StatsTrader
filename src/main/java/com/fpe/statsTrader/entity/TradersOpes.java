@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fpe.statsTrader.jpa.DeleteTradersOpe;
 import com.fpe.statsTrader.jpa.InsertaTraderOpe;
 import com.fpe.statsTrader.jpa.UpdateDatosOpe;
 
@@ -393,14 +394,16 @@ public class TradersOpes {
 		if (sideTrade != null && !sideTrade.equals("")) {
 			patrones1m = dataSegunSide1m.get(sideTrade);
 			patrones15m = dataSegunSide15m.get(sideTrade);
-			System.out.println("Actualizando patrones disponbles para 1m segun side...");
-			for (String p1 : patrones1m) {
-				System.out.println(p1);
-			}
-			System.out.println("Actualizando patrones disponbles para 15m segun side...");
-			for (String p15 : patrones15m) {
-				System.out.println(p15);
-			}
+			// System.out.println("Actualizando patrones disponbles para 1m
+			// segun side...");
+			// for (String p1 : patrones1m) {
+			// System.out.println(p1);
+			// }
+			// System.out.println("Actualizando patrones disponbles para 15m
+			// segun side...");
+			// for (String p15 : patrones15m) {
+			// System.out.println(p15);
+			// }
 		} else {
 			patrones1m = new ArrayList<>();
 			patrones15m = new ArrayList<>();
@@ -488,14 +491,37 @@ public class TradersOpes {
 			System.out.println("Objeto TradersOpes set a null todos sus campos...");
 
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("inputOpeMsgExito",
-					"Exito!! Trade correctamente modificada.");
+					"Exito!! Trade correctamente modificado.");
 
 			return "consultaopes?faces-redirect=true"; // fuerza el refresco del
-													// formulario
+														// formulario
 		} else {
 			showMessage("Error!! No ha sido posible modificar la operación en la base de datos.");
 			return null;
 		}
+
+	}
+
+	public String deleteOpe(TradersOpes opeAborrar) {
+
+		DeleteTradersOpe deleteTradersOpe = new DeleteTradersOpe();
+		if (deleteTradersOpe.deleteOpe(opeAborrar)) {
+			showMessage("Exito!! Trade eliminado correctamente.");
+			return "consultaopes?faces-redirect=true"; // fuerza el refresco del
+		} else {
+			showMessage("Error!! No ha sido posible eliminar la operación en la base de datos.");
+			return null;
+		}
+
+	}
+
+	public String cancelaModificacion() {
+
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("inputOpeMsgExito",
+				"Cancelado!! Modificación de la operación cancelada.");
+
+		return "consultaopes?faces-redirect=true"; // fuerza el refresco del
+													// formulario
 
 	}
 

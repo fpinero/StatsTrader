@@ -21,10 +21,10 @@
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
 
-		<f:viewAction action="#{consultaOpesHelper.loadTradersOpes}" />
+		<!-- <f:viewAction action="#{consultaOpesHelper.loadTradersOpes}" /> -->
 
-		<!-- <f:event listener="#{consultaOpesHelper.loadTradersOpes()}"
-			type="preRenderView"></f:event> -->
+		<f:event listener="#{consultaOpesHelper.loadTradersOpes()}"
+			type="preRenderView"></f:event>
 
 		<f:viewAction action="#{consultaOpesHelper.verificaSiHayMsgExito}" />
 
@@ -84,7 +84,8 @@
 
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 				<h:form id="formTable">
-				<p:growl id="growl" showDetail="false" sticky="false" autoUpdate="true" life="4500"/>
+					<p:growl id="growl" showDetail="false" sticky="false"
+						autoUpdate="true" life="4500" />
 					<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
 					<p:calendar id="fechaIni"
 						value="#{consultaOpesHelper.fechaInicial}" pattern="dd-MM-yyyy"
@@ -100,7 +101,9 @@
 							
 					<p:commandButton value="Buscar Trades" update="trops" />
 
-					<br />
+					<br /><br />
+					
+					<div align="center" style="color: blue;">Haz click derecho sobre uno de los trades de la lista para ver las opciones disponibles</div>
 					<br />
 					<p:dataTable id="trops" var="trop"
 						value="#{consultaOpesHelper.tradersOpes}" resizableColumns="true"
@@ -188,9 +191,22 @@
 						<p:menuitem value="Modificar" update="trops" icon="ui-icon-wrench"
 							actionListener="#{tradersOpes.initForModify(consultaOpesHelper.selectedOpe)}"
 							action="modiope" />
-						<!-- <p:menuitem value="Delete" update="cars" icon="ui-icon-close"
-							actionListener="#{dtContextMenuView.deleteCar}" /> -->
+						<p:menuitem value="Eliminar" icon="ui-icon-close"
+							oncomplete="PF('deleteDialog').show()" />
 					</p:contextMenu>
+
+					<p:dialog header="Eliminar Trade seleccionado"
+						widgetVar="deleteDialog" modal="false" showEffect="fade"
+						hideEffect="fade" resizable="false">
+						<br/>
+						<h:outputText value="¿Desea eliminar el trade seleccionado?" />
+						<br /><br/>
+						<div align="center"><p:commandButton value="Eliminar Trade"
+							actionListener="#{tradersOpes.deleteOpe(consultaOpesHelper.selectedOpe)}"
+							outcome="consultaopes" update="trops"
+							onclick="PF('deleteDialog').close()" /></div>
+						<br/>
+					</p:dialog>
 
 					<p:dialog header="Info del Trade seleccionado"
 						widgetVar="opeDialog" modal="false" showEffect="fade"

@@ -86,10 +86,10 @@ public class ConsultaOpesHelper {
 		tradersOpes = qlot.getTradersOpes(currentTrader, fechaInicial, fechaFinal);
 		
 		//provisional
-//		System.out.println(">>>>> operaciones del trader logueado <<<<<<");
-//		for (TradersOpes to : tradersOpes){
-//			System.out.println(to);
-//		}
+		System.out.println(">>>>> operaciones del trader logueado <<<<<<");
+		for (TradersOpes to : tradersOpes){
+			System.out.println(to);
+		}
 		
 	}
 	

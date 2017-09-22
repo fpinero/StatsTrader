@@ -190,16 +190,8 @@
 					<br />
 					<div align="center">
 						<p:commandButton value="Modificar" action="#{tradersOpes.actualizaOpe}" />
-						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
-						<!-- actionListener="#{trader.destruyeThisTrader}" />  -->
-
-						<!-- Esto también funciona en JSF 2.2 por mucho que eclipse muestra un error en el binding	 -->
-						<!-- This is the consequence of the new EL 2.2 feature of calling a method in a value expression via 
-						the #{bean.method()} syntax instead of only referencing a property via the #{bean.property} -->
-
-						<!-- <p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}">
-							<f:actionListener binding="#{trader.destruyeThisTrader()}" />
-						</p:commandButton>	 -->
+						&nbsp;&nbsp;
+						<p:commandButton value="Cancelar" action="#{tradersOpes.cancelaModificacion}" />
 
 						<br /> <br />
 

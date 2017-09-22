@@ -1,5 +1,9 @@
 package com.fpe.statsTrader.jpa;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -18,6 +22,15 @@ public class UpdateDatosOpe {
 	public boolean updateTraderOpe(TradersOpes opeModificada) {
 		
 		boolean actualizacionExitosa = false;
+		
+		//este truco de sumar 5 horas a la fecha es necesario pq el <f:convertDateTime pattern="dd-MM-yyyy" />
+		//falla numerosas veces cuando la hora es 00:00:00 y formatea la fecha al día previo
+		
+		Calendar c = GregorianCalendar.getInstance();
+		c.setTime(opeModificada.getFechaTrade());
+		c.set(Calendar.HOUR_OF_DAY, 5);
+		Date opeTime = c.getTime();
+		opeModificada.setFechaTrade(opeTime);
 		
 		System.out.println("operación a actualizar en la BD: " + opeModificada.toString());
 		
