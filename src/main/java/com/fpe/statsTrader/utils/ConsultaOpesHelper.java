@@ -83,6 +83,9 @@ public class ConsultaOpesHelper {
 		
 		Trader currentTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 		QueryListaOpesTrader qlot = new QueryListaOpesTrader();
+		
+		
+		
 		tradersOpes = qlot.getTradersOpes(currentTrader, fechaInicial, fechaFinal);
 		
 		//provisional

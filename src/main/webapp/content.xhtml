@@ -22,7 +22,7 @@
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
 	</f:metadata>
 
-	<p:layout fullPage="true">
+	<p:layout fullPage="true" stateful="true" id="mainlayout">
 
 		<p:layoutUnit position="north" size="62"
 			header="StatsTrader #{thisVersionApp.versionApp}">
@@ -67,22 +67,50 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<p:panelGrid>
-
-				<h:outputText value="Name:" />
-				<h:outputText value="Kobe Bryant" />
-
-				<h:outputText value="Team:" />
-				<h:outputText value="Los Angeles Lakers" />
-
-				<h:outputText value="Position:" />
-				<h:outputText value="Shooting Guard" />
-
-				<h:outputText value="Number:" />
-				<h:outputText value="24" />
-				
-			</p:panelGrid>
-
+		
+			<p:layout fullPage="false">
+				<!-- <p:layoutUnit position="center"> -->
+					<p:layoutUnit position="north">
+		
+						<h:outputText value="north" />
+						<h:outputText value="Kobe Bryant" />
+					
+						<h:outputText value="Team:" />
+						<h:outputText value="Los Angeles Lakers" />
+						
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="north">
+		
+						<h:outputText value="north2" />
+						<h:outputText value="Kobe Bryant" />
+					
+						<h:outputText value="Team:" />
+						<h:outputText value="Los Angeles Lakers" />
+						
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="center">
+					
+						<h:outputText value="center:" />
+						<h:outputText value="Shooting Guard" />
+		
+						<h:outputText value="Number:" />
+						<h:outputText value="24" />
+						
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="south">
+					
+						<h:outputText value="south" />
+						<h:outputText value="Shooting Guard" />
+		
+						<h:outputText value="Number:" />
+						<h:outputText value="24" />
+						
+					</p:layoutUnit>
+				<!-- </p:layoutUnit> -->	
+			</p:layout>	
 
 		</p:layoutUnit>
 

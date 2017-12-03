@@ -516,6 +516,21 @@ public class TradersOpes {
 	}
 
 	public String cancelaModificacion() {
+		
+		// Si no se establecen a nulo, al ir a inputar un nuevo trade aparecen los datos del que intentó modificar pero canceló
+		this.symbolTrade = null;
+		this.sideTrade = null;
+		this.resultadoTrade = null;
+		this.patronTrade1m = null;
+		this.patronTrade15m = null;
+		this.sharesTrade = null;
+		this.brutoOpe = null;
+		this.netoOpe = null;
+		this.fechaTrade = null;
+		this.centsTrade = null;
+		this.todo100plan = null;
+		this.stopEvitable = null;
+		this.observaciones = null;
 
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("inputOpeMsgExito",
 				"Cancelado!! Modificación de la operación cancelada.");
