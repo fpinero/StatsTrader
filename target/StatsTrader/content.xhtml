@@ -16,7 +16,13 @@
 </h:head>
 
 <h:body>
-	<p:layout fullPage="true">
+
+	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
+	<f:metadata>
+		<f:viewAction action="#{checkParams.checkTraderExists}" />
+	</f:metadata>
+
+	<p:layout fullPage="true" stateful="true" id="mainlayout">
 
 		<p:layoutUnit position="north" size="62"
 			header="StatsTrader #{thisVersionApp.versionApp}">
@@ -33,7 +39,7 @@
 			</div>
 		</p:layoutUnit>
 
-		<p:layoutUnit position="west" size="200" header="Menu Aplicación">
+		<p:layoutUnit position="west" size="200" header="Menu Aplicación" collapsible="true">
 			<h:form>
 				<p:menu>
 					<p:submenu label="Usuario">
@@ -46,6 +52,14 @@
 						<p:menuitem value="Modificar Cuenta" outcome="modificarcuenta"
 							icon="ui-icon-star" />
 					</p:submenu>
+					<p:submenu label="Operaciones">
+						<p:menuitem value="Imputar Trade" outcome="inputope"
+							icon="ui-icon-star" />
+						<p:menuitem value="Consulta Trades" outcome="consultaopes"
+							icon="ui-icon-star" />
+						<p:menuitem value="Estadísticas" outcome="content"
+							icon="ui-icon-star" />
+					</p:submenu>
 
 				</p:menu>
 
@@ -53,8 +67,50 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<h:outputText value="Aqui va el contenido content" />
-
+		
+			<p:layout fullPage="false">
+				<!-- <p:layoutUnit position="center"> -->
+					<p:layoutUnit position="north">
+		
+						<h:outputText value="north" />
+						<h:outputText value="Kobe Bryant" />
+					
+						<h:outputText value="Team:" />
+						<h:outputText value="Los Angeles Lakers" />
+						
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="north">
+		
+						<h:outputText value="north2" />
+						<h:outputText value="Kobe Bryant" />
+					
+						<h:outputText value="Team:" />
+						<h:outputText value="Los Angeles Lakers" />
+						
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="center">
+					
+						<h:outputText value="center:" />
+						<h:outputText value="Shooting Guard" />
+		
+						<h:outputText value="Number:" />
+						<h:outputText value="24" />
+						
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="south">
+					
+						<h:outputText value="south" />
+						<h:outputText value="Shooting Guard" />
+		
+						<h:outputText value="Number:" />
+						<h:outputText value="24" />
+						
+					</p:layoutUnit>
+				<!-- </p:layoutUnit> -->	
+			</p:layout>	
 
 		</p:layoutUnit>
 

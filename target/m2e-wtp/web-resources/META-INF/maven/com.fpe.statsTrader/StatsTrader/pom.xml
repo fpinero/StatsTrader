@@ -107,17 +107,16 @@
 			<version>1.4</version>
 		</dependency>
 		<!-- CDI bean injections because managedBean is deprecated -->
-		<!-- **** CDI no funciona con PrimeFaces. hay q seguir usando ManagedBean **** -->
-		<!-- <dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
-			<version>2.0</version>
-		</dependency> -->
+		<!-- **** CDI no funciona con PrimeFaces. hay q seguir usando ManagedBean 
+			**** -->
+		<!-- <dependency> <groupId>javax.enterprise</groupId> <artifactId>cdi-api</artifactId> 
+			<version>2.0</version> </dependency> -->
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.2</version>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -130,6 +129,32 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<!-- plugin necesario para que funcione en heroku -->
+			<!-- añadir el fichero Procfile con este comando: -->
+			<!-- web: java $JAVA_OPTS -jar target/dependency/webapp-runnerar (aqui van dos dashes)port $PORT target/StatsTrader.war -->
+			<!-- hacer un mvn package antes del deploy a herou git heroku master -->
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.0.2</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals><goal>copy</goal></goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.github.jsimone</groupId>
+                                <artifactId>webapp-runner</artifactId>
+                                <version>8.5.23.0</version>
+                                <destFileName>webapp-runner.jar</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+			
 		</plugins>
 		<finalName>${project.artifactId}</finalName>
 	</build>
