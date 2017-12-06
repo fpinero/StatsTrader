@@ -131,7 +131,7 @@
 			</plugin>
 			<!-- plugin necesario para que funcione en heroku -->
 			<!-- añadir el fichero Procfile con este comando: -->
-			<!-- web: java $JAVA_OPTS -jar target/dependency/webapp-runnerar (aqui van dos dashes)port $PORT target/StatsTrader.war -->
+			<!-- web: java $JAVA_OPTS -jar target/dependency/webapp-runner (aqui van dos dashes)port $PORT target/StatsTrader.war -->
 			<!-- hacer un mvn package antes del deploy a herou git heroku master -->
 			<plugin>
             <groupId>org.apache.maven.plugins</groupId>
