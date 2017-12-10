@@ -71,8 +71,30 @@
 			<div align="center">
 				<h3 style="text-align: center; color: blue;">Consulta estadísticas generales</h3>
 			</div>
+			<h:form id="formEstadisticas">
+				<p:growl id="growl" showDetail="false" sticky="false"
+						autoUpdate="true" life="4500" />
+				<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
+					<p:calendar id="fechaIni"
+						value="#{estadisticasHelper.fechaInicial}" pattern="dd-MM-yyyy"
+						mask="true" required="true" size="10" />
+					
+					&nbsp;&nbsp;
+					
+					<h:outputLabel for="fechaFin" value="Fecha Final: " />
+					<p:calendar id="fechaFin" value="#{estadisticasHelper.fechaFinal}"
+						pattern="dd-MM-yyyy" mask="true" required="true" size="10" />
+							
+					&nbsp;&nbsp;
+							
+					<p:commandButton value="Refrescar" update="panelEstadisticas" />  
 
-			<p:panelGrid columns="2">
+					<br /><br />
+				
+			</h:form>
+			
+
+			<p:panelGrid columns="2" id="panelEstadisticas">
 				<p:panel id="panel1left" header="Estadísticas">
 					<h:outputText value="Name:" />
 					<h:outputText value="Kobe Bryant" />
@@ -129,6 +151,7 @@
 					<h:outputText value="Number4:" />
 					<h:outputText value="244" />
 				</p:panel>
+				
 			</p:panelGrid>
 
 
