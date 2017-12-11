@@ -42,10 +42,43 @@ public class ConsultaOpesHelper {
 		tradersOpes = new ArrayList<>();
 		
 		fechaHoy = GregorianCalendar.getInstance();
-		fechaFinal = fechaHoy.getTime();
+		
+		try {
+			System.out.println("...Verificando si existe el atributo de sesión fechaFinConsultaOpes");
+			Date fechaFinPrevia = (Date) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("fechaFinConsultaOpes");
+			if (fechaFinPrevia != null) {
+				fechaFinal = fechaFinPrevia;
+			} else {
+				System.out.println("...Existía el atributo pero era nulo.");
+				fechaFinal = fechaHoy.getTime();
+			}
+			System.out.println("...Existía el atributo fechaFinConsultaOpes con valor: "+ fechaFinPrevia);
+		} catch (Exception e) {
+			System.out.println("Excepción intentando obtener el atributo fechaFinConsultaOpes en el @PostConstruct\n" + e);
+			fechaFinal = fechaHoy.getTime();
+			System.out.println("...Se establece fechaInicial a: " + fechaFinal);
+		}
+		System.out.println("...fechaFinal=" + fechaFinal);
 		
 		fechaHoy.set(Calendar.DAY_OF_MONTH, 1);
-		fechaInicial = fechaHoy.getTime();
+		
+		try {
+			System.out.println("...Verificando si existe el atributo de sesión fechaIniConsultaOpes");
+			Date fechaIniPrevia = (Date) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("fechaIniConsultaOpes");
+			if (fechaIniPrevia != null) {
+				fechaInicial = fechaIniPrevia;
+			} else {
+				System.out.println("...Existía el atributo pero era nulo.");
+				fechaInicial = fechaHoy.getTime();
+			}
+			System.out.println("...Existía el atributo fechaIniConsultaOpes con valor: "+ fechaIniPrevia);
+		}catch(Exception e) {
+			System.out.println("Excepción intentando obtener el atributo fechaIniConsultaOpes en el @PostConstruct\n" + e);
+			fechaInicial = fechaHoy.getTime();
+			System.out.println("...Se establece fechaInicial a: " + fechaInicial);
+		}
+		System.out.println("...fechaInicial=" + fechaInicial);
+		
 		
 	}
 	
@@ -80,6 +113,13 @@ public class ConsultaOpesHelper {
 	}
 
 	public void loadTradersOpes() {
+		
+		System.out.println("....Estableciendo atributo de sesion fechaIniConsultaOpes=" + fechaInicial);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("fechaIniConsultaOpes",
+				fechaInicial);
+		System.out.println("....Estableciendo atributo de sesion fechaFinConsultaOpes=" + fechaFinal);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("fechaFinConsultaOpes",
+				fechaFinal);
 		
 		Trader currentTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 		QueryListaOpesTrader qlot = new QueryListaOpesTrader();
