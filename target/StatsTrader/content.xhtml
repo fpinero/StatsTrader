@@ -39,7 +39,8 @@
 			</div>
 		</p:layoutUnit>
 
-		<p:layoutUnit position="west" size="200" header="Menu Aplicación" collapsible="true">
+		<p:layoutUnit position="west" size="200" header="Menu Aplicación"
+			collapsible="true">
 			<h:form>
 				<p:menu>
 					<p:submenu label="Usuario">
@@ -67,50 +68,92 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-		
-			<p:layout fullPage="false">
-				<!-- <p:layoutUnit position="center"> -->
-					<p:layoutUnit position="north">
-		
-						<h:outputText value="north" />
-						<h:outputText value="Kobe Bryant" />
+			<div align="center">
+				<h3 style="text-align: center; color: blue;">Consulta estadísticas generales</h3>
+			</div>
+			<h:form id="formEstadisticas">
+				<p:growl id="growl" showDetail="false" sticky="false"
+						autoUpdate="true" life="4500" />
+				<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
+					<p:calendar id="fechaIni"
+						value="#{estadisticasHelper.fechaInicial}" pattern="dd-MM-yyyy"
+						mask="true" required="true" size="10" />
 					
-						<h:outputText value="Team:" />
-						<h:outputText value="Los Angeles Lakers" />
-						
-					</p:layoutUnit>
+					&nbsp;&nbsp;
 					
-					<p:layoutUnit position="north">
-		
-						<h:outputText value="north2" />
-						<h:outputText value="Kobe Bryant" />
-					
-						<h:outputText value="Team:" />
-						<h:outputText value="Los Angeles Lakers" />
-						
-					</p:layoutUnit>
-					
-					<p:layoutUnit position="center">
-					
-						<h:outputText value="center:" />
-						<h:outputText value="Shooting Guard" />
-		
-						<h:outputText value="Number:" />
-						<h:outputText value="24" />
-						
-					</p:layoutUnit>
-					
-					<p:layoutUnit position="south">
-					
-						<h:outputText value="south" />
-						<h:outputText value="Shooting Guard" />
-		
-						<h:outputText value="Number:" />
-						<h:outputText value="24" />
-						
-					</p:layoutUnit>
-				<!-- </p:layoutUnit> -->	
-			</p:layout>	
+					<h:outputLabel for="fechaFin" value="Fecha Final: " />
+					<p:calendar id="fechaFin" value="#{estadisticasHelper.fechaFinal}"
+						pattern="dd-MM-yyyy" mask="true" required="true" size="10" />
+							
+					&nbsp;&nbsp;
+							
+					<p:commandButton value="Refrescar" update="panelEstadisticas" />  
+
+					<br /><br />
+				
+			</h:form>
+			
+
+			<p:panelGrid columns="2" id="panelEstadisticas">
+				<p:panel id="panel1left" header="Estadísticas">
+					<h:outputText value="Name:" />
+					<h:outputText value="Kobe Bryant" />
+
+					<h:outputText value="Team:" />
+					<h:outputText value="Los Angeles Lakers" />
+
+					<h:outputText value="Position:" />
+					<h:outputText value="Shooting Guard" />
+
+					<h:outputText value="Number:" />
+					<h:outputText value="24" />
+				</p:panel>
+				<!-- </div>
+				<div id="panel2" class="toTheRight"> -->
+				<p:panel id="panel2right" header="Ratio">
+					<h:outputText value="Name2:" />
+					<h:outputText value="Kobe Bryant2" />
+
+					<h:outputText value="Team2:" />
+					<h:outputText value="Los Angeles Lakers2" />
+
+					<h:outputText value="Position2:" />
+					<h:outputText value="Shooting Guard2" />
+
+					<h:outputText value="Number2:" />
+					<h:outputText value="242" />
+				</p:panel>
+			</p:panelGrid>
+			<p:panelGrid columns="2">
+				<p:panel id="panel3left" header="Patrones utilizados 15m largo">
+					<h:outputText value="Name3:" />
+					<h:outputText value="Kobe Bryant3" />
+
+					<h:outputText value="Team3:" />
+					<h:outputText value="Los Angeles Lakers3" />
+
+					<h:outputText value="Position3:" />
+					<h:outputText value="Shooting Guard3" />
+
+					<h:outputText value="Number3:" />
+					<h:outputText value="243" />
+				</p:panel>
+				<p:panel id="panel4right" header="Patrones utilizados 1m largo">
+					<h:outputText value="Name4:" />
+					<h:outputText value="Kobe Bryant4" />
+
+					<h:outputText value="Team4:" />
+					<h:outputText value="Los Angeles Lakers4" />
+
+					<h:outputText value="Position4:" />
+					<h:outputText value="Shooting Guard4" />
+
+					<h:outputText value="Number4:" />
+					<h:outputText value="244" />
+				</p:panel>
+				
+			</p:panelGrid>
+
 
 		</p:layoutUnit>
 
