@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.model.chart.PieChartModel;
 import org.springframework.stereotype.Component;
 
 @ManagedBean
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Component;
 public class EstadisticasHelper {
 	
 	private Calendar fechaHoy;
-	
 	private Date fechaInicial;
-	
 	private Date fechaFinal;
+	
+	private PieChartModel pieModel1;
 	
 	public EstadisticasHelper() {
 		
@@ -52,6 +53,14 @@ public class EstadisticasHelper {
 		this.fechaFinal = fechaFinal;
 	}
 	
+	public PieChartModel getPieModel1() {
+		return pieModel1;
+	}
 	
+	private void createPie() {
+		pieModel1 = new PieChartModel();
+		
+		
+	}
 
 }
