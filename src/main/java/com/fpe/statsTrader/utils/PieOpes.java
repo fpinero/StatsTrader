@@ -1,17 +1,17 @@
 package com.fpe.statsTrader.utils;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 
 import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.jpa.QueryPieOpes;
 
 @Component
+@RequestScoped
 @ManagedBean
-@ViewScoped
 public class PieOpes {
 	
 	int opesBuenas;
@@ -30,6 +30,7 @@ public class PieOpes {
 		this.opesMalas = pieOpes.getOpesMalas();
 		this.opesBe = pieOpes.getOpesBe();
 		
+		System.out.println("PieOpes.this=" + this.toString());
 		return this;
 		
 	}
@@ -57,6 +58,12 @@ public class PieOpes {
 	public void setOpesBe(int opesBe) {
 		this.opesBe = opesBe;
 	}
+
+	@Override
+	public String toString() {
+		return "PieOpes [opesBuenas=" + opesBuenas + ", opesMalas=" + opesMalas + ", opesBe=" + opesBe + "]";
+	}
+	
 	
 	
 

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
@@ -23,10 +22,12 @@ public class QueryPieOpes {
 	int opesMalas = 0;
 	int opesBe = 0;
 	
-	@ManagedProperty(value="#{pieOPes}")
-	PieOpes beanPie;
+//	@ManagedProperty(value="#{pieOPes}")
+//	PieOpes beanPie;
 	
 	public PieOpes buscaOPesBMB(Date desdeFecha, Date hastaFecha) {
+		
+		PieOpes beanPie = new PieOpes();
 		
 		Trader thisTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 		int idTrader = thisTrader.getId();
@@ -57,7 +58,7 @@ public class QueryPieOpes {
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			//hagamos el commit
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			if (!thisTradersOpes.isEmpty()) {
 				opesBuenas = thisTradersOpes.size();
@@ -69,16 +70,16 @@ public class QueryPieOpes {
 			//Obtengamos las operaciones malas
 			
 			//comencemos la transaccion
-			session.beginTransaction();
+			//session.beginTransaction();
 			
-			//Obtengamos las operaciones buenas
+			//Obtengamos las operaciones malas
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop'";
 			System.out.println("query=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			//hagamos el commit
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			if (!thisTradersOpes.isEmpty()) {
 				opesMalas = thisTradersOpes.size();
@@ -101,10 +102,10 @@ public class QueryPieOpes {
 			} else {
 				opesBe = 0;
 			}
-			System.out.println("...Operaciones malas del trader=" + opesMalas);
+			System.out.println("...Operaciones BreakEven del trader=" + opesMalas);
 			
 		} catch (Exception e) {
-			System.out.println("Excepción en buscaOPesBMB \n" + e.getMessage());
+			System.out.println("Excepción en buscaOPesBMB \n" + e);
 			return null;
 		}
 		

@@ -94,23 +94,12 @@
 			</h:form>
 			
 
-			<p:panelGrid columns="2" id="panelEstadisticas">
-				<p:panel id="panel1left" header="Estadísticas">
-					<h:outputText value="Name:" />
-					<h:outputText value="Kobe Bryant" />
-
-					<h:outputText value="Team:" />
-					<h:outputText value="Los Angeles Lakers" />
-
-					<h:outputText value="Position:" />
-					<h:outputText value="Shooting Guard" />
-
-					<h:outputText value="Number:" />
-					<h:outputText value="24" />
+			<p:panelGrid columns="2" id="panelEstadisticas" columnClasses="no-border" layout="grid" >
+				<p:panel id="panel1left" header="Estadísticas" styleClass="no-border">
+					<p:chart type="pie" model="#{estadisticasHelper.pieModel1}" style="width:350px;height:250px"  />  
 				</p:panel>
-				<!-- </div>
-				<div id="panel2" class="toTheRight"> -->
-				<p:panel id="panel2right" header="Ratio">
+				
+				<p:panel id="panel2right" header="Ratio" styleClass="no-border" >
 					<h:outputText value="Name2:" />
 					<h:outputText value="Kobe Bryant2" />
 
