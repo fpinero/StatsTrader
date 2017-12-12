@@ -23,6 +23,8 @@ public class EstadisticasHelper {
 	
 	private PieChartModel pieModel1;
 	
+	private TraderRatio traderRatio;
+	
 	public EstadisticasHelper() {
 		
 	}
@@ -96,7 +98,7 @@ public class EstadisticasHelper {
 	}
 	
 	public PieChartModel getPieModel1() {
-		System.out.println("...en getPieModel1");
+//		System.out.println("...en getPieModel1");
 		createPie();
 		System.out.println("pieModel1.getTitle()=" + pieModel1.getTitle());
 		return pieModel1;
@@ -122,6 +124,16 @@ public class EstadisticasHelper {
 		}
 		pieModel1.setLegendPosition("w");
 				
+	}
+
+	public TraderRatio getTraderRatio() {
+		createTraderRatio();
+		return traderRatio;
+	}
+	
+	public void createTraderRatio() {
+		traderRatio = new TraderRatio().obtenDatosRatio(fechaInicial, fechaFinal);
+		
 	}
 
 }

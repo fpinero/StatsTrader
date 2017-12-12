@@ -14,24 +14,24 @@ import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.Trader;
 import com.fpe.statsTrader.entity.TradersOpes;
 import com.fpe.statsTrader.utils.ConvertToSqlDateFormatWithQuotes;
-import com.fpe.statsTrader.utils.PieOpes;
+import com.fpe.statsTrader.utils.TraderRatio;
 
-public class QueryPieOpes {
+public class QueryTraderRatio {
 	
-	int opesBuenas = 0;
-	int opesMalas = 0;
-	int opesBe = 0;
+	private double ratio = 0.0;
+	private double ratioSinStopsEvitables = 0;
+	private int opesBuenas = 0;
+	private int opesStop = 0;
+	private int opesBe = 0;
+	private int opesStopEvitable = 0;
 	
-//	@ManagedProperty(value="#{pieOPes}")  //no hay setter, no se puede inyectar
-//	PieOpes beanPie;
-	
-	public PieOpes buscaOPesBMB(Date desdeFecha, Date hastaFecha) {
+	public TraderRatio obtenRatio(Date desdeFecha, Date hastaFecha) {
 		
-		PieOpes beanPie = new PieOpes();
+		TraderRatio beanTraderRatio = new TraderRatio();
 		
 		Trader thisTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 		int idTrader = thisTrader.getId();
-		System.out.println("...id del trader logueado en QueryPieOpes: " + idTrader);
+		System.out.println("...id del trader logueado en QueryTraderRatio: " + idTrader);
 		
 		ConvertToSqlDateFormatWithQuotes convert = new ConvertToSqlDateFormatWithQuotes();
 		
@@ -71,11 +71,11 @@ public class QueryPieOpes {
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
-				opesMalas = thisTradersOpes.size();
+				opesStop = thisTradersOpes.size();
 			} else {
-				opesMalas = 0;
+				opesStop = 0;
 			}
-			System.out.println("...Operaciones malas del trader=" + opesMalas);
+			System.out.println("...Operaciones malas del trader=" + opesStop);
 			
 			//Obtengamos las operaciones breakeven
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
@@ -102,7 +102,11 @@ public class QueryPieOpes {
 		beanPie.setOpesMalas(opesMalas);
 		beanPie.setOpesBe(opesBe);
 		
-		return beanPie;
+		return beanTraderRatio;
 	}
+		
+		
+	}
+	
 
 }
