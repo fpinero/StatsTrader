@@ -116,7 +116,7 @@ public class EstadisticasHelper {
 //		System.out.println("thePie.getOpesBe()=" + thePie.getOpesBe());
 		pieModel1.set("BreakEven", thePie.getOpesBe());
 		if (thePie.getOpesBuenas() == 0 && thePie.getOpesMalas() == 0 && thePie.getOpesBe() == 0) {
-			pieModel1.setTitle("No hay operaciones realizadas en el rango de fechas");
+			pieModel1.setTitle("No hay operaciones en el rango de fechas");
 		} else {
 			pieModel1.setTitle("Relación Resultados Operaciones");
 		}

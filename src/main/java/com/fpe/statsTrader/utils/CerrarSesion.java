@@ -37,6 +37,7 @@ public class CerrarSesion {
 		//establece el param thisTrader a null y redirige a la pag de login
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("thisTrader", null);
 		traderBean.destruyeThisTrader();
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();  //esto destruye todos los parámetros de la sesión
 		return "login?faces-redirect=true";
 	}
 	
