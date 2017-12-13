@@ -1,5 +1,6 @@
 package com.fpe.statsTrader.jpa;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,11 +20,17 @@ import com.fpe.statsTrader.utils.TraderRatio;
 public class QueryTraderRatio {
 	
 	private double ratio = 0.0;
-	private double ratioSinStopsEvitables = 0;
+	private double ratioSinStopsEvitables = 0.0;
+	private double ratioTodoAcordePlan = 0.0;
 	private int opesBuenas = 0;
 	private int opesStop = 0;
 	private int opesBe = 0;
 	private int opesStopEvitable = 0;
+	private int opesStopNoEvitable = 0;
+	private int opesTodoAcordePlan = 0;
+	private int opesNoTodoAcordePlan = 0;
+	private int opesBuenasTodoAcordePlan = 0;
+	private int opesBuenasNoTodoAcordePlan = 0;
 	
 	public TraderRatio obtenRatio(Date desdeFecha, Date hastaFecha) {
 		
@@ -83,9 +90,6 @@ public class QueryTraderRatio {
 			System.out.println("query=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
-			//hagamos el commit
-			session.getTransaction().commit();
-			
 			if (!thisTradersOpes.isEmpty()) {
 				opesBe = thisTradersOpes.size();
 			} else {
@@ -93,20 +97,150 @@ public class QueryTraderRatio {
 			}
 			System.out.println("...Operaciones BreakEven del trader=" + opesBe);
 			
+			//Obtengamos las operaciones stop evitables
+			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop'" +
+					" AND t.stopEvitable='SI'";
+			System.out.println("query=" + query);
+			thisTradersOpes = session.createQuery(query).getResultList();
+			
+			if (!thisTradersOpes.isEmpty()) {
+				opesStopEvitable = thisTradersOpes.size();
+			} else {
+				opesStopEvitable = 0;
+			}
+			System.out.println("...Operaciones opesStopEvitable del trader=" + opesStopEvitable);
+			
+			//Obtengamos las operaciones stop no evitables
+			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop'" +
+					" AND t.stopEvitable='NO'";
+			System.out.println("query=" + query);
+			thisTradersOpes = session.createQuery(query).getResultList();
+			
+			if (!thisTradersOpes.isEmpty()) {
+				opesStopNoEvitable = thisTradersOpes.size();
+			} else {
+				opesStopNoEvitable = 0;
+			}
+			System.out.println("...Operaciones opesStopNoEvitable del trader=" + opesStopNoEvitable);
+			
+			//Obtengamos las operaciones todo acorde el plan
+			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.todo100plan='SI'";
+					
+			System.out.println("query=" + query);
+			thisTradersOpes = session.createQuery(query).getResultList();
+			
+			if (!thisTradersOpes.isEmpty()) {
+				opesTodoAcordePlan = thisTradersOpes.size();
+			} else {
+				opesTodoAcordePlan = 0;
+			}
+			System.out.println("...Operaciones todo acorde el plan del trader=" + opesTodoAcordePlan);
+			
+			//Obtengamos las operaciones todo no acorde el plan
+			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.todo100plan='NO'";
+					
+			System.out.println("query=" + query);
+			thisTradersOpes = session.createQuery(query).getResultList();
+			
+			if (!thisTradersOpes.isEmpty()) {
+				opesNoTodoAcordePlan = thisTradersOpes.size();
+			} else {
+				opesNoTodoAcordePlan = 0;
+			}
+			System.out.println("...Operaciones todo no acorde el plan del trader=" + opesNoTodoAcordePlan);
+			
+			//Obtengamos las operaciones buenas todo acorde al plan
+			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Bueno'" +
+					" AND t.todo100plan='SI'";
+			System.out.println("query=" + query);
+			thisTradersOpes = session.createQuery(query).getResultList();
+			
+			if (!thisTradersOpes.isEmpty()) {
+				opesBuenasTodoAcordePlan = thisTradersOpes.size();
+			} else {
+				opesBuenasTodoAcordePlan = 0;
+			}
+			System.out.println("...Operaciones buenas todo acorde al plan=" + opesBuenasTodoAcordePlan);
+			
+			//Obtengamos las operaciones buenas no todo acorde al plan
+			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Bueno'" +
+					" AND t.todo100plan='NO'";
+			System.out.println("query=" + query);
+			thisTradersOpes = session.createQuery(query).getResultList();
+			
+			if (!thisTradersOpes.isEmpty()) {
+				opesBuenasNoTodoAcordePlan = thisTradersOpes.size();
+			} else {
+				opesBuenasNoTodoAcordePlan = 0;
+			}
+			System.out.println("...Operaciones buenas no todo acorde al plan=" + opesBuenasNoTodoAcordePlan);
+			
+			//hagamos el commit
+			session.getTransaction().commit();
+			
 		} catch (Exception e) {
-			System.out.println("Excepción en buscaOPesBMB \n" + e);
+			System.out.println("Excepción en obtenRatio \n" + e);
 			return null;
 		}
 		
-		beanPie.setOpesBuenas(opesBuenas);
-		beanPie.setOpesMalas(opesMalas);
-		beanPie.setOpesBe(opesBe);
+		DecimalFormat df = new DecimalFormat("#,00");
+		
+		
+		//calculemos el ratio
+		int totalOpes = opesBuenas + opesStop; //se ignoran los breakeven
+		try {
+			ratio = Double.parseDouble((df.format((opesBuenas * 100)/totalOpes)));
+		} catch (Exception e) {
+			// por si totalOpes = 0
+			System.out.println("---> excepcion calculando el ratio " + e);
+			ratio = 0;
+		}
+		System.out.println("...ratio del trader=" + ratio);
+		
+		//calculemos el ratio sin stops evitables
+		int totalOpesSinStopEvitable = ((opesBuenas + opesStop) - opesStopEvitable); //se ignoran los breakeven
+		try {
+			ratioSinStopsEvitables = Double.parseDouble((df.format((opesBuenas * 100)/totalOpesSinStopEvitable)));
+		} catch (Exception e) {
+			// por si totalOpes = 0
+			System.out.println("---> excepcion calculando el ratio sin stops evitables " + e);
+			ratioSinStopsEvitables = 0;
+		}
+		System.out.println("...ratio sin stops evitables del trader=" + ratioSinStopsEvitables);
+		
+		//calculemos el ratio con todo acorde el plan
+		int totalOpesTodoAcordePlan = (opesTodoAcordePlan + opesStopNoEvitable); //se ignoran los breakeven
+		try {
+			ratioTodoAcordePlan = Double.parseDouble((df.format((opesTodoAcordePlan * 100)/totalOpesTodoAcordePlan)));
+		} catch (Exception e) {
+			// por si totalOpes = 0
+			System.out.println("---> excepcion calculando el ratio con todo acorde el plan " + e);
+			ratioTodoAcordePlan = 0;
+		}
+		System.out.println("...ratio con todo acorde el plan del trader=" + ratioTodoAcordePlan);
+		
+		beanTraderRatio.setRatio(ratio);
+		beanTraderRatio.setRatioSinStopsEvitables(ratioSinStopsEvitables);
+		beanTraderRatio.setRatioTodoAcordePlan(ratioTodoAcordePlan);
+		beanTraderRatio.setOpesBuenas(opesBuenas);
+		beanTraderRatio.setOpesStop(opesStop);
+		beanTraderRatio.setOpesBe(opesBe);
+		beanTraderRatio.setOpesStopEvitable(opesStopEvitable);
+		beanTraderRatio.setOpesStopNoEvitable(opesStopNoEvitable);
+		beanTraderRatio.setOpesTodoAcordePlan(opesTodoAcordePlan);
+		beanTraderRatio.setOpesNoTodoAcordePlan(opesNoTodoAcordePlan);
+		beanTraderRatio.setOpesBuenasTodoAcordePlan(opesBuenasTodoAcordePlan);
+		beanTraderRatio.setOpesBuenasNoTodoAcordePlan(opesBuenasNoTodoAcordePlan);
 		
 		return beanTraderRatio;
 	}
 		
 		
-	}
-	
 
 }

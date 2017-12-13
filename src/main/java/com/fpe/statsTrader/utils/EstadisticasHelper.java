@@ -132,8 +132,8 @@ public class EstadisticasHelper {
 	}
 	
 	public void createTraderRatio() {
+		System.out.println("...en createTraderRatio");
 		traderRatio = new TraderRatio().obtenDatosRatio(fechaInicial, fechaFinal);
-		
 	}
 
 }

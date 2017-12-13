@@ -2,6 +2,9 @@ package com.fpe.statsTrader.utils;
 
 import java.util.Date;
 
+import com.fpe.statsTrader.jpa.QueryPieOpes;
+import com.fpe.statsTrader.jpa.QueryTraderRatio;
+
 public class TraderRatio {
 	
 	private double ratio = 0.0;
@@ -118,19 +121,36 @@ public class TraderRatio {
 	}
 
 	public TraderRatio obtenDatosRatio(Date fechaInicial, Date fechaFinal) {
-		//lanzar la query por las opes y los ratios del trader logueado
+		//lanza la query por las opes y los ratios del trader logueado
+		QueryTraderRatio queryTraderRatio = new QueryTraderRatio();
+		TraderRatio traderRatio = queryTraderRatio.obtenRatio(fechaInicial, fechaFinal);
+		this.ratio = traderRatio.getRatio();
+		this.ratioSinStopsEvitables = traderRatio.getRatioSinStopsEvitables();
+		this.ratioTodoAcordePlan = traderRatio.getRatioTodoAcordePlan();
+		this.opesBuenas = traderRatio.getOpesBuenas();
+		this.opesStop = traderRatio.getOpesStop();
+		this.opesBe = traderRatio.getOpesBe();
+		this.opesStopEvitable = traderRatio.getOpesStopEvitable();
+		this.opesStopNoEvitable = traderRatio.getOpesStopNoEvitable();
+		this.opesTodoAcordePlan = traderRatio.getOpesTodoAcordePlan();
+		this.opesNoTodoAcordePlan = traderRatio.getOpesNoTodoAcordePlan();
+		this.opesBuenasTodoAcordePlan = traderRatio.getOpesBuenasTodoAcordePlan();
+		this.opesBuenasNoTodoAcordePlan = traderRatio.getOpesBuenasNoTodoAcordePlan();
 		
-		
-		return null;
+		System.out.println("TraderRatio.this=" + this.toString());
+		return this;
 	}
 
 	@Override
 	public String toString() {
-		return "TarderRatio [ratio=" + ratio + ", ratioSinStopsEvitables=" + ratioSinStopsEvitables + ", opesBuenas="
-				+ opesBuenas + ", opesStop=" + opesStop + ", opesBe=" + opesBe + ", opesStopEvitable="
-				+ opesStopEvitable + "]";
+		return "TraderRatio [ratio=" + ratio + ", ratioSinStopsEvitables=" + ratioSinStopsEvitables
+				+ ", ratioTodoAcordePlan=" + ratioTodoAcordePlan + ", opesBuenas=" + opesBuenas + ", opesStop="
+				+ opesStop + ", opesBe=" + opesBe + ", opesStopEvitable=" + opesStopEvitable + ", opesStopNoEvitable="
+				+ opesStopNoEvitable + ", opesTodoAcordePlan=" + opesTodoAcordePlan + ", opesNoTodoAcordePlan="
+				+ opesNoTodoAcordePlan + ", opesBuenasTodoAcordePlan=" + opesBuenasTodoAcordePlan
+				+ ", opesBuenasNoTodoAcordePlan=" + opesBuenasNoTodoAcordePlan + "]";
 	}
-	
+
 	
 	
 }

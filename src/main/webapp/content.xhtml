@@ -100,17 +100,22 @@
 				</p:panel>
 				
 				<p:panel id="panel2right" header="Ratio" styleClass="no-border" >
-					<h:outputText value="Name2:" />
-					<h:outputText value="Kobe Bryant2" />
-
-					<h:outputText value="Team2:" />
-					<h:outputText value="Los Angeles Lakers2" />
-
-					<h:outputText value="Position2:" />
-					<h:outputText value="Shooting Guard2" />
-
-					<h:outputText value="Number2:" />
-					<h:outputText value="242" />
+					<ui:param name="thisRatio" value="#{estadisticasHelper.traderRatio}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;">
+						<span><strong>Ratio Real:</strong><h:outputText value="#{thisRatio.ratio}" styleClass="negrita"/></span>
+						<span><strong>Ratio <span style="color:red;">si</span> Sin Stops Evitables:</strong><h:outputText value="#{thisRatio.ratioSinStopsEvitables}" styleClass="negrita"/></span>
+						<span><strong>Ratio <span style="color:red;">si</span> Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.ratioTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Buenas:</strong><h:outputText value="#{thisRatio.opesBuenas}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Stops:</strong><h:outputText value="#{thisRatio.opesStop}" styleClass="negrita"/></span>
+						<span><strong>Total Trades B/E:</strong><h:outputText value="#{thisRatio.opesBe}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Stop Evitable:</strong><h:outputText value="#{thisRatio.opesStopEvitable}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Stop No Evitable:</strong><h:outputText value="#{thisRatio.opesStopNoEvitable}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Total Trades No Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesNoTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Buenas Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesBuenasTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Buenas No Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesBuenasNoTodoAcordePlan}" styleClass="negrita"/></span>
+						
+					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>
 			<p:panelGrid columns="2">
