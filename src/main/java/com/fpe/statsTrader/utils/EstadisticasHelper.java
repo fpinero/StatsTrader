@@ -1,8 +1,10 @@
 package com.fpe.statsTrader.utils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -24,6 +26,8 @@ public class EstadisticasHelper {
 	private PieChartModel pieModel1;
 	
 	private TraderRatio traderRatio;
+	
+	private List<Patron15m> resultados15mLargo;
 	
 	public EstadisticasHelper() {
 		
@@ -136,4 +140,35 @@ public class EstadisticasHelper {
 		traderRatio = new TraderRatio().obtenDatosRatio(fechaInicial, fechaFinal);
 	}
 
+	public List<Patron15m> getResultados15mLargo() {
+		obtenResultadosTodosPatrones15mLargo();
+		return resultados15mLargo;
+	}
+	
+	public void obtenResultadosTodosPatrones15mLargo () {
+		 
+		//Los patrones que tenemos en 15m para largos
+		//mejor así y llamar a la query en un bucle por si se añade alguno mas
+		List<String> patronLargoTrade15mItems = new ArrayList<>();
+		patronLargoTrade15mItems.add("PBS");
+		patronLargoTrade15mItems.add("Extendida a la baja con +COG");
+		patronLargoTrade15mItems.add("Extendida a la baja");
+		patronLargoTrade15mItems.add("Triángulo Alcista");
+		patronLargoTrade15mItems.add("Triángulo");
+		patronLargoTrade15mItems.add("Doble Suelo");
+		patronLargoTrade15mItems.add("Breakout cont. Tendencia");
+		patronLargoTrade15mItems.add("Otro");
+		
+		this.resultados15mLargo = new ArrayList<>();
+		
+		for (String p15 : patronLargoTrade15mItems) {
+			System.out.println("...Obteniendo resultado del patrón 15m: " + p15);
+			Patron15m patron15 = new Patron15m().obtenDatosParaEstePatron15m(p15, "largo", fechaInicial, fechaFinal);
+			resultados15mLargo.add(patron15);
+			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
+		}
+		
+	}
+
+	
 }
