@@ -204,9 +204,9 @@ public class QueryTraderRatio {
 		System.out.println("...ratio del trader=" + ratio);
 		
 		//calculemos el ratio sin stops evitables
-		int totalOpesSinStopEvitable = ((opesBuenas + opesStop) - opesStopEvitable); //se ignoran los breakeven
+		totalOpes = opesBuenas + opesStopEvitable;
 		try {
-			ratioSinStopsEvitables = Double.parseDouble((df.format((opesBuenas * 100)/totalOpesSinStopEvitable)));
+			ratioSinStopsEvitables = Double.parseDouble((df.format((opesBuenas * 100)/totalOpes)));
 		} catch (Exception e) {
 			// por si totalOpes = 0
 			System.out.println("---> excepcion calculando el ratio sin stops evitables " + e);
@@ -215,9 +215,13 @@ public class QueryTraderRatio {
 		System.out.println("...ratio sin stops evitables del trader=" + ratioSinStopsEvitables);
 		
 		//calculemos el ratio con todo acorde el plan
-		int totalOpesTodoAcordePlan = (opesTodoAcordePlan + opesStopNoEvitable); //se ignoran los breakeven
+		int tmpOpesStopNoEvitable = opesStopNoEvitable; //se ignoran los breakeven
+		if (opesStopNoEvitable == 0) {
+			tmpOpesStopNoEvitable = 1;
+		}
 		try {
-			ratioTodoAcordePlan = Double.parseDouble((df.format((opesTodoAcordePlan * 100)/totalOpesTodoAcordePlan)));
+			ratioTodoAcordePlan = Double.parseDouble((df.format((tmpOpesStopNoEvitable * 100) / opesTodoAcordePlan)));
+			ratioTodoAcordePlan = 100 - ratioTodoAcordePlan;
 		} catch (Exception e) {
 			// por si totalOpes = 0
 			System.out.println("---> excepcion calculando el ratio con todo acorde el plan " + e);
