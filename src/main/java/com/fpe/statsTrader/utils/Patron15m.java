@@ -7,6 +7,8 @@ import javax.faces.bean.RequestScoped;
 
 import org.springframework.stereotype.Component;
 
+import com.fpe.statsTrader.jpa.QueryEstadisticas15m;
+
 @Component
 @ManagedBean
 @RequestScoped
@@ -65,8 +67,15 @@ public class Patron15m {
 	public Patron15m obtenDatosParaEstePatron15m(String patron15, String side, Date fechaInicial, Date fechaFinal) {
 		//lanzar la query que obtiene los datos para este patron y esta side
 		//y restornar este objeto
+		QueryEstadisticas15m queryEstadisticas15m = new QueryEstadisticas15m();
+		Patron15m tmpPatron15m = queryEstadisticas15m.obtenDatosDeStse15m(patron15, side, fechaFinal, fechaFinal); 
+		this.patron = tmpPatron15m.getPatron();
+		this.vecesNegociado = tmpPatron15m.getVecesNegociado();
+		this.numeroStops = tmpPatron15m.getNumeroStops();
+		this.numeroBuenas = tmpPatron15m.getNumeroBuenas();
+		this.numeroBe = tmpPatron15m.getNumeroBe();
 		
-		
+		System.out.println("this.Patron15m=" + this.toString());
 		return this;
 	}
 
