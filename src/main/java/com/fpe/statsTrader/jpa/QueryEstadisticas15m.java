@@ -30,7 +30,7 @@ public class QueryEstadisticas15m {
 		
 		Trader thisTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 		int idTrader = thisTrader.getId();
-		System.out.println("...id del trader logueado en QueryPieOpes: " + idTrader);
+		System.out.println("...id del trader logueado en QueryEstadisticas15m: " + idTrader);
 		
 		ConvertToSqlDateFormatWithQuotes convert = new ConvertToSqlDateFormatWithQuotes();
 		
@@ -52,7 +52,8 @@ public class QueryEstadisticas15m {
 			
 			//Obtengamos las operaciones buenas
 			String query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
-					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.patronTrade15m='" + patron15 + "'";
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.patronTrade15m='" + patron15 + "'" +
+					" AND sideTrade=" + "'" + side + "'";
 			System.out.println("query=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			

@@ -88,7 +88,7 @@
 							
 					&nbsp;&nbsp;
 							
-					<p:commandButton value="Refrescar" update="panelEstadisticas" />  
+					<p:commandButton value="Refrescar" update="panelEstadisticas panelEstadisticas2" />  
 
 					<br /><br />
 				
@@ -119,19 +119,35 @@
 					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="2" id="panelEstadisticas2" columnClasses="no-border" layout="grid">
 				<p:panel id="panel3left" header="Patrones utilizados 15m largo">
-					<h:outputText value="Name3:" />
-					<h:outputText value="Kobe Bryant3" />
-
-					<h:outputText value="Team3:" />
-					<h:outputText value="Los Angeles Lakers3" />
-
-					<h:outputText value="Position3:" />
-					<h:outputText value="Shooting Guard3" />
-
-					<h:outputText value="Number3:" />
-					<h:outputText value="243" />
+					<p:dataTable id="p15ls" var="p15l"
+						value="#{estadisticasHelper.resultados15mLargo}" resizableColumns="true"
+						scrollable="true" scrollWidth="130%" scrollHeight="400"
+						sortBy="#{p15l.vecesNegociado}" sortOrder="ascending">
+						
+						
+						<p:column headerText="Patrón" width="40" styleClass="singleLine">
+							<h:outputText value="#{p15l.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="15" styleClass="singleLine">
+							<h:outputText value="#{p15l.vecesNegociado}" />
+						</p:column>
+						
+						<p:column headerText="Stops" width="15" styleClass="singleLine">
+							<h:outputText value="#{p15l.numeroStops}" />
+						</p:column>
+						
+						<p:column headerText="Buenas" width="15" styleClass="singleLine">
+							<h:outputText value="#{p15l.numeroBuenas}" />
+						</p:column>
+						
+						<p:column headerText="BreakEven" width="15" styleClass="singleLine">
+							<h:outputText value="#{p15l.numeroBe}" />
+						</p:column>
+						
+					</p:dataTable>
 				</p:panel>
 				<p:panel id="panel4right" header="Patrones utilizados 1m largo">
 					<h:outputText value="Name4:" />
