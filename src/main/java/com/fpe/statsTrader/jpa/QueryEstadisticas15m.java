@@ -50,14 +50,15 @@ public class QueryEstadisticas15m {
 			//comencemos la transaccion
 			session.beginTransaction();
 			
-			//Obtengamos las operaciones buenas
+			//Obtengamos las operaciones en 15m 
 			String query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.patronTrade15m='" + patron15 + "'" +
-					" AND sideTrade=" + "'" + side + "'";
+					" AND t.sideTrade=" + "'" + side + "'";
 			System.out.println("query=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			for (TradersOpes to : thisTradersOpes  ) {
+				System.out.println("thitTo=" + to.toString());
 				vecesNegociado++;
 				if (to.getResultadoTrade().equals("Bueno")) {
 					numeroBuenas++;

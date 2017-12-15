@@ -165,7 +165,7 @@ public class EstadisticasHelper {
 			System.out.println("...Obteniendo resultado del patrón 15m: " + p15);
 			Patron15m patron15 = new Patron15m().obtenDatosParaEstePatron15m(p15, "Largo", fechaInicial, fechaFinal);
 			resultados15mLargo.add(patron15);
-			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
+//			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
 		}
 		
 	}

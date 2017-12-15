@@ -120,31 +120,31 @@
 				</p:panel>
 			</p:panelGrid>
 			<p:panelGrid columns="2" id="panelEstadisticas2" columnClasses="no-border" layout="grid">
-				<p:panel id="panel3left" header="Patrones utilizados 15m largo">
+				<p:panel id="panel3left" header="Patrones utilizados 15m largo" styleClass="no-border">
 					<p:dataTable id="p15ls" var="p15l"
 						value="#{estadisticasHelper.resultados15mLargo}" resizableColumns="true"
-						scrollable="true" scrollWidth="130%" scrollHeight="400"
-						sortBy="#{p15l.vecesNegociado}" sortOrder="ascending">
+						scrollable="true" scrollWidth="85%" scrollHeight="170"
+						 sortBy="#{p15l.numeroBuenas}" sortOrder="ascending">
 						
-						
-						<p:column headerText="Patrón" width="40" styleClass="singleLine">
+						<p:column headerText="Patrón" width="32" styleClass="singleLine">
 							<h:outputText value="#{p15l.patron}" />
 						</p:column>
 						
-						<p:column headerText="Utilizado" width="15" styleClass="singleLine">
-							<h:outputText value="#{p15l.vecesNegociado}" />
+						<p:column headerText="Utilizado" width="12" styleClass="singleLine">
+							<h:outputText value="#{p15l.vecesNegociado}" style="float:right"/>
 						</p:column>
 						
-						<p:column headerText="Stops" width="15" styleClass="singleLine">
-							<h:outputText value="#{p15l.numeroStops}" />
+						<p:column headerText="Stops" width="12" styleClass="singleLine">
+							<h:outputText value="#{p15l.numeroStops}" style="float:right"/>
 						</p:column>
 						
-						<p:column headerText="Buenas" width="15" styleClass="singleLine">
-							<h:outputText value="#{p15l.numeroBuenas}" />
+						<p:column headerText="Buenas" width="12" styleClass="singleLine"
+						 sortBy="#{p15l.numeroBuenas}">
+							<h:outputText value="#{p15l.numeroBuenas}" style="float:right"/>
 						</p:column>
 						
-						<p:column headerText="BreakEven" width="15" styleClass="singleLine">
-							<h:outputText value="#{p15l.numeroBe}" />
+						<p:column headerText="B/E" width="5" styleClass="singleLine">
+							<h:outputText value="#{p15l.numeroBe}" style="float:right"/>
 						</p:column>
 						
 					</p:dataTable>

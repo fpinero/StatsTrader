@@ -67,8 +67,9 @@ public class Patron15m {
 	public Patron15m obtenDatosParaEstePatron15m(String patron15, String side, Date fechaInicial, Date fechaFinal) {
 		//lanzar la query que obtiene los datos para este patron y esta side
 		//y restornar este objeto
+//		System.out.println("fechaInicial en obtenDatosParaEstePatron15m=" + fechaInicial);
 		QueryEstadisticas15m queryEstadisticas15m = new QueryEstadisticas15m();
-		Patron15m tmpPatron15m = queryEstadisticas15m.obtenDatosDeStse15m(patron15, side, fechaFinal, fechaFinal); 
+		Patron15m tmpPatron15m = queryEstadisticas15m.obtenDatosDeStse15m(patron15, side, fechaInicial, fechaFinal); 
 		this.patron = tmpPatron15m.getPatron();
 		this.vecesNegociado = tmpPatron15m.getVecesNegociado();
 		this.numeroStops = tmpPatron15m.getNumeroStops();
