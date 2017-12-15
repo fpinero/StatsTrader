@@ -66,8 +66,8 @@ public class Patron15m {
 		//lanzar la query que obtiene los datos para este patron y esta side
 		//y restornar este objeto
 		
-		//esto no vale
-		return null;
+		
+		return this;
 	}
 
 	@Override
