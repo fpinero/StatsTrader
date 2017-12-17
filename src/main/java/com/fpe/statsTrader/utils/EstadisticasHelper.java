@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -167,7 +168,15 @@ public class EstadisticasHelper {
 			resultados15mLargo.add(patron15);
 //			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
 		}
-		
+		//ordenemos la lista
+		List<Patron15m> result = resultados15mLargo.stream().sorted((o1, o2)->((Integer)o1.getNumeroBuenas()).
+				compareTo(((Integer)o2.getNumeroBuenas()))).collect(Collectors.toList());
+		//devolvámos la lista ordenada descendentemente (reversed)
+		List<Patron15m> orderedList = new ArrayList<>();
+		for (int i = result.size()-1; i >= 0; i--){
+			orderedList.add(result.get(i));
+		}
+		resultados15mLargo = orderedList;
 	}
 
 	

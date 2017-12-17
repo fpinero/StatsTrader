@@ -20,6 +20,10 @@
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
+		
+		<!-- <f:event listener="#{estadisticasHelper.obtenResultadosTodosPatrones15mLargo()}"
+			type="preRenderView"></f:event> -->
+			
 	</f:metadata>
 
 	<p:layout fullPage="true" stateful="true" id="mainlayout">
@@ -123,27 +127,26 @@
 				<p:panel id="panel3left" header="Patrones utilizados 15m largo" styleClass="no-border">
 					<p:dataTable id="p15ls" var="p15l"
 						value="#{estadisticasHelper.resultados15mLargo}" resizableColumns="true"
-						scrollable="true" scrollWidth="85%" scrollHeight="170"
-						 sortBy="#{p15l.numeroBuenas}" sortOrder="ascending">
+						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
+						 <!-- sortBy="#{p15l.numeroBuenas}" sortOrder="ascending" -->
 						
-						<p:column headerText="Patrón" width="32" styleClass="singleLine">
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
 							<h:outputText value="#{p15l.patron}" />
 						</p:column>
 						
-						<p:column headerText="Utilizado" width="12" styleClass="singleLine">
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
 							<h:outputText value="#{p15l.vecesNegociado}" style="float:right"/>
 						</p:column>
 						
-						<p:column headerText="Stops" width="12" styleClass="singleLine">
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
 							<h:outputText value="#{p15l.numeroStops}" style="float:right"/>
 						</p:column>
 						
-						<p:column headerText="Buenas" width="12" styleClass="singleLine"
-						 sortBy="#{p15l.numeroBuenas}">
+						<p:column headerText="Buenas" width="13" styleClass="singleLine">
 							<h:outputText value="#{p15l.numeroBuenas}" style="float:right"/>
 						</p:column>
 						
-						<p:column headerText="B/E" width="5" styleClass="singleLine">
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
 							<h:outputText value="#{p15l.numeroBe}" style="float:right"/>
 						</p:column>
 						
