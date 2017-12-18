@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.PieChartModel;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequestScoped
+@SessionScoped
 @ManagedBean
 public class EstadisticasHelper {
 	
@@ -29,6 +29,8 @@ public class EstadisticasHelper {
 	private TraderRatio traderRatio;
 	
 	private List<Patron15m> resultados15mLargo;
+	private List<Patron15m> resultados15mCorto;
+	
 	
 	public EstadisticasHelper() {
 		
@@ -146,6 +148,11 @@ public class EstadisticasHelper {
 		return resultados15mLargo;
 	}
 	
+	public List<Patron15m> getResultados15mCorto() {
+		obtenResultadosTodosPatrones15mCorto();
+		return resultados15mCorto;
+	}
+
 	public void obtenResultadosTodosPatrones15mLargo () {
 		 
 		//Los patrones que tenemos en 15m para largos
@@ -163,7 +170,7 @@ public class EstadisticasHelper {
 		this.resultados15mLargo = new ArrayList<>();
 		
 		for (String p15 : patronLargoTrade15mItems) {
-			System.out.println("...Obteniendo resultado del patrón 15m: " + p15);
+			System.out.println("...Obteniendo resultado del patrón 15m en largo: " + p15);
 			Patron15m patron15 = new Patron15m().obtenDatosParaEstePatron15m(p15, "Largo", fechaInicial, fechaFinal);
 			resultados15mLargo.add(patron15);
 //			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
@@ -177,6 +184,39 @@ public class EstadisticasHelper {
 			orderedList.add(result.get(i));
 		}
 		resultados15mLargo = orderedList;
+	}
+	
+	public void obtenResultadosTodosPatrones15mCorto () {
+		 
+		//Los patrones que tenemos en 15m para cortos
+		//mejor así y llamar a la query en un bucle por si se añade alguno mas
+		List<String> patronCortoTrade15mItems = new ArrayList<>();
+		patronCortoTrade15mItems.add("PSS");
+		patronCortoTrade15mItems.add("Extendida al alza con -COG");
+		patronCortoTrade15mItems.add("Extendida al alza");
+		patronCortoTrade15mItems.add("Triángulo Bajista");
+		patronCortoTrade15mItems.add("Triángulo");
+		patronCortoTrade15mItems.add("Doble Techo");
+		patronCortoTrade15mItems.add("Breakdown cont. Tendencia");
+		patronCortoTrade15mItems.add("Otro");
+		
+		this.resultados15mCorto = new ArrayList<>();
+		
+		for (String p15 : patronCortoTrade15mItems) {
+			System.out.println("...Obteniendo resultado del patrón 15m en corto: " + p15);
+			Patron15m patron15 = new Patron15m().obtenDatosParaEstePatron15m(p15, "Corto", fechaInicial, fechaFinal);
+			resultados15mCorto.add(patron15);
+//			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
+		}
+		//ordenemos la lista
+		List<Patron15m> result = resultados15mCorto.stream().sorted((o1, o2)->((Integer)o1.getNumeroBuenas()).
+				compareTo(((Integer)o2.getNumeroBuenas()))).collect(Collectors.toList());
+		//devolvamos la lista ordenada descendentemente (reversed)
+		List<Patron15m> orderedList = new ArrayList<>();
+		for (int i = result.size()-1; i >= 0; i--){
+			orderedList.add(result.get(i));
+		}
+		resultados15mCorto = orderedList;
 	}
 
 	

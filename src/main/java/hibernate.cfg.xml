@@ -7,8 +7,8 @@
 	<session-factory>
 		<!-- JDBC DataBase connetion settings -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://46.101.80.252:3306/statstrader?useSSL=false</property>
-		<!-- <property name="connection.url">jdbc:mysql://localhost:3306/statstrader?useSSL=false</property> -->
+		<!-- <property name="connection.url">jdbc:mysql://46.101.80.252:3306/statstrader?useSSL=false</property> -->
+		<property name="connection.url">jdbc:mysql://localhost:3306/statstrader?useSSL=false</property>
 		<property name="connection.username">remoUser</property>
 		<property name="connection.password">1q2w3e4r-</property>
 		

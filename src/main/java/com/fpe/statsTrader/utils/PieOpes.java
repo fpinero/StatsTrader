@@ -3,14 +3,14 @@ package com.fpe.statsTrader.utils;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.jpa.QueryPieOpes;
 
 @Component
-@RequestScoped
+@SessionScoped
 @ManagedBean
 public class PieOpes {
 	

@@ -128,7 +128,7 @@
 					<p:dataTable id="p15ls" var="p15l"
 						value="#{estadisticasHelper.resultados15mLargo}" resizableColumns="true"
 						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
-						 <!-- sortBy="#{p15l.numeroBuenas}" sortOrder="ascending" -->
+						 <!-- sortBy="#{p15l.numeroBuenas}" sortOrder="ascending" --> 
 						
 						<p:column headerText="Patrón" width="35" styleClass="singleLine">
 							<h:outputText value="#{p15l.patron}" />
@@ -142,7 +142,7 @@
 							<h:outputText value="#{p15l.numeroStops}" style="float:right"/>
 						</p:column>
 						
-						<p:column headerText="Buenas" width="13" styleClass="singleLine">
+						<p:column headerText="Buenas" width="13" styleClass="singleLine" >
 							<h:outputText value="#{p15l.numeroBuenas}" style="float:right"/>
 						</p:column>
 						
@@ -152,18 +152,93 @@
 						
 					</p:dataTable>
 				</p:panel>
-				<p:panel id="panel4right" header="Patrones utilizados 1m largo">
-					<h:outputText value="Name4:" />
-					<h:outputText value="Kobe Bryant4" />
-
-					<h:outputText value="Team4:" />
-					<h:outputText value="Los Angeles Lakers4" />
-
-					<h:outputText value="Position4:" />
-					<h:outputText value="Shooting Guard4" />
-
-					<h:outputText value="Number4:" />
-					<h:outputText value="244" />
+				
+				<p:panel id="panel3Right" header="Patrones utilizados 15m Corto" styleClass="no-border">
+					<p:dataTable id="p15Cs" var="p15C"
+						value="#{estadisticasHelper.resultados15mCorto}" resizableColumns="true"
+						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
+						
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
+							<h:outputText value="#{p15C.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15C.vecesNegociado}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15C.numeroStops}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Buenas" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15C.numeroBuenas}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
+							<h:outputText value="#{p15C.numeroBe}" style="float:right"/>
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+				
+			</p:panelGrid>
+			
+			<p:panelGrid columns="2" id="panelEstadisticas3" columnClasses="no-border" layout="grid">
+				<p:panel id="panel4left" header="Patrones utilizados 15m largo" styleClass="no-border">
+					<p:dataTable id="p1ls" var="p1l"
+						value="#{estadisticasHelper.resultados15mLargo}" resizableColumns="true"
+						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
+						 <!-- sortBy="#{p15l.numeroBuenas}" sortOrder="ascending" --> 
+						
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
+							<h:outputText value="#{p1l.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1l.vecesNegociado}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1l.numeroStops}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Buenas" width="13" styleClass="singleLine" >
+							<h:outputText value="#{p1l.numeroBuenas}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
+							<h:outputText value="#{p1l.numeroBe}" style="float:right"/>
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+				
+				<p:panel id="panel4Right" header="Patrones utilizados 15m Corto" styleClass="no-border">
+					<p:dataTable id="p1Cs" var="p1C"
+						value="#{estadisticasHelper.resultados15mCorto}" resizableColumns="true"
+						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
+						
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
+							<h:outputText value="#{p1C.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1C.vecesNegociado}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1C.numeroStops}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Buenas" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1C.numeroBuenas}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
+							<h:outputText value="#{p1C.numeroBe}" style="float:right"/>
+						</p:column>
+						
+					</p:dataTable>
 				</p:panel>
 				
 			</p:panelGrid>
