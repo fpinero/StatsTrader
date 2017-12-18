@@ -30,7 +30,7 @@ public class EstadisticasHelper {
 	
 	private List<Patron15m> resultados15mLargo;
 	private List<Patron15m> resultados15mCorto;
-	
+	private List<Patron1m> resultados1mLargo;
 	
 	public EstadisticasHelper() {
 		
@@ -152,6 +152,11 @@ public class EstadisticasHelper {
 		obtenResultadosTodosPatrones15mCorto();
 		return resultados15mCorto;
 	}
+	
+	public List<Patron1m> getResultados1mLargo() {
+		obtenResultadosTodosPatrones1mLargo();
+		return resultados1mLargo;
+	}
 
 	public void obtenResultadosTodosPatrones15mLargo () {
 		 
@@ -219,5 +224,39 @@ public class EstadisticasHelper {
 		resultados15mCorto = orderedList;
 	}
 
+	public void obtenResultadosTodosPatrones1mLargo () {
+		 
+		//Los patrones que tenemos en 1m para largos
+		//mejor así y llamar a la query en un bucle por si se añade alguno mas
+		List<String> patronLargoTrade1mItems = new ArrayList<>();
+		patronLargoTrade1mItems.add("Doble Suelo");
+		patronLargoTrade1mItems.add("BreakOut");
+		patronLargoTrade1mItems.add("Cup&Handle");
+		patronLargoTrade1mItems.add("HCH-inv");
+		patronLargoTrade1mItems.add("Triángulo Alcista");
+		patronLargoTrade1mItems.add("PBS");
+		patronLargoTrade1mItems.add("Suelo Redondeado");
+		patronLargoTrade1mItems.add("JBE");
+		patronLargoTrade1mItems.add("Momentum");
+		patronLargoTrade1mItems.add("Otro");
+		
+		this.resultados1mLargo = new ArrayList<>();
+		
+		for (String p1 : patronLargoTrade1mItems) {
+			System.out.println("...Obteniendo resultado del patrón 1m en largo: " + p1);
+			Patron1m patron1 = new Patron1m().obtenDatosParaEstePatron1m(p1, "Largo", fechaInicial, fechaFinal);
+			resultados1mLargo.add(patron1);
+//			System.out.println("...Resultado del patrón " + p1 + ": " + patron1.toString());
+		}
+		//ordenemos la lista
+		List<Patron1m> result = resultados1mLargo.stream().sorted((o1, o2)->((Integer)o1.getNumeroBuenas()).
+				compareTo(((Integer)o2.getNumeroBuenas()))).collect(Collectors.toList());
+		//devolvámos la lista ordenada descendentemente (reversed)
+		List<Patron1m> orderedList = new ArrayList<>();
+		for (int i = result.size()-1; i >= 0; i--){
+			orderedList.add(result.get(i));
+		}
+		resultados1mLargo = orderedList;
+	}
 	
 }
