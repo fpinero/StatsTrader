@@ -76,7 +76,7 @@ public class Patron1m {
 		this.numeroBuenas = tmpPatron1m.getNumeroBuenas();
 		this.numeroBe = tmpPatron1m.getNumeroBe();
 		
-		System.out.println("this.Patron1m=" + this.toString());
+		System.out.println("this.Patron1m obtenDatosParaEstePatron1m=" + this.toString());
 		return this;
 	}
 

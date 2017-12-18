@@ -30,7 +30,7 @@ public class QueryEstadisticas15m {
 		
 		Trader thisTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 		int idTrader = thisTrader.getId();
-		System.out.println("...id del trader logueado en QueryEstadisticas15m: " + idTrader);
+//		System.out.println("...id del trader logueado en QueryEstadisticas15m: " + idTrader);
 		
 		ConvertToSqlDateFormatWithQuotes convert = new ConvertToSqlDateFormatWithQuotes();
 		
@@ -54,7 +54,7 @@ public class QueryEstadisticas15m {
 			String query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.patronTrade15m='" + patron15 + "'" +
 					" AND t.sideTrade=" + "'" + side + "'";
-			System.out.println("query=" + query);
+//			System.out.println("query=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			for (TradersOpes to : thisTradersOpes  ) {
@@ -77,11 +77,11 @@ public class QueryEstadisticas15m {
 			return null;
 		}
 		
-		System.out.println("patronNegociado=" + patronNegociado);
-		System.out.println("numeroBuenas=" + numeroBuenas);
-		System.out.println("numeroStops=" + numeroStops);
-		System.out.println("numeroBe=" + numeroBe);
-		System.out.println("vecesNegociado=" + vecesNegociado);
+//		System.out.println("patronNegociado=" + patronNegociado);
+//		System.out.println("numeroBuenas=" + numeroBuenas);
+//		System.out.println("numeroStops=" + numeroStops);
+//		System.out.println("numeroBe=" + numeroBe);
+//		System.out.println("vecesNegociado=" + vecesNegociado);
 		
 		patron15bean.setNumeroBe(numeroBe);
 		patron15bean.setNumeroBuenas(numeroBuenas);

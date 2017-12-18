@@ -31,6 +31,7 @@ public class EstadisticasHelper {
 	private List<Patron15m> resultados15mLargo;
 	private List<Patron15m> resultados15mCorto;
 	private List<Patron1m> resultados1mLargo;
+	private List<Patron1m> resultados1mCorto;
 	
 	public EstadisticasHelper() {
 		
@@ -139,7 +140,7 @@ public class EstadisticasHelper {
 	}
 	
 	public void createTraderRatio() {
-		System.out.println("...en createTraderRatio");
+//		System.out.println("...en createTraderRatio");
 		traderRatio = new TraderRatio().obtenDatosRatio(fechaInicial, fechaFinal);
 	}
 
@@ -156,6 +157,11 @@ public class EstadisticasHelper {
 	public List<Patron1m> getResultados1mLargo() {
 		obtenResultadosTodosPatrones1mLargo();
 		return resultados1mLargo;
+	}
+	
+	public List<Patron1m> getResultados1mCorto() {
+		obtenResultadosTodosPatrones1mCorto();
+		return resultados1mCorto;
 	}
 
 	public void obtenResultadosTodosPatrones15mLargo () {
@@ -175,7 +181,7 @@ public class EstadisticasHelper {
 		this.resultados15mLargo = new ArrayList<>();
 		
 		for (String p15 : patronLargoTrade15mItems) {
-			System.out.println("...Obteniendo resultado del patrón 15m en largo: " + p15);
+//			System.out.println("...Obteniendo resultado del patrón 15m en largo: " + p15);
 			Patron15m patron15 = new Patron15m().obtenDatosParaEstePatron15m(p15, "Largo", fechaInicial, fechaFinal);
 			resultados15mLargo.add(patron15);
 //			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
@@ -208,7 +214,7 @@ public class EstadisticasHelper {
 		this.resultados15mCorto = new ArrayList<>();
 		
 		for (String p15 : patronCortoTrade15mItems) {
-			System.out.println("...Obteniendo resultado del patrón 15m en corto: " + p15);
+//			System.out.println("...Obteniendo resultado del patrón 15m en corto: " + p15);
 			Patron15m patron15 = new Patron15m().obtenDatosParaEstePatron15m(p15, "Corto", fechaInicial, fechaFinal);
 			resultados15mCorto.add(patron15);
 //			System.out.println("...Resultado del patrón " + p15 + ": " + patron15.toString());
@@ -243,7 +249,7 @@ public class EstadisticasHelper {
 		this.resultados1mLargo = new ArrayList<>();
 		
 		for (String p1 : patronLargoTrade1mItems) {
-			System.out.println("...Obteniendo resultado del patrón 1m en largo: " + p1);
+			System.out.println("...Obteniendo resultado del patrón 1m en largo obtenResultadosTodosPatrones1mLargo: " + p1);
 			Patron1m patron1 = new Patron1m().obtenDatosParaEstePatron1m(p1, "Largo", fechaInicial, fechaFinal);
 			resultados1mLargo.add(patron1);
 //			System.out.println("...Resultado del patrón " + p1 + ": " + patron1.toString());
@@ -257,6 +263,41 @@ public class EstadisticasHelper {
 			orderedList.add(result.get(i));
 		}
 		resultados1mLargo = orderedList;
+	}
+	
+	public void obtenResultadosTodosPatrones1mCorto () {
+		 
+		//Los patrones que tenemos en 1m para cortos
+		//mejor así y llamar a la query en un bucle por si se añade alguno mas
+		List<String> patronCortoTrade1mItems = new ArrayList<>();
+		patronCortoTrade1mItems.add("Doble Techo");
+		patronCortoTrade1mItems.add("BreakDown");
+		patronCortoTrade1mItems.add("Cup&Handle-inv");
+		patronCortoTrade1mItems.add("HCH");
+		patronCortoTrade1mItems.add("Triángulo Bajista");
+		patronCortoTrade1mItems.add("PSS");
+		patronCortoTrade1mItems.add("Techo Redondeado");
+		patronCortoTrade1mItems.add("DBI");
+		patronCortoTrade1mItems.add("Momentum");
+		patronCortoTrade1mItems.add("Otro");
+		
+		this.resultados1mCorto = new ArrayList<>();
+		
+		for (String p1 : patronCortoTrade1mItems) {
+			System.out.println("...Obteniendo resultado del patrón 1m en corto obtenResultadosTodosPatrones1mLargo: " + p1);
+			Patron1m patron1 = new Patron1m().obtenDatosParaEstePatron1m(p1, "Corto", fechaInicial, fechaFinal);
+			resultados1mCorto.add(patron1);
+//			System.out.println("...Resultado del patrón " + p1 + ": " + patron1.toString());
+		}
+		//ordenemos la lista
+		List<Patron1m> result = resultados1mCorto.stream().sorted((o1, o2)->((Integer)o1.getNumeroBuenas()).
+				compareTo(((Integer)o2.getNumeroBuenas()))).collect(Collectors.toList());
+		//devolvámos la lista ordenada descendentemente (reversed)
+		List<Patron1m> orderedList = new ArrayList<>();
+		for (int i = result.size()-1; i >= 0; i--){
+			orderedList.add(result.get(i));
+		}
+		resultados1mCorto = orderedList;
 	}
 	
 }

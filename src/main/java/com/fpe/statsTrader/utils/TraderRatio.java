@@ -137,7 +137,7 @@ public class TraderRatio {
 		this.opesBuenasTodoAcordePlan = traderRatio.getOpesBuenasTodoAcordePlan();
 		this.opesBuenasNoTodoAcordePlan = traderRatio.getOpesBuenasNoTodoAcordePlan();
 		
-		System.out.println("TraderRatio.this=" + this.toString());
+//		System.out.println("TraderRatio.this=" + this.toString());
 		return this;
 	}
 

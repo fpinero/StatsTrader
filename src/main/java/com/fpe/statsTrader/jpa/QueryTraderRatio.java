@@ -61,7 +61,7 @@ public class QueryTraderRatio {
 			//Obtengamos las operaciones buenas
 			String query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Bueno'";
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -74,7 +74,7 @@ public class QueryTraderRatio {
 			//Obtengamos las operaciones malas
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop'";
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -87,7 +87,7 @@ public class QueryTraderRatio {
 			//Obtengamos las operaciones breakeven
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='BreakEven'";
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -101,7 +101,7 @@ public class QueryTraderRatio {
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop'" +
 					" AND t.stopEvitable='SI'";
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -115,7 +115,7 @@ public class QueryTraderRatio {
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop'" +
 					" AND t.stopEvitable='NO'";
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -129,7 +129,7 @@ public class QueryTraderRatio {
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.todo100plan='SI'";
 					
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -143,7 +143,7 @@ public class QueryTraderRatio {
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.todo100plan='NO'";
 					
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -157,7 +157,7 @@ public class QueryTraderRatio {
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Bueno'" +
 					" AND t.todo100plan='SI'";
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {
@@ -171,7 +171,7 @@ public class QueryTraderRatio {
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Bueno'" +
 					" AND t.todo100plan='NO'";
-			System.out.println("query=" + query);
+			System.out.println("query obtenRatio=" + query);
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			if (!thisTradersOpes.isEmpty()) {

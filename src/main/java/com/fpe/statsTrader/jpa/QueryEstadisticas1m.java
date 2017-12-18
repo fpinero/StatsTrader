@@ -54,7 +54,9 @@ public class QueryEstadisticas1m {
 			String query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
 					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.patronTrade1m='" + patron1 + "'" +
 					" AND t.sideTrade=" + "'" + side + "'";
-			System.out.println("query=" + query);
+			System.out.println("\n***************************************************");
+			System.out.println("QueryEstadisticas1m query=" + query);
+			System.out.println("***************************************************\n");
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
 			for (TradersOpes to : thisTradersOpes  ) {
@@ -77,11 +79,11 @@ public class QueryEstadisticas1m {
 			return null;
 		}
 		
-		System.out.println("patronNegociado=" + patronNegociado);
-		System.out.println("numeroBuenas=" + numeroBuenas);
-		System.out.println("numeroStops=" + numeroStops);
-		System.out.println("numeroBe=" + numeroBe);
-		System.out.println("vecesNegociado=" + vecesNegociado);
+		System.out.println("QueryEstadisticas1m " + side + " patronNegociado=" + patronNegociado);
+		System.out.println("QueryEstadisticas1m " + side + "  numeroBuenas=" + numeroBuenas);
+		System.out.println("QueryEstadisticas1m " + side + " numeroStops=" + numeroStops);
+		System.out.println("QueryEstadisticas1m " + side + " numeroBe=" + numeroBe);
+		System.out.println("QueryEstadisticas1m " + side + " vecesNegociado=" + vecesNegociado);
 		
 		patron1bean.setNumeroBe(numeroBe);
 		patron1bean.setNumeroBuenas(numeroBuenas);
