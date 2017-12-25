@@ -65,11 +65,15 @@
 							icon="ui-icon-star" />
 						<p:menuitem value="Consulta Trades" outcome="consultaopes"
 							icon="ui-icon-star" />
-						<p:menuitem value="Estadísticas" outcome="content"
+						<p:menuitem value="Estadísticas" outcome="content" onclick="toggle('waitdiv');"
 							icon="ui-icon-star" />
 					</p:submenu>
 
 				</p:menu>
+				
+				<div id="waitdiv" align="center" style="display: none">
+							<p:graphicImage id="wait" library="images" name="waitarrows.gif" ></p:graphicImage>
+				</div>
 
 			</h:form>
 		</p:layoutUnit>
@@ -210,6 +214,20 @@
 		</p:layoutUnit>
 
 	</p:layout>
+	
+	<script type="text/javascript">
+      function toggle(id) {
+    	   /* alert("..en toggle id=" + id) */ 
+        var element = document.getElementById(id);
+        if(element.style.display == 'block') {
+        	/* alert("..en element.style.display == block") */ 
+          element.style.display = 'none';
+        } else {
+        	 /* alert("..en element.style.display == else") */ 
+          element.style.display = 'block'
+        }
+      }
+    </script>
 
 </h:body>
 
