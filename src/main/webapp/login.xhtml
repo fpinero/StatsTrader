@@ -17,6 +17,8 @@
 
 <h:body>
 
+	<h:outputScript library="js" name="common.js" target="body" />
+
 	<!-- Solo debe estar aquí si el objeto Trader NO existe, si existe se le reenvía a modificarcuenta -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderAlreadyExists}" />
@@ -109,20 +111,6 @@
 		</p:layoutUnit>
 
 	</p:layout>
-
-	<script type="text/javascript">
-      function toggle(id) {
-    	   /* alert("..en toggle id=" + id) */ 
-        var element = document.getElementById(id);
-        if(element.style.display == 'block') {
-        	/* alert("..en element.style.display == block") */ 
-          element.style.display = 'none';
-        } else {
-        	 /* alert("..en element.style.display == else") */ 
-          element.style.display = 'block'
-        }
-      }
-    </script>
 
 </h:body>
 

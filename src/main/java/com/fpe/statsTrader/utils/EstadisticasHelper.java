@@ -116,9 +116,6 @@ public class EstadisticasHelper {
 		
 		System.out.println("...en createPie");
 		
-		ShowWaitYesOrNot swait = new ShowWaitYesOrNot();
-		swait.setShowToYes();
-		
 		pieModel1 = new PieChartModel();
 		PieOpes thePie = new PieOpes().buscaOpesPie(fechaInicial, fechaFinal);
 		

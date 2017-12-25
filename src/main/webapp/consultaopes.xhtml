@@ -17,6 +17,8 @@
 
 <h:body>
 
+	<h:outputScript library="js" name="common.js" target="body" />
+
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
@@ -123,59 +125,65 @@
 							</h:outputText>
 						</p:column>
 
-						<p:column headerText="Symbol" width="25" styleClass="singleLine">
+						<p:column headerText="Symbol" width="25" styleClass="singleLine" 
+							sortBy="#{trop.symbolTrade}">
 							<h:outputText value="#{trop.symbolTrade}" />
 						</p:column>
 
-						<p:column headerText="Side" width="25" styleClass="singleLine">
+						<p:column headerText="Side" width="25" styleClass="singleLine" 
+							sortBy="#{trop.sideTrade}">
 							<h:outputText value="#{trop.sideTrade}" />
 						</p:column>
 
 						<p:column headerText="Resultado" width="35"
-							styleClass="singleLine">
+							styleClass="singleLine" sortBy="#{trop.resultadoTrade}">
 							<h:outputText value="#{trop.resultadoTrade}" />
 						</p:column>
 
 						<p:column headerText="Patrón 1m" width="90"
-							styleClass="singleLine">
+							styleClass="singleLine" sortBy="#{trop.patronTrade1m}">
 							<h:outputText value="#{trop.patronTrade1m}" />
 						</p:column>
 
 						<p:column headerText="Patrón 15m" width="105"
-							styleClass="singleLine">
+							styleClass="singleLine" sortBy="#{trop.patronTrade15m}">
 							<h:outputText value="#{trop.patronTrade15m}" />
 						</p:column>
 
-						<p:column headerText="Shares" width="25" styleClass="singleLine">
+						<p:column headerText="Shares" width="25" styleClass="singleLine" 
+						 	sortBy="#{trop.sharesTrade}">
 							<h:outputText value="#{trop.sharesTrade}" style="float:right" />
 						</p:column>
 
-						<p:column headerText="Bruto" width="25" styleClass="singleLine">
+						<p:column headerText="Bruto" width="25" styleClass="singleLine" 
+							sortBy="#{trop.brutoOpe}">
 							<h:outputText value="#{trop.brutoOpe}" style="float:right" />
 						</p:column>
 
-						<p:column headerText="Neto" width="25" styleClass="singleLine">
+						<p:column headerText="Neto" width="25" styleClass="singleLine" 
+							sortBy="#{trop.netoOpe}">
 							<h:outputText value="#{trop.netoOpe}" style="float:right" />
 						</p:column>
 
 						<p:column headerText="Cents Trade" width="25"
-							styleClass="singleLine">
+							styleClass="singleLine" sortBy="#{trop.centsTrade}">
 							<h:outputText value="#{trop.centsTrade}" style="float:right" />
 						</p:column>
 
 						<p:column headerText="100% Plan" width="25"
-							styleClass="singleLine">
+							styleClass="singleLine" sortBy="#{trop.todo100plan}">
 							<div align="center">
 								<h:outputText value="#{trop.todo100plan}" />
 							</div>
 						</p:column>
 
 						<p:column headerText="Stop Evitable" width="35"
-							styleClass="singleLine">
+							styleClass="singleLine" sortBy="#{trop.stopEvitable}">
 							<h:outputText value="#{trop.stopEvitable}" />
 						</p:column>
 
-						<p:column headerText="Observaciones" styleClass="singleLine">
+						<p:column headerText="Observaciones" styleClass="singleLine" 
+							sortBy="#{trop.observaciones}">
 							<h:outputText value="#{trop.observaciones}" />
 						</p:column>
 
@@ -284,20 +292,6 @@
 
 	</p:layout>
 	
-	<script type="text/javascript">
-      function toggle(id) {
-    	   /* alert("..en toggle id=" + id) */ 
-        var element = document.getElementById(id);
-        if(element.style.display == 'block') {
-        	/* alert("..en element.style.display == block") */ 
-          element.style.display = 'none';
-        } else {
-        	 /* alert("..en element.style.display == else") */ 
-          element.style.display = 'block'
-        }
-      }
-    </script>
-
 </h:body>
 
 

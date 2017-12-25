@@ -17,6 +17,8 @@
 
 <h:body>
 
+	<h:outputScript library="js" name="common.js" target="body" />
+
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
@@ -62,23 +64,28 @@
 							icon="ui-icon-star" />
 						<p:menuitem value="Consulta Trades" outcome="consultaopes"
 							icon="ui-icon-star" />
-						<p:menuitem value="Estadísticas" outcome="content" 
+						<p:menuitem value="Estadísticas" outcome="content" onclick="toggle('waitdiv');"
 							icon="ui-icon-star" />
 					</p:submenu>
 
 				</p:menu>
+				
+				<div id="waitdiv" align="center" style="display: none">
+							<p:graphicImage id="wait" library="images" name="waitarrows.gif" ></p:graphicImage>
+				</div>
 
 			</h:form>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<div align="center">
+			<!-- <div align="center"> -->
 				<h3 style="text-align: center; color: blue;">Consulta estadísticas generales</h3>
-			</div>
-			<h:form id="formEstadisticas">
-				<p:growl id="growl" showDetail="false" sticky="false"
-						autoUpdate="true" life="4500" />
-						&nbsp;&nbsp;
+			<!-- </div> -->
+			
+			<h:form id="formEstadisticas" style="margin-top:0">
+				
+				<div id="rangofechas" style="display: block">
+				&nbsp;&nbsp;
 				<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
 					<p:calendar id="fechaIni"
 						value="#{estadisticasHelper.fechaInicial}" pattern="dd-MM-yyyy"
@@ -92,14 +99,20 @@
 							
 					&nbsp;&nbsp;
 							
-					<p:commandButton value="Refrescar" update="panelEstadisticas panelEstadisticas2" />  
-
-					<br /><br />
+					<p:commandButton value="Refrescar" onclick="toggle('rangofechas'); toggle('arrows');" 
+						oncomplete="toggle('rangofechas'); toggle('arrows');"
+						update="panelEstadisticas panelEstadisticas2" />  
+						
+				</div>
+					<br />
+				<div id="arrows" align="center" style="margin-top:0; display: none">
+							<p:graphicImage id="wait" library="images" name="Spinner.gif" ></p:graphicImage>
+				</div>
 				
 			</h:form>
 			
 
-			<p:panelGrid columns="2" id="panelEstadisticas" columnClasses="no-border" layout="grid" >
+			<p:panelGrid columns="2" id="panelEstadisticas" columnClasses="no-border"  layout="grid">  
 				<p:panel id="panel1left" header="Estadísticas" styleClass="no-border">
 					<p:chart type="pie" model="#{estadisticasHelper.pieModel1}" style="width:350px;height:250px"  />  
 				</p:panel>
@@ -123,12 +136,11 @@
 					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>
-			<p:panelGrid columns="2" id="panelEstadisticas2" columnClasses="no-border" layout="grid">
+			<p:panelGrid columns="2" id="panelEstadisticas2" columnClasses="no-border" layout="grid">  
 				<p:panel id="panel3left" header="Patrones utilizados 15m largo" styleClass="no-border">
 					<p:dataTable id="p15ls" var="p15l"
 						value="#{estadisticasHelper.resultados15mLargo}" resizableColumns="true"
-						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
-						 <!-- sortBy="#{p15l.numeroBuenas}" sortOrder="ascending" --> 
+						 >   <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
 						
 						<p:column headerText="Patrón" width="35" styleClass="singleLine">
 							<h:outputText value="#{p15l.patron}" />
@@ -156,7 +168,7 @@
 				<p:panel id="panel3Right" header="Patrones utilizados 15m Corto" styleClass="no-border">
 					<p:dataTable id="p15Cs" var="p15C"
 						value="#{estadisticasHelper.resultados15mCorto}" resizableColumns="true"
-						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
+						 >   <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
 						
 						<p:column headerText="Patrón" width="35" styleClass="singleLine">
 							<h:outputText value="#{p15C.patron}" />
@@ -183,12 +195,11 @@
 				
 			</p:panelGrid>
 			
-			<p:panelGrid columns="2" id="panelEstadisticas3" columnClasses="no-border" layout="grid">
+			<p:panelGrid columns="2" id="panelEstadisticas3" columnClasses="no-border" layout="grid">   
 				<p:panel id="panel4left" header="Patrones utilizados 1m largo" styleClass="no-border">
 					<p:dataTable id="p1ls" var="p1l"
 						value="#{estadisticasHelper.resultados1mLargo}" resizableColumns="true"
-						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
-						 <!-- sortBy="#{p15l.numeroBuenas}" sortOrder="ascending" --> 
+						 >  <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
 						
 						<p:column headerText="Patrón" width="35" styleClass="singleLine">
 							<h:outputText value="#{p1l.patron}" />
@@ -216,7 +227,7 @@
 				<p:panel id="panel4Right" header="Patrones utilizados 1m Corto" styleClass="no-border">
 					<p:dataTable id="p1Cs" var="p1C"
 						value="#{estadisticasHelper.resultados1mCorto}" resizableColumns="true"
-						scrollable="true" scrollWidth="95%" scrollHeight="100%" >
+						 >   <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
 						
 						<p:column headerText="Patrón" width="35" styleClass="singleLine">
 							<h:outputText value="#{p1C.patron}" />
