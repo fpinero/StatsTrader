@@ -89,13 +89,19 @@
 
 						</p:panelGrid>
 						<br />
-						<div align="center">
-							<p:commandButton value="Iniciar Sesión" id="ajax" update="growl" 
-							 action="#{checkLogin.compruebaCredenciales}" />
+						<div id="loginbutton" align="center" style="display: block">
+							<p:commandButton value="Iniciar Sesión" id="ajax" 
+							 action="#{checkLogin.compruebaCredenciales}"  ajax="false"
+							 onclick="toggle('loginbutton'); toggle('waitdiv');" oncomplete="toggle('loginbutton'); toggle('waitdiv');" 
+							 >
+							 </p:commandButton>
 							<br /> <br />
 							<p:link style="font-size: 12px; color:blue;"
 								value="Olvidé la contraseña" outcome="recuperarpwd" />
 							<br /> <br />
+						</div>
+						<div id="waitdiv" align="center" style="display: none">
+							<p:graphicImage id="wait" library="images" name="waitarrows.gif" ></p:graphicImage>
 						</div>
 					</h:form>
 			</p:panelGrid>
@@ -103,6 +109,20 @@
 		</p:layoutUnit>
 
 	</p:layout>
+
+	<script type="text/javascript">
+      function toggle(id) {
+    	   /* alert("..en toggle id=" + id) */ 
+        var element = document.getElementById(id);
+        if(element.style.display == 'block') {
+        	/* alert("..en element.style.display == block") */ 
+          element.style.display = 'none';
+        } else {
+        	 /* alert("..en element.style.display == else") */ 
+          element.style.display = 'block'
+        }
+      }
+    </script>
 
 </h:body>
 

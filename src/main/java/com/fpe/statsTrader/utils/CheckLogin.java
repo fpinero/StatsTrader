@@ -38,8 +38,11 @@ public class CheckLogin {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
 	public String compruebaCredenciales() {
+		
+		ShowWaitYesOrNot swait = new ShowWaitYesOrNot();
+		swait.setShowToYes();
 		
 		//retorna null si es login invalido, 
 		//en caso contrario retorna la pagina princiapl de la app 
@@ -51,6 +54,7 @@ public class CheckLogin {
 			return "content?faces-redirect=true";
 		} else {
 			showMessage("Usuario/Password incorrecto!");
+			swait.setShowToNo();
 			return null;
 		}
 	}
