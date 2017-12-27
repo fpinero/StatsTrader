@@ -101,7 +101,7 @@
 							
 					<p:commandButton value="Refrescar" onclick="toggle('rangofechas'); toggle('arrows');" 
 						oncomplete="toggle('rangofechas'); toggle('arrows');"
-						update="panelEstadisticas panelEstadisticas2" />  
+						update="panelEstadisticas panelEstadisticas2 panelEstadisticas3 panelEstadisticas4" />  
 						
 				</div>
 					<br />
@@ -251,7 +251,26 @@
 						
 					</p:dataTable>
 				</p:panel>
-				
+			</p:panelGrid>
+			<p:panelGrid columns="2" id="panelEstadisticas4" columnClasses="no-border"  layout="grid">  
+				<p:panel id="panel5left" header="Resultado por Side" styleClass="no-border" >
+					<ui:param name="thisRatioPorSide" value="#{estadisticasHelper.ratioPorSide}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Trades en Largo:</strong><h:outputText value="#{thisRatioPorSide.numeroOpesLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos Largos:</strong><h:outputText value="#{thisRatioPorSide.numeroBuenasLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades en Corto:</strong><h:outputText value="#{thisRatioPorSide.numeroOpesCorto}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos Cortos:</strong><h:outputText value="#{thisRatioPorSide.numeroBuenasCorto}" styleClass="negrita"/></span>
+						<span><strong>Ratio Trades Largo:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesLargo}" styleClass="negrita"/></span>
+						<span><strong>Ratio Trades Corto:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesCorto}" styleClass="negrita"/></span>
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="panel5right" header="Patrón con mejor ratio" styleClass="no-border" >
+					<!-- <ui:param name="thisRatio" value="#{estadisticasHelper.traderRatio}"></ui:param> -->
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						to be done...
+						
+					</h:panelGrid>
+				</p:panel>
 			</p:panelGrid>
 
 

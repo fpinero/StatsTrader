@@ -33,6 +33,8 @@ public class EstadisticasHelper {
 	private List<Patron1m> resultados1mLargo;
 	private List<Patron1m> resultados1mCorto;
 	
+	private RatioPorSide ratioPorSide;
+	
 	public EstadisticasHelper() {
 		
 	}
@@ -162,6 +164,11 @@ public class EstadisticasHelper {
 	public List<Patron1m> getResultados1mCorto() {
 		obtenResultadosTodosPatrones1mCorto();
 		return resultados1mCorto;
+	}
+	
+	public RatioPorSide getRatioPorSide() {
+		obtenRatioPorSide();
+		return ratioPorSide;
 	}
 
 	public void obtenResultadosTodosPatrones15mLargo () {
@@ -298,6 +305,19 @@ public class EstadisticasHelper {
 			orderedList.add(result.get(i));
 		}
 		resultados1mCorto = orderedList;
+	}
+	
+	public void obtenRatioPorSide() {
+		
+		RatioPorSide ratioPorSide = new RatioPorSide();
+		ratioPorSide = ratioPorSide.obtenRatioPorSideLargoAndCorto(fechaInicial, fechaFinal);
+		
+		System.out.println("*****************************************");
+		System.out.println("ratioPorSide=" + ratioPorSide.toString());
+		System.out.println("*****************************************");
+		
+		this.ratioPorSide = ratioPorSide;
+		
 	}
 	
 }
