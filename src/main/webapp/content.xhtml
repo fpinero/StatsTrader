@@ -120,11 +120,11 @@
 				<p:panel id="panel2right" header="Ratio" styleClass="no-border" >
 					<ui:param name="thisRatio" value="#{estadisticasHelper.traderRatio}"></ui:param>
 					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
-						<span><strong>Ratio Real:</strong><h:outputText value="#{thisRatio.ratio}" styleClass="negrita"/></span>
+						<span><strong>Ratio Real:</strong><h:outputText value="#{thisRatio.ratio}%" styleClass="negrita"/></span>
 						<span><strong>Total Trades Buenos:</strong><h:outputText value="#{thisRatio.opesBuenas}" styleClass="negrita"/></span>
-						<span><strong>Ratio <span style="color:red;">si</span> Sin Stops Evitables:</strong><h:outputText value="#{thisRatio.ratioSinStopsEvitables}" styleClass="negrita"/></span>
+						<span><strong>Ratio <span style="color:red;">si</span> Sin Stops Evitables:</strong><h:outputText value="#{thisRatio.ratioSinStopsEvitables}%" styleClass="negrita"/></span>
 						<span><strong>Total Trades Stops:</strong><h:outputText value="#{thisRatio.opesStop}" styleClass="negrita"/></span>
-						<span><strong>Ratio <span style="color:red;">si</span> Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.ratioTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Ratio <span style="color:red;">si</span> Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.ratioTodoAcordePlan}%" styleClass="negrita"/></span>
 						<span><strong>Total Trades B/E:</strong><h:outputText value="#{thisRatio.opesBe}" styleClass="negrita"/></span>
 						<span><strong>Total Trades Stop No Evitable:</strong><h:outputText value="#{thisRatio.opesStopNoEvitable}" styleClass="negrita"/></span>
 						<span><strong>Total Trades Buenos No Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesBuenasNoTodoAcordePlan}" styleClass="negrita"/></span>
@@ -260,15 +260,19 @@
 						<span><strong>Trades Buenos Largos:</strong><h:outputText value="#{thisRatioPorSide.numeroBuenasLargo}" styleClass="negrita"/></span>
 						<span><strong>Trades en Corto:</strong><h:outputText value="#{thisRatioPorSide.numeroOpesCorto}" styleClass="negrita"/></span>
 						<span><strong>Trades Buenos Cortos:</strong><h:outputText value="#{thisRatioPorSide.numeroBuenasCorto}" styleClass="negrita"/></span>
-						<span><strong>Ratio Trades Largo:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesLargo}" styleClass="negrita"/></span>
-						<span><strong>Ratio Trades Corto:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesCorto}" styleClass="negrita"/></span>
+						<span><strong>Ratio Trades Largo:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesLargo}%" styleClass="negrita"/></span>
+						<span><strong>Ratio Trades Corto:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesCorto}%" styleClass="negrita"/></span>
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="panel5right" header="Patrón con mejor ratio" styleClass="no-border" >
+				<p:panel id="panel5right" header="Distancia Objetivos Mes Actual" styleClass="no-border" >
 					<!-- <ui:param name="thisRatio" value="#{estadisticasHelper.traderRatio}"></ui:param> -->
 					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
-						to be done...
-						
+						<span><strong>Ratio a lograr:</strong><h:outputText value="75%" styleClass="negrita"/></span>
+						<span><strong>Ratio Actual:</strong><h:outputText value="#{thisRatio.ratio}%" styleClass="negrita"/></span>
+						<span><strong>Objetivo Semanal:</strong><h:outputText value="$#{thisTrader.obejtivoSemanal}" styleClass="negrita"/></span>
+						<span><strong>Objetivo Actual:</strong><h:outputText value="bean" styleClass="negrita"/></span>
+						<span><strong>Objetivo Mensual:</strong><h:outputText value="$#{thisTrader.objetivoMensual}" styleClass="negrita"/></span>
+						<span><strong>Objetivo Actual:</strong><h:outputText value="bean" styleClass="negrita"/></span>
 					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>
