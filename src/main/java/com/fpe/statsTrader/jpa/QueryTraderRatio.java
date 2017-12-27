@@ -189,13 +189,14 @@ public class QueryTraderRatio {
 			return null;
 		}
 		
-		DecimalFormat df = new DecimalFormat("#,00");
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
 		
 		
 		//calculemos el ratio
 		int totalOpes = opesBuenas + opesStop; //se ignoran los breakeven
 		try {
-			ratio = Double.parseDouble((df.format((opesBuenas * 100)/totalOpes)));
+			ratio = Double.parseDouble((df.format((opesBuenas * 100)/totalOpes).replace("," , ".")));
 		} catch (Exception e) {
 			// por si totalOpes = 0
 			System.out.println("---> excepcion calculando el ratio " + e);
@@ -206,7 +207,7 @@ public class QueryTraderRatio {
 		//calculemos el ratio sin stops evitables
 		totalOpes = opesBuenas + opesStopEvitable;
 		try {
-			ratioSinStopsEvitables = Double.parseDouble((df.format((opesBuenas * 100)/totalOpes)));
+			ratioSinStopsEvitables = Double.parseDouble((df.format((opesBuenas * 100)/totalOpes).replace("," , ".")));
 		} catch (Exception e) {
 			// por si totalOpes = 0
 			System.out.println("---> excepcion calculando el ratio sin stops evitables " + e);
@@ -220,8 +221,10 @@ public class QueryTraderRatio {
 			tmpOpesStopNoEvitable = 1;
 		}
 		try {
-			ratioTodoAcordePlan = Double.parseDouble((df.format((tmpOpesStopNoEvitable * 100) / opesTodoAcordePlan)));
-			ratioTodoAcordePlan = 100 - ratioTodoAcordePlan;
+			ratioTodoAcordePlan = Double.parseDouble((df.format((tmpOpesStopNoEvitable * 100) / opesTodoAcordePlan).replace("," , ".")));
+			if (ratioTodoAcordePlan != 100) {
+				ratioTodoAcordePlan = 100 - ratioTodoAcordePlan;
+			}
 		} catch (Exception e) {
 			// por si totalOpes = 0
 			System.out.println("---> excepcion calculando el ratio con todo acorde el plan " + e);

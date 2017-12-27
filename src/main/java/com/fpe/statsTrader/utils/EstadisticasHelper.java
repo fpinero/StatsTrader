@@ -35,6 +35,8 @@ public class EstadisticasHelper {
 	
 	private RatioPorSide ratioPorSide;
 	
+	private EstadoActualObjetivos estadoActualObjetivos;
+	
 	public EstadisticasHelper() {
 		
 	}
@@ -169,6 +171,11 @@ public class EstadisticasHelper {
 	public RatioPorSide getRatioPorSide() {
 		obtenRatioPorSide();
 		return ratioPorSide;
+	}
+
+	public EstadoActualObjetivos getEstadoActualObjetivos() {
+		obtenEstadoActualObjetivos();
+		return estadoActualObjetivos;
 	}
 
 	public void obtenResultadosTodosPatrones15mLargo () {
@@ -317,6 +324,19 @@ public class EstadisticasHelper {
 		System.out.println("*****************************************");
 		
 		this.ratioPorSide = ratioPorSide;
+		
+	}
+	
+	public void obtenEstadoActualObjetivos() {
+		
+		EstadoActualObjetivos estadoActualObjetivos = new EstadoActualObjetivos();
+		estadoActualObjetivos = estadoActualObjetivos.obtenEstadoActualObjetivos();
+		
+		System.out.println("*****************************************");
+		System.out.println("estadoActualObjetivos=" + estadoActualObjetivos.toString());
+		System.out.println("*****************************************");
+		
+		this.estadoActualObjetivos = estadoActualObjetivos;
 		
 	}
 	

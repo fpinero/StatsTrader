@@ -88,12 +88,13 @@ public class QueryRatioSideCortos {
 		//calculemos el ratio
 		//(numeroBuenasCorto * 100) / numeroOpesCorto
 		
-		DecimalFormat df = new DecimalFormat("#,00");
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
 		
 		if (numeroOpesCorto == 0) {
 			ratioOpesCorto = 0d;
 		} else {
-			ratioOpesCorto = Double.parseDouble((df.format((numeroBuenasCorto * 100)/numeroOpesCorto)));
+			ratioOpesCorto = Double.parseDouble((df.format((numeroBuenasCorto * 100)/numeroOpesCorto).replace("," , ".")));
 		}
 		
 		System.out.println("ratioOpesLargo del trader=" + ratioOpesCorto);

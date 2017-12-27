@@ -88,12 +88,13 @@ public class QueryRatioSideLargos {
 		//calculemos el ratio
 		//(numeroBuenasLargo * 100) / numeroOpesLargo
 		
-		DecimalFormat df = new DecimalFormat("#,00");
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
 		
 		if (numeroOpesLargo == 0) {
 			ratioOpesLargo = 0d;
 		} else {
-			ratioOpesLargo = Double.parseDouble((df.format((numeroBuenasLargo * 100)/numeroOpesLargo)));
+			ratioOpesLargo = Double.parseDouble((df.format((numeroBuenasLargo * 100)/numeroOpesLargo).replace("," , ".")));
 		}
 		
 		System.out.println("ratioOpesLargo del trader=" + ratioOpesLargo);

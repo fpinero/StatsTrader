@@ -265,14 +265,14 @@
 					</h:panelGrid>
 				</p:panel>
 				<p:panel id="panel5right" header="Distancia Objetivos Mes Actual" styleClass="no-border" >
-					<!-- <ui:param name="thisRatio" value="#{estadisticasHelper.traderRatio}"></ui:param> -->
+					<ui:param name="thisEstadoObjetivos" value="#{estadisticasHelper.estadoActualObjetivos}"></ui:param> 
 					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
 						<span><strong>Ratio a lograr:</strong><h:outputText value="75%" styleClass="negrita"/></span>
-						<span><strong>Ratio Actual:</strong><h:outputText value="#{thisRatio.ratio}%" styleClass="negrita"/></span>
+						<span><strong>Ratio Actual:</strong><h:outputText value="#{thisEstadoObjetivos.ratioMes}%" styleClass="negrita"/></span>
 						<span><strong>Objetivo Semanal:</strong><h:outputText value="$#{thisTrader.obejtivoSemanal}" styleClass="negrita"/></span>
-						<span><strong>Objetivo Actual:</strong><h:outputText value="bean" styleClass="negrita"/></span>
+						<span><strong>Objetivo Actual:</strong><h:outputText value="$#{thisEstadoObjetivos.netoSemana}" styleClass="negrita"/></span>
 						<span><strong>Objetivo Mensual:</strong><h:outputText value="$#{thisTrader.objetivoMensual}" styleClass="negrita"/></span>
-						<span><strong>Objetivo Actual:</strong><h:outputText value="bean" styleClass="negrita"/></span>
+						<span><strong>Objetivo Actual:</strong><h:outputText value="$#{thisEstadoObjetivos.netoMes}" styleClass="negrita"/></span>
 					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>
