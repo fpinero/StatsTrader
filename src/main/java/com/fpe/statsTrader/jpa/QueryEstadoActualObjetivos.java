@@ -102,8 +102,8 @@ public class QueryEstadoActualObjetivos {
 			//obtengamos el neto del mes
 			for (TradersOpes tr : thisTradersOpes) {
 				netoDelMes += tr.getNetoOpe();
-				System.out.println("tr.getNetoOpe()=" + tr.getNetoOpe());
-				System.out.println("netoDelMes=" + netoDelMes);
+//				System.out.println("tr.getNetoOpe()=" + tr.getNetoOpe());
+//				System.out.println("netoDelMes=" + netoDelMes);
 			}
 			netoDelMes = Double.parseDouble(df.format(netoDelMes).replace("," , "."));
 			
@@ -118,8 +118,8 @@ public class QueryEstadoActualObjetivos {
 			//obtengamos el neto de la semana
 			for (TradersOpes tr : thisTradersOpes) {
 				netoDeLaSemana += tr.getNetoOpe();
-				System.out.println("tr.getNetoOpe()=" + tr.getNetoOpe());
-				System.out.println("netoDeLaSemana=" + netoDeLaSemana);
+//				System.out.println("tr.getNetoOpe()=" + tr.getNetoOpe());
+//				System.out.println("netoDeLaSemana=" + netoDeLaSemana);
 			}
 			netoDeLaSemana = Double.parseDouble(df.format(netoDeLaSemana).replace("," , "."));
 			
