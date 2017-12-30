@@ -279,23 +279,30 @@
 				</p:panel>
 			</p:panelGrid>
 			<p:panelGrid columns="2" id="panelEstadisticas5" columnClasses="no-border"  layout="grid">  
-				<p:panel id="panel6left" header="Combinación Patrón con mejor ratio" styleClass="no-border" >
+				<p:panel id="panel6left" header="Combinación Patrón 15m/1m con mejor ratio" styleClass="no-border" >
 					<ui:param name="thisMejorCombinacion" value="#{estadisticasHelper.combinacionMejorPatron15m}"></ui:param>
 					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
-						<span><strong>Patron 15m Largo:</strong><h:outputText value="#{thisMejorCombinacion.patron15mLargo}" styleClass="negrita"/></span>
-						<span><strong>Opes Buenas:</strong><h:outputText value="#{thisMejorCombinacion.numeroOpesBuenasLargo}" styleClass="negrita"/></span>
+						<span><strong>Patrón 15m Largo:</strong><h:outputText value="#{thisMejorCombinacion.patron15mLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos:</strong><h:outputText value="#{thisMejorCombinacion.numeroOpesBuenasLargo}" styleClass="negrita"/></span>
 						<span><strong>Patrón 1m Largo:</strong><h:outputText value="#{thisMejorCombinacion.patron1mLargo}" styleClass="negrita"/></span>
 						<span><strong>Veces Usado:</strong><h:outputText value="#{thisMejorCombinacion.numeroVecesNegociadoLargo}" styleClass="negrita"/></span>
-						<span><strong>Patron 15m Corto:</strong><h:outputText value="#{thisMejorCombinacion.patron15mCorto}" styleClass="negrita"/></span>
-						<span><strong>Opes Buenas:</strong><h:outputText value="#{thisMejorCombinacion.numeroOpesBuenasCorto}" styleClass="negrita"/></span>
+						<span><strong>Patrón 15m Corto:</strong><h:outputText value="#{thisMejorCombinacion.patron15mCorto}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos:</strong><h:outputText value="#{thisMejorCombinacion.numeroOpesBuenasCorto}" styleClass="negrita"/></span>
 						<span><strong>Patrón 1m Corto:</strong><h:outputText value="#{thisMejorCombinacion.patron1mCorto}" styleClass="negrita"/></span>
 						<span><strong>Veces Usado:</strong><h:outputText value="#{thisMejorCombinacion.numeroVecesNegociadoCorto}" styleClass="negrita"/></span>
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="panel6right" header="Combinación Patrón con peor ratio" styleClass="no-border" >
-					<!-- <ui:param name="thisEstadoObjetivos" value="#{estadisticasHelper.estadoActualObjetivos}"></ui:param>  -->
+				<p:panel id="panel6right" header="Combinación Patrón 15m/1m con peor ratio" styleClass="no-border" >
+					<ui:param name="thisPeorCombinacion" value="#{estadisticasHelper.combinacionPeorPatron15m}"></ui:param>
 					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
-						to be done...
+						<span><strong>Patrón 15m Largo:</strong><h:outputText value="#{thisPeorCombinacion.patron15mLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades Stops:</strong><h:outputText value="#{thisPeorCombinacion.numeroOpesStopsLargo}" styleClass="negrita"/></span>
+						<span><strong>Patrón 1m Largo:</strong><h:outputText value="#{thisPeorCombinacion.patron1mLargo}" styleClass="negrita"/></span>
+						<span><strong>Veces Usado:</strong><h:outputText value="#{thisPeorCombinacion.numeroVecesNegociadoLargo}" styleClass="negrita"/></span>
+						<span><strong>Patrón 15m Corto:</strong><h:outputText value="#{thisPeorCombinacion.patron15mCorto}" styleClass="negrita"/></span>
+						<span><strong>Trades Stops:</strong><h:outputText value="#{thisPeorCombinacion.numeroOpesStopsCorto}" styleClass="negrita"/></span>
+						<span><strong>Patrón 1m Corto:</strong><h:outputText value="#{thisPeorCombinacion.patron1mCorto}" styleClass="negrita"/></span>
+						<span><strong>Veces Usado:</strong><h:outputText value="#{thisPeorCombinacion.numeroVecesNegociadoCorto}" styleClass="negrita"/></span>
 					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>

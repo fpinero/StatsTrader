@@ -13,29 +13,29 @@ import org.hibernate.Session;
 import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.Trader;
 import com.fpe.statsTrader.entity.TradersOpes;
-import com.fpe.statsTrader.utils.CombinacionMejorPatron15m;
+import com.fpe.statsTrader.utils.CombinacionPeorPatron15m;
 import com.fpe.statsTrader.utils.ConvertToSqlDateFormatWithQuotes;
 
-public class QueryCombinacionMejorPatron15m {
+public class QueryCombinacionPeorPatron15m {
 	
-	String patron15mLargo = "";
-	String patron1mLargo = "";
-	int numeroVecesNegociadoLargo = 0;
-	int numeroOpesBuenasLargo = 0;
-	String patron15mCorto = "";
-	String patron1mCorto = "";
-	int numeroVecesNegociadoCorto = 0;
-	int numeroOpesBuenasCorto = 0;
+	String patron15mLargo;
+	String patron1mLargo;
+	int numeroVecesNegociadoLargo;
+	int numeroOpesStopsLargo;
+	String patron15mCorto;
+	String patron1mCorto;
+	int numeroVecesNegociadoCorto;
+	int numeroOpesStopsCorto;
 	
-	public CombinacionMejorPatron15m obtenMejorCombinacion15m(Date desdeFecha, Date hastaFecha) {
+	public CombinacionPeorPatron15m obtenPeorCombinacion15m(Date desdeFecha, Date hastaFecha) {
 		
-		CombinacionMejorPatron15m beanCombinacionMejorPatron15m = new CombinacionMejorPatron15m();
+		CombinacionPeorPatron15m beanCombinacionPeorPatron15m = new CombinacionPeorPatron15m();
 		
 		List<TradersOpes> thisTradersOpes = new ArrayList<>();
 		
 		Trader thisTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 		int idTrader = thisTrader.getId();
-		System.out.println("...id del trader logueado en QueryCombinacionMejorPatron15m: " + idTrader);
+		System.out.println("...id del trader logueado en QueryCombinacionPeorPatron15m: " + idTrader);
 		
 		ConvertToSqlDateFormatWithQuotes convert = new ConvertToSqlDateFormatWithQuotes();
 		
@@ -56,11 +56,11 @@ public class QueryCombinacionMejorPatron15m {
 			//comencemos la transaccion
 			session.beginTransaction();
 			
-			//Obtengamos las operaciones buenas realizadas en el rango de fechas en largo
+			//Obtengamos las operaciones malas realizadas en el rango de fechas en largo
 			String query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
-					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Bueno' AND t.sideTrade='" + 
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop' AND t.sideTrade='" + 
 					side + "'";
-			System.out.println("query patrones en " + side + "=" + query);
+			System.out.println("query patrones stops en " + side + "=" + query);
 			
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
@@ -74,7 +74,7 @@ public class QueryCombinacionMejorPatron15m {
 				}
 			}
 			
-			System.out.println("###### Mejor patron usado en 15m en " + side + " = " + patron15mLargo);
+			System.out.println("###### Peor patron usado en 15m en " + side + " = " + patron15mLargo);
 			
 			// hagamos ahora la query de que patrón se usó mas veces con este patrón
 			//hay que sacar dos cosas, el numero de veces negociado y las veces que fue buena la ope
@@ -93,20 +93,20 @@ public class QueryCombinacionMejorPatron15m {
 			
 			System.out.println("###### Numero de veces usado el patron " + patron15mLargo + " en 15m en " + side + " = " + numeroVecesNegociadoLargo);
 			
-			int numeroOpesBuenasLargo1m = 0;
+			int numeroOpesStopsLargo1m = 0;
 			for (TradersOpes tr : thisTradersOpes){
 				String patron1mUtilizado = tr.getPatronTrade1m();
-				if (tr.getResultadoTrade().equalsIgnoreCase("Bueno")){
+				if (tr.getResultadoTrade().equalsIgnoreCase("Stop")){
 					int ocurrencias = vecesUsadoEstePatron1(thisTradersOpes, patron1mUtilizado);
-					if (ocurrencias > numeroOpesBuenasLargo1m) {
+					if (ocurrencias > numeroOpesStopsLargo1m) {
 						patron1mLargo = patron1mUtilizado;
-						numeroOpesBuenasLargo = ocurrencias;
-						numeroOpesBuenasLargo1m = ocurrencias;
+						numeroOpesStopsLargo = ocurrencias;
+						numeroOpesStopsLargo1m = ocurrencias;
 					}
 				}
 			}
 			
-			System.out.println("###### Mejor patron usado en 1m en " + side + " = " + patron1mLargo + "conjuntamente con el patron en 15m " + patron15mLargo);
+			System.out.println("###### Peor patron usado en 1m en " + side + " = " + patron1mLargo + "conjuntamente con el patron en 15m " + patron15mLargo);
 			
 			//#######################
 			//ahora lo mismo pero para cortos
@@ -115,9 +115,9 @@ public class QueryCombinacionMejorPatron15m {
 			
 			//Obtengamos las operaciones buenas en corto
 			query = "from TradersOpes t WHERE t.traderId=" + idTrader + " AND t.fechaTrade >=" + convert.converDate(desdeFecha) +
-					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Bueno' AND t.sideTrade='" + 
+					" AND t.fechaTrade <" + convert.converDate(hastaFecha) + " AND t.resultadoTrade='Stop' AND t.sideTrade='" + 
 					side + "'";
-			System.out.println("query patrones en " + side + "=" + query);
+			System.out.println("query patrones stops en " + side + "=" + query);
 			
 			thisTradersOpes = session.createQuery(query).getResultList();
 			
@@ -131,7 +131,7 @@ public class QueryCombinacionMejorPatron15m {
 				}
 			}
 			
-			System.out.println("###### Mejor patron usado en 15m en " + side + " = " + patron15mCorto);
+			System.out.println("###### Peor patron usado en 15m en " + side + " = " + patron15mCorto);
 			
 			// hagamos ahora la query de que patrón se usó mas veces con este patrón
 			//hay que sacar dos cosas, el numero de veces negociado y las veces que fue buena la ope
@@ -150,21 +150,21 @@ public class QueryCombinacionMejorPatron15m {
 			
 			System.out.println("###### Numero de veces usado el patron " + patron15mCorto + " en 15m en " + side + " = " + numeroVecesNegociadoCorto);
 			
-			int numeroOpesBuenasCorto1m = 0;
+			int numeroOpesStopsCorto1m = 0;
 			for (TradersOpes tr : thisTradersOpes){
 				String patron1mUtilizado = tr.getPatronTrade1m();
-				if (tr.getResultadoTrade().equalsIgnoreCase("Bueno")){
+				if (tr.getResultadoTrade().equalsIgnoreCase("Stop")){
 //					System.out.println("---------||||||---> jugada en corto=" + tr.getSymbolTrade() + " resultado=" + tr.getResultadoTrade());
 					int ocurrencias = vecesUsadoEstePatron1(thisTradersOpes, patron1mUtilizado);
-					if (ocurrencias > numeroOpesBuenasCorto1m) {
+					if (ocurrencias > numeroOpesStopsCorto1m) {
 						patron1mCorto = patron1mUtilizado;
-						numeroOpesBuenasCorto = ocurrencias;
-						numeroOpesBuenasCorto1m = ocurrencias;
+						numeroOpesStopsCorto = ocurrencias;
+						numeroOpesStopsCorto1m = ocurrencias;
 					}
 				}
 			}
 			
-			System.out.println("###### Mejor patron usado en 1m en " + side + " = " + patron1mCorto + "conjuntamente con el patron en 15m " + patron15mCorto);
+			System.out.println("###### Peor patron usado en 1m en " + side + " = " + patron1mCorto + "conjuntamente con el patron en 15m " + patron15mCorto);
 			
 			//hagamos el commit
 			session.getTransaction().commit();
@@ -175,18 +175,18 @@ public class QueryCombinacionMejorPatron15m {
 			return null;
 		}
 		
-		beanCombinacionMejorPatron15m.setPatron15mLargo(patron15mLargo);
-		beanCombinacionMejorPatron15m.setPatron1mLargo(patron1mLargo);
-		beanCombinacionMejorPatron15m.setNumeroVecesNegociadoLargo(numeroVecesNegociadoLargo);
-		beanCombinacionMejorPatron15m.setNumeroOpesBuenasLargo(numeroOpesBuenasLargo);
-		beanCombinacionMejorPatron15m.setPatron15mCorto(patron15mCorto);
-		beanCombinacionMejorPatron15m.setPatron1mCorto(patron1mCorto);
-		beanCombinacionMejorPatron15m.setNumeroVecesNegociadoCorto(numeroVecesNegociadoCorto);
-		beanCombinacionMejorPatron15m.setNumeroOpesBuenasCorto(numeroOpesBuenasCorto);
+		beanCombinacionPeorPatron15m.setPatron15mLargo(patron15mLargo);
+		beanCombinacionPeorPatron15m.setPatron1mLargo(patron1mLargo);
+		beanCombinacionPeorPatron15m.setNumeroVecesNegociadoLargo(numeroVecesNegociadoLargo);
+		beanCombinacionPeorPatron15m.setNumeroOpesStopsLargo(numeroOpesStopsLargo);
+		beanCombinacionPeorPatron15m.setPatron15mCorto(patron15mCorto);
+		beanCombinacionPeorPatron15m.setPatron1mCorto(patron1mCorto);
+		beanCombinacionPeorPatron15m.setNumeroVecesNegociadoCorto(numeroVecesNegociadoCorto);
+		beanCombinacionPeorPatron15m.setNumeroOpesStopsCorto(numeroOpesStopsCorto);
 		
-		System.out.println("...beanCombinacionMejorPatron15m=" + beanCombinacionMejorPatron15m);
+		System.out.println("...beanCombinacionPeorPatron15m=" + beanCombinacionPeorPatron15m);
 		
-		return beanCombinacionMejorPatron15m;
+		return beanCombinacionPeorPatron15m;
 		
 	}
 	
@@ -200,7 +200,7 @@ public class QueryCombinacionMejorPatron15m {
 			}
 		}
 		
-		System.out.println("Patron bueno 15m " + patron + " utilizado " + n + " veces");
+//		System.out.println("Patron stop 15m " + patron + " utilizado " + n + " veces");
 		return n;
 	}
 	
@@ -209,7 +209,7 @@ private int vecesUsadoEstePatron1(List<TradersOpes> listadoOpes, String patron) 
 		int n = 0;
 		for (TradersOpes to : listadoOpes) {
 //			System.out.println("----------------> comparando " + patron + " con " + to.getPatronTrade1m() + " del symbol=" + to.getSymbolTrade());
-			if (patron.equals(to.getPatronTrade1m()) && "Bueno".equals(to.getResultadoTrade())){
+			if (patron.equals(to.getPatronTrade1m()) && "Stop".equals(to.getResultadoTrade())){
 //				System.out.println("----------------> comparando " + patron + " con " + to.getPatronTrade1m() + " del symbol=" + to.getSymbolTrade());
 				n++;
 			}

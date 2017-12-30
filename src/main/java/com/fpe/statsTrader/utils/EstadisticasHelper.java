@@ -16,6 +16,7 @@ import org.primefaces.model.chart.PieChartModel;
 import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.jpa.QueryCombinacionMejorPatron15m;
+import com.fpe.statsTrader.jpa.QueryCombinacionPeorPatron15m;
 
 @Component
 @SessionScoped
@@ -40,6 +41,7 @@ public class EstadisticasHelper {
 	private EstadoActualObjetivos estadoActualObjetivos;
 	
 	private CombinacionMejorPatron15m combinacionMejorPatron15m;
+	private CombinacionPeorPatron15m combinacionPeorPatron15m;
 	
 	public EstadisticasHelper() {
 		
@@ -190,6 +192,16 @@ public class EstadisticasHelper {
 		comM15m = queryCombinacionMejorPatron15m.obtenMejorCombinacion15m(fechaInicial, fechaFinal);
 		this.combinacionMejorPatron15m = comM15m;
 		return combinacionMejorPatron15m;
+	}
+	
+	public CombinacionPeorPatron15m getCombinacionPeorPatron15m() {
+		// crea el objeto CombinacionMejorPatron15m y lo rellena con el resulado de la query
+		CombinacionPeorPatron15m comP15m = new CombinacionPeorPatron15m();
+		//llamemos a la query
+		QueryCombinacionPeorPatron15m queryCombinacionPeorPatron15m = new QueryCombinacionPeorPatron15m();
+		comP15m = queryCombinacionPeorPatron15m.obtenPeorCombinacion15m(fechaInicial, fechaFinal);
+		this.combinacionPeorPatron15m = comP15m;
+		return combinacionPeorPatron15m;
 	}
 
 	public void obtenResultadosTodosPatrones15mLargo () {
