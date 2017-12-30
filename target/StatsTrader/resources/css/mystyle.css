@@ -11,6 +11,12 @@
 	color: red;
 }
 
+/* color rojo y texto centrado para los mensajes de error */
+.errorCentered {
+	color: blue;
+	text-align: center;
+}
+
 /* fuente menor para la pagina de crear cuenta */
 
 .fuenteMenor {
