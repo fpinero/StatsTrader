@@ -42,7 +42,7 @@ public class WebApplicationInitializer implements org.springframework.web.WebApp
 					.buildSessionFactory();
 			
 		// inicialicemos el string de la version, luego en CheckParams hay un método que carga el objeto en thisVersionApp
-			GlobalVars.version = "0.6";
+			GlobalVars.version = "1.0";
 		}
 		
 		System.out.println("Variables globales inicializadas...");

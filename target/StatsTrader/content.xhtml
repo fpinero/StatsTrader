@@ -10,6 +10,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
 
 	<h:outputStylesheet library="css" name="mystyle.css" />
 	<title>StatsTrader</title>
@@ -17,9 +19,15 @@
 
 <h:body>
 
+	<h:outputScript library="js" name="common.js" target="body" />
+
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
+		
+		<!-- <f:event listener="#{estadisticasHelper.obtenResultadosTodosPatrones15mLargo()}"
+			type="preRenderView"></f:event> -->
+			
 	</f:metadata>
 
 	<p:layout fullPage="true" stateful="true" id="mainlayout">
@@ -58,22 +66,28 @@
 							icon="ui-icon-star" />
 						<p:menuitem value="Consulta Trades" outcome="consultaopes"
 							icon="ui-icon-star" />
-						<p:menuitem value="Estadísticas" outcome="content"
+						<p:menuitem value="Estadísticas" outcome="content" onclick="toggle('waitdiv');"
 							icon="ui-icon-star" />
 					</p:submenu>
 
 				</p:menu>
+				
+				<div id="waitdiv" align="center" style="display: none">
+							<p:graphicImage id="wait" library="images" name="waitarrows.gif" ></p:graphicImage>
+				</div>
 
 			</h:form>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<div align="center">
+			<!-- <div align="center"> -->
 				<h3 style="text-align: center; color: blue;">Consulta estadísticas generales</h3>
-			</div>
-			<h:form id="formEstadisticas">
-				<p:growl id="growl" showDetail="false" sticky="false"
-						autoUpdate="true" life="4500" />
+			<!-- </div> -->
+			
+			<h:form id="formEstadisticas" style="margin-top:0">
+				
+				<div id="rangofechas" style="display: block">
+				&nbsp;&nbsp;
 				<h:outputLabel for="fechaIni" value="Fecha Inicial: " />
 					<p:calendar id="fechaIni"
 						value="#{estadisticasHelper.fechaInicial}" pattern="dd-MM-yyyy"
@@ -87,71 +101,210 @@
 							
 					&nbsp;&nbsp;
 							
-					<p:commandButton value="Refrescar" update="panelEstadisticas" />  
-
-					<br /><br />
+					<p:commandButton value="Refrescar" onclick="toggle('rangofechas'); toggle('arrows');" 
+						oncomplete="toggle('rangofechas'); toggle('arrows');"
+						update="panelEstadisticas panelEstadisticas2 panelEstadisticas3 panelEstadisticas4 panelEstadisticas5" />  
+						
+				</div>
+					<br />
+				<div id="arrows" align="center" style="margin-top:0; display: none">
+							<p:graphicImage id="wait" library="images" name="Spinner.gif" ></p:graphicImage>
+				</div>
 				
 			</h:form>
 			
 
-			<p:panelGrid columns="2" id="panelEstadisticas">
-				<p:panel id="panel1left" header="Estadísticas">
-					<h:outputText value="Name:" />
-					<h:outputText value="Kobe Bryant" />
-
-					<h:outputText value="Team:" />
-					<h:outputText value="Los Angeles Lakers" />
-
-					<h:outputText value="Position:" />
-					<h:outputText value="Shooting Guard" />
-
-					<h:outputText value="Number:" />
-					<h:outputText value="24" />
-				</p:panel>
-				<!-- </div>
-				<div id="panel2" class="toTheRight"> -->
-				<p:panel id="panel2right" header="Ratio">
-					<h:outputText value="Name2:" />
-					<h:outputText value="Kobe Bryant2" />
-
-					<h:outputText value="Team2:" />
-					<h:outputText value="Los Angeles Lakers2" />
-
-					<h:outputText value="Position2:" />
-					<h:outputText value="Shooting Guard2" />
-
-					<h:outputText value="Number2:" />
-					<h:outputText value="242" />
-				</p:panel>
-			</p:panelGrid>
-			<p:panelGrid columns="2">
-				<p:panel id="panel3left" header="Patrones utilizados 15m largo">
-					<h:outputText value="Name3:" />
-					<h:outputText value="Kobe Bryant3" />
-
-					<h:outputText value="Team3:" />
-					<h:outputText value="Los Angeles Lakers3" />
-
-					<h:outputText value="Position3:" />
-					<h:outputText value="Shooting Guard3" />
-
-					<h:outputText value="Number3:" />
-					<h:outputText value="243" />
-				</p:panel>
-				<p:panel id="panel4right" header="Patrones utilizados 1m largo">
-					<h:outputText value="Name4:" />
-					<h:outputText value="Kobe Bryant4" />
-
-					<h:outputText value="Team4:" />
-					<h:outputText value="Los Angeles Lakers4" />
-
-					<h:outputText value="Position4:" />
-					<h:outputText value="Shooting Guard4" />
-
-					<h:outputText value="Number4:" />
-					<h:outputText value="244" />
+			<p:panelGrid columns="2" id="panelEstadisticas" columnClasses="no-border"  layout="grid">  
+				<p:panel id="panel1left" header="Estadísticas" styleClass="no-border">
+					<p:chart type="pie" model="#{estadisticasHelper.pieModel1}" style="width:350px;height:250px"  />  
 				</p:panel>
 				
+				<p:panel id="panel2right" header="Ratio" styleClass="no-border" >
+					<ui:param name="thisRatio" value="#{estadisticasHelper.traderRatio}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Ratio Real:</strong><h:outputText value="#{thisRatio.ratio}%" styleClass="negrita"/></span>
+						<span><strong>Total Trades Buenos:</strong><h:outputText value="#{thisRatio.opesBuenas}" styleClass="negrita"/></span>
+						<span><strong>Ratio <span style="color:red;">si</span> Sin Stops Evitables:</strong><h:outputText value="#{thisRatio.ratioSinStopsEvitables}%" styleClass="negrita"/></span>
+						<span><strong>Total Trades Stops:</strong><h:outputText value="#{thisRatio.opesStop}" styleClass="negrita"/></span>
+						<span><strong>Ratio <span style="color:red;">si</span> Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.ratioTodoAcordePlan}%" styleClass="negrita"/></span>
+						<span><strong>Total Trades B/E:</strong><h:outputText value="#{thisRatio.opesBe}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Stop No Evitable:</strong><h:outputText value="#{thisRatio.opesStopNoEvitable}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Buenos No Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesBuenasNoTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Stop Evitable:</strong><h:outputText value="#{thisRatio.opesStopEvitable}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Buenos Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesBuenasTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Total Trades No Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesNoTodoAcordePlan}" styleClass="negrita"/></span>
+						<span><strong>Total Trades Todo Acorde al Plan:</strong><h:outputText value="#{thisRatio.opesTodoAcordePlan}" styleClass="negrita"/></span>
+						
+					</h:panelGrid>
+				</p:panel>
+			</p:panelGrid>
+			<p:panelGrid columns="2" id="panelEstadisticas2" columnClasses="no-border" layout="grid">  
+				<p:panel id="panel3left" header="Patrones utilizados 15m largo" styleClass="no-border">
+					<p:dataTable id="p15ls" var="p15l"
+						value="#{estadisticasHelper.resultados15mLargo}" resizableColumns="true"
+						 >   <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
+						
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
+							<h:outputText value="#{p15l.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15l.vecesNegociado}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15l.numeroStops}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Buenas" width="13" styleClass="singleLine" >
+							<h:outputText value="#{p15l.numeroBuenas}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
+							<h:outputText value="#{p15l.numeroBe}" style="float:right"/>
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+				
+				<p:panel id="panel3Right" header="Patrones utilizados 15m Corto" styleClass="no-border">
+					<p:dataTable id="p15Cs" var="p15C"
+						value="#{estadisticasHelper.resultados15mCorto}" resizableColumns="true"
+						 >   <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
+						
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
+							<h:outputText value="#{p15C.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15C.vecesNegociado}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15C.numeroStops}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Buenas" width="13" styleClass="singleLine">
+							<h:outputText value="#{p15C.numeroBuenas}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
+							<h:outputText value="#{p15C.numeroBe}" style="float:right"/>
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+				
+			</p:panelGrid>
+			
+			<p:panelGrid columns="2" id="panelEstadisticas3" columnClasses="no-border" layout="grid">   
+				<p:panel id="panel4left" header="Patrones utilizados 1m largo" styleClass="no-border">
+					<p:dataTable id="p1ls" var="p1l"
+						value="#{estadisticasHelper.resultados1mLargo}" resizableColumns="true"
+						 >  <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
+						
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
+							<h:outputText value="#{p1l.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1l.vecesNegociado}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1l.numeroStops}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Buenas" width="13" styleClass="singleLine" >
+							<h:outputText value="#{p1l.numeroBuenas}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
+							<h:outputText value="#{p1l.numeroBe}" style="float:right"/>
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+				
+				<p:panel id="panel4Right" header="Patrones utilizados 1m Corto" styleClass="no-border">
+					<p:dataTable id="p1Cs" var="p1C"
+						value="#{estadisticasHelper.resultados1mCorto}" resizableColumns="true"
+						 >   <!-- scrollable="true" scrollWidth="95%" scrollHeight="100%" -->
+						
+						<p:column headerText="Patrón" width="35" styleClass="singleLine">
+							<h:outputText value="#{p1C.patron}" />
+						</p:column>
+						
+						<p:column headerText="Utilizado" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1C.vecesNegociado}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Stops" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1C.numeroStops}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="Buenas" width="13" styleClass="singleLine">
+							<h:outputText value="#{p1C.numeroBuenas}" style="float:right"/>
+						</p:column>
+						
+						<p:column headerText="B/E" width="7" styleClass="singleLine">
+							<h:outputText value="#{p1C.numeroBe}" style="float:right"/>
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+			</p:panelGrid>
+			<p:panelGrid columns="2" id="panelEstadisticas4" columnClasses="no-border"  layout="grid">  
+				<p:panel id="panel5left" header="Resultado por Side" styleClass="no-border" >
+					<ui:param name="thisRatioPorSide" value="#{estadisticasHelper.ratioPorSide}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Trades en Largo:</strong><h:outputText value="#{thisRatioPorSide.numeroOpesLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos Largos:</strong><h:outputText value="#{thisRatioPorSide.numeroBuenasLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades en Corto:</strong><h:outputText value="#{thisRatioPorSide.numeroOpesCorto}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos Cortos:</strong><h:outputText value="#{thisRatioPorSide.numeroBuenasCorto}" styleClass="negrita"/></span>
+						<span><strong>Ratio Trades Largo:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesLargo}%" styleClass="negrita"/></span>
+						<span><strong>Ratio Trades Corto:</strong><h:outputText value="#{thisRatioPorSide.ratioOpesCorto}%" styleClass="negrita"/></span>
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="panel5right" header="Estado Objetivos Mes Actual" styleClass="no-border" >
+					<ui:param name="thisEstadoObjetivos" value="#{estadisticasHelper.estadoActualObjetivos}"></ui:param> 
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Ratio a lograr:</strong><h:outputText value="75%" styleClass="negrita"/></span>
+						<span><strong>Ratio Actual:</strong><h:outputText value="#{thisEstadoObjetivos.ratioMes}%" styleClass="negrita"/></span>
+						<span><strong>Objetivo Semanal:</strong><h:outputText value="$#{thisTrader.obejtivoSemanal}" styleClass="negrita"/></span>
+						<span><strong>Objetivo Actual:</strong><h:outputText value="$#{thisEstadoObjetivos.netoSemana}" styleClass="negrita"/></span>
+						<span><strong>Objetivo Mensual:</strong><h:outputText value="$#{thisTrader.objetivoMensual}" styleClass="negrita"/></span>
+						<span><strong>Objetivo Actual:</strong><h:outputText value="$#{thisEstadoObjetivos.netoMes}" styleClass="negrita"/></span>
+					</h:panelGrid>
+				</p:panel>
+			</p:panelGrid>
+			<p:panelGrid columns="2" id="panelEstadisticas5" columnClasses="no-border"  layout="grid">  
+				<p:panel id="panel6left" header="Combinación Patrón 15m/1m con mejor ratio" styleClass="no-border" >
+					<ui:param name="thisMejorCombinacion" value="#{estadisticasHelper.combinacionMejorPatron15m}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Patrón 15m Largo:</strong><h:outputText value="#{thisMejorCombinacion.patron15mLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos:</strong><h:outputText value="#{thisMejorCombinacion.numeroOpesBuenasLargo}" styleClass="negrita"/></span>
+						<span><strong>Patrón 1m Largo:</strong><h:outputText value="#{thisMejorCombinacion.patron1mLargo}" styleClass="negrita"/></span>
+						<span><strong>Veces Usado:</strong><h:outputText value="#{thisMejorCombinacion.numeroVecesNegociadoLargo}" styleClass="negrita"/></span>
+						<span><strong>Patrón 15m Corto:</strong><h:outputText value="#{thisMejorCombinacion.patron15mCorto}" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos:</strong><h:outputText value="#{thisMejorCombinacion.numeroOpesBuenasCorto}" styleClass="negrita"/></span>
+						<span><strong>Patrón 1m Corto:</strong><h:outputText value="#{thisMejorCombinacion.patron1mCorto}" styleClass="negrita"/></span>
+						<span><strong>Veces Usado:</strong><h:outputText value="#{thisMejorCombinacion.numeroVecesNegociadoCorto}" styleClass="negrita"/></span>
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="panel6right" header="Combinación Patrón 15m/1m con peor ratio" styleClass="no-border" >
+					<ui:param name="thisPeorCombinacion" value="#{estadisticasHelper.combinacionPeorPatron15m}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Patrón 15m Largo:</strong><h:outputText value="#{thisPeorCombinacion.patron15mLargo}" styleClass="negrita"/></span>
+						<span><strong>Trades Stops:</strong><h:outputText value="#{thisPeorCombinacion.numeroOpesStopsLargo}" styleClass="negrita"/></span>
+						<span><strong>Patrón 1m Largo:</strong><h:outputText value="#{thisPeorCombinacion.patron1mLargo}" styleClass="negrita"/></span>
+						<span><strong>Veces Usado:</strong><h:outputText value="#{thisPeorCombinacion.numeroVecesNegociadoLargo}" styleClass="negrita"/></span>
+						<span><strong>Patrón 15m Corto:</strong><h:outputText value="#{thisPeorCombinacion.patron15mCorto}" styleClass="negrita"/></span>
+						<span><strong>Trades Stops:</strong><h:outputText value="#{thisPeorCombinacion.numeroOpesStopsCorto}" styleClass="negrita"/></span>
+						<span><strong>Patrón 1m Corto:</strong><h:outputText value="#{thisPeorCombinacion.patron1mCorto}" styleClass="negrita"/></span>
+						<span><strong>Veces Usado:</strong><h:outputText value="#{thisPeorCombinacion.numeroVecesNegociadoCorto}" styleClass="negrita"/></span>
+					</h:panelGrid>
+				</p:panel>
 			</p:panelGrid>
 
 

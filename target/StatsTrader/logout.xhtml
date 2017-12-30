@@ -10,12 +10,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
 
 	<h:outputStylesheet library="css" name="mystyle.css" />
 	<title>StatsTrader</title>
 </h:head>
 
 <h:body>
+
+	<h:outputScript library="js" name="common.js" target="body" />
 
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
@@ -57,11 +61,15 @@
 							icon="ui-icon-star" />
 						<p:menuitem value="Consulta Trades" outcome="consultaopes"
 							icon="ui-icon-star" />
-						<p:menuitem value="Estadísticas" outcome="content"
+						<p:menuitem value="Estadísticas" outcome="content" onclick="toggle('waitdiv');"
 							icon="ui-icon-star" />
 					</p:submenu>
 
 				</p:menu>
+				
+				<div id="waitdiv" align="center" style="display: none">
+							<p:graphicImage id="wait" library="images" name="waitarrows.gif" ></p:graphicImage>
+				</div>
 
 			</h:form>
 		</p:layoutUnit>
@@ -76,7 +84,7 @@
 						<h:outputText value="¿Desea cerrar la sesión?" />
 					</p:panelGrid>
 					<br />
-					<div align="center">
+					<div id="sinobuttons" align="center" style="display: block">
 						<p:commandButton value="Sí" action="#{cerrarSesion.cierraSesion}" />
 						<!-- Al final lo hago injectando el bean trader en cerrarsesion (es mas fino) -->
 							 <!-- actionListener="#{trader.destruyeThisTrader}" />  -->
@@ -90,17 +98,20 @@
 						</p:commandButton>	 -->
 						
 						&nbsp;&nbsp;
-						<p:commandButton value="No" action="#{cerrarSesion.noCierraSesion}" />
+						<p:commandButton value="No" action="#{cerrarSesion.noCierraSesion}" onclick="toggle('sinobuttons'); toggle('arrows');" />
 						<br /> <br />
 
 					</div> 
+					<div id="arrows" align="center" style="display: none">
+							<p:graphicImage id="wait" library="images" name="waitarrows.gif" ></p:graphicImage>
+						</div>
 				</h:form>
 			</p:panelGrid>
 
 		</p:layoutUnit>
 
 	</p:layout>
-
+	
 </h:body>
 
 

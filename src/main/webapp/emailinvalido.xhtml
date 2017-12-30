@@ -71,15 +71,23 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<h:outputText value="#{trader.textoErrorEmailInvalido}"
-				styleClass="error" />
-			<br /> <br />
-			<h:outputText
-				value="Por favor pulse el botón retroceder y modifique dicho campo"
-				styleClass="error" />
-			<br />
-			<br />
-			<button onclick="window.history.back();">Retroceder</button>
+		<br/><br/>
+			<p:panelGrid columns="1" styleClass="panelGridCenter">
+				<h:outputText value="#{trader.textoErrorEmailInvalido}"
+					styleClass="error" />
+			</p:panelGrid>
+			<br/>
+			<p:panelGrid columns="1" styleClass="panelGridCenter">
+				<h:outputText
+					value="Por favor pulse el botón retroceder y modifique dicho campo"
+					styleClass="errorCentered" />
+			</p:panelGrid>
+				<br />
+				<br />
+				<div align="center">
+					<button onclick="window.history.back();">Retroceder</button>
+				</div>
+			
 
 		</p:layoutUnit>
 

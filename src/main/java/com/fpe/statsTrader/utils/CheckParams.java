@@ -63,6 +63,9 @@ public class CheckParams {
 			System.out.println(">>>>> Comprobando si thisTrader existe en checkTraderCorrectamenteCreado");
 			Trader thisTrader = (Trader) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("thisTrader");
 			if (thisTrader != null) {
+				//enviemos un email a fpinero@quierosertrader.com de que una nueva cuenta ha sido creada
+				enviaAvisonuevaCtaCreadaEnStatsTrader(thisTrader.getNombre(), thisTrader.getUser(), thisTrader.getEmail());
+				
 				System.out.println("thisTrader no es null.. \n" + thisTrader.toString() + "\n" + 
 							"Procedemos a establecerlo a null");
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("thisTrader", null);
@@ -91,6 +94,24 @@ public class CheckParams {
 			} else {
 				return "content?faces-redirect=true";
 			}
+		}
+		
+		private void enviaAvisonuevaCtaCreadaEnStatsTrader(String nombre, String user, String email) {
+			
+			System.out.println("Enviando email de aviso de nueva cuenta de usuario creada en StatsTrader...");
+			
+			try {
+				SimpleMail sendEmail = new SimpleMail();
+				String textoEmail = "Se ha creado una nueva cuenta en StatsTrader \n\n" + "Nombre: " + nombre + "\n\n"
+	                    + "User:" + user + "\n\n" + "Email: " + email;
+				System.out.println("Texto mensaje:\n" + textoEmail);
+				sendEmail.send("fpinero@quierosertrader.com", "StatsTrader nueva cuenta creada.", textoEmail);	
+				System.out.println("email enviado...");
+				
+			} catch (Exception e) {
+				System.out.println("Excepción enviando codigo nueva cuenta creada en StatsTrader \n " + e);
+			}
+			
 		}
 		
 		public void showMessage() {

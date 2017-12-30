@@ -10,12 +10,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
 
 	<h:outputStylesheet library="css" name="mystyle.css" />
 	<title>Login StatsTrader</title>
 </h:head>
 
 <h:body>
+
+	<h:outputScript library="js" name="common.js" target="body" />
 
 	<!-- Solo debe estar aquí si el objeto Trader NO existe, si existe se le reenvía a modificarcuenta -->
 	<f:metadata>
@@ -70,7 +74,7 @@
 
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 					<h:form>
-						<p:growl id="growl" showDetail="false" sticky="true" autoUpdate="true"/>
+						<p:growl id="growl" showDetail="false" life="3500" autoUpdate="true"/>
 						<h3 style="text-align: center; color: blue;">Login Usuario</h3>
 						<p:panelGrid columns="2" id="grid" styleClass="panelGridCenter">
 							<h:outputLabel for="idUser" value="User: " />
@@ -89,13 +93,19 @@
 
 						</p:panelGrid>
 						<br />
-						<div align="center">
-							<p:commandButton value="Iniciar Sesión" id="ajax" update="growl" 
-							 action="#{checkLogin.compruebaCredenciales}" />
+						<div id="loginbutton" align="center" style="display: block">
+							<p:commandButton value="Iniciar Sesión" id="ajax" 
+							 action="#{checkLogin.compruebaCredenciales}"  ajax="false"
+							 onclick="toggle('loginbutton'); toggle('waitdiv');" oncomplete="toggle('loginbutton'); toggle('waitdiv');" 
+							 >
+							 </p:commandButton>
 							<br /> <br />
 							<p:link style="font-size: 12px; color:blue;"
 								value="Olvidé la contraseña" outcome="recuperarpwd" />
 							<br /> <br />
+						</div>
+						<div id="waitdiv" align="center" style="display: none">
+							<p:graphicImage id="wait" library="images" name="waitarrows.gif" ></p:graphicImage>
 						</div>
 					</h:form>
 			</p:panelGrid>

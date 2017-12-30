@@ -200,7 +200,7 @@ public class QueryCombinacionMejorPatron15m {
 			}
 		}
 		
-		System.out.println("Patron bueno 15m " + patron + " utilizado " + n + " veces");
+//		System.out.println("Patron bueno 15m " + patron + " utilizado " + n + " veces");
 		return n;
 	}
 	
