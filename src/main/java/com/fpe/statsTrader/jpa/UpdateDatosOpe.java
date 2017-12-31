@@ -4,18 +4,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import org.hibernate.Session;
-import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.TradersOpes;
 
-@Component
-@ManagedBean
-@SessionScoped
+//@Component
+//@ManagedBean
+//@SessionScoped
 public class UpdateDatosOpe {
 	
 	//retorna true si todo va bien

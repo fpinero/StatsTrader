@@ -1,15 +1,14 @@
 package com.fpe.statsTrader.utils;
 
 import javax.faces.bean.ManagedBean;
-
-import org.springframework.context.annotation.ComponentScan;
+import javax.faces.bean.RequestScoped;
 
 import com.fpe.statsTrader.jpa.QueryEmailYaEnUso;
 import com.fpe.statsTrader.jpa.QueryForbidenDomains;
 import com.fpe.statsTrader.jpa.QueryNombreUsuarioYaEnUso;
 
-@ComponentScan
 @ManagedBean
+@RequestScoped
 public class IsValidEmail {
 	
 	public IsValidEmail() {

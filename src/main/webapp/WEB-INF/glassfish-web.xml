@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glassfish-web-app>
+     <class-loader delegate="false"/>
+     <jsp-config> 
+            <property name="compilerSourceVM" value="1.8"/> 
+            <property name="compilerTargetVM" value="1.8"/> 
+    </jsp-config>
+</glassfish-web-app>

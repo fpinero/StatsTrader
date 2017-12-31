@@ -5,11 +5,9 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.jpa.QueryPieOpes;
 
-@Component
+//@Component
 @SessionScoped
 @ManagedBean
 public class PieOpes {

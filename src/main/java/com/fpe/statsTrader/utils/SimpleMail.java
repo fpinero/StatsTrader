@@ -1,18 +1,20 @@
 package com.fpe.statsTrader.utils;
 
-import javax.faces.bean.ManagedBean;
-import javax.mail.*;
-import javax.mail.internet.*;
-
-import org.springframework.stereotype.Component;
-
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-
 import java.util.Properties;
 
-@Component
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+//@Component
 @ManagedBean
+@RequestScoped
 public class SimpleMail {
 
     private static final String SMTP_HOST_NAME = "mail.n0-reply.com";

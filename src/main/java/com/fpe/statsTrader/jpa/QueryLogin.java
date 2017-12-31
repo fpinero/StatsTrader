@@ -2,20 +2,16 @@ package com.fpe.statsTrader.jpa;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
-import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.Trader;
 
-@Component
-@ManagedBean
-@SessionScoped
+//@Component
+//@ManagedBean
+//@SessionScoped
 public class QueryLogin {
 	
 //	@ManagedProperty(value="trader")

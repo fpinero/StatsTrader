@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.TradersOpes;
 
-@Component
+//@Component
 @ManagedBean
 @SessionScoped
 public class DeleteTradersOpe {

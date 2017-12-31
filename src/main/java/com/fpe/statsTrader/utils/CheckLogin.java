@@ -1,20 +1,26 @@
 package com.fpe.statsTrader.utils;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.jpa.QueryLogin;
 import com.fpe.statsTrader.jpa.QueryNombreUsuario;
 
-@ManagedBean
-@Component
+
+//@Component
 @SessionScoped
-public class CheckLogin {
+@ManagedBean
+public class CheckLogin implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4724288827743122899L;
+
 	private String user;
 	
 	private String pwd;

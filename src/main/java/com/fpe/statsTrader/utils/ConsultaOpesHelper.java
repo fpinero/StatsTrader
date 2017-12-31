@@ -12,14 +12,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.entity.Trader;
 import com.fpe.statsTrader.entity.TradersOpes;
 import com.fpe.statsTrader.jpa.QueryListaOpesTrader;
 
 @ManagedBean
-@Component
+//@Component
 @ViewScoped
 public class ConsultaOpesHelper {
 	

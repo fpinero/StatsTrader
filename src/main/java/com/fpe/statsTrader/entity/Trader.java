@@ -2,6 +2,7 @@ package com.fpe.statsTrader.entity;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -20,8 +21,13 @@ import com.fpe.statsTrader.utils.IsValidEmail;
 @Table(name="trader")
 @SessionScoped
 @ManagedBean
-public class Trader {
+public class Trader implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4943463358467496013L;
+
 	// annotate the class as an entity and map to db table
 	
 	// define fields

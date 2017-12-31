@@ -1,5 +1,7 @@
 package com.fpe.statsTrader.entity;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
@@ -13,7 +15,12 @@ import javax.persistence.Table;
 @Table(name="forbidendomains")
 @ManagedBean
 @SessionScoped
-public class ForbidenDomains {
+public class ForbidenDomains implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2422277159001230684L;
 
 	// annotate the class as an entity and map to db table
 	

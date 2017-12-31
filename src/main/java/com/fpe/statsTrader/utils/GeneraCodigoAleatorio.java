@@ -1,19 +1,23 @@
 package com.fpe.statsTrader.utils;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.jpa.CreaCuentaTraderVerificado;
 
-@Component
+//@Component
 @ManagedBean
 @SessionScoped
-public class GeneraCodigoAleatorio {
+public class GeneraCodigoAleatorio implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4300932733619303547L;
 	private String codigoVerificacion;
 	private boolean rendered = false;
 	

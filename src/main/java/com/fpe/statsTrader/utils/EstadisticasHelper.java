@@ -1,5 +1,6 @@
 package com.fpe.statsTrader.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,16 +14,19 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.PieChartModel;
-import org.springframework.stereotype.Component;
 
 import com.fpe.statsTrader.jpa.QueryCombinacionMejorPatron15m;
 import com.fpe.statsTrader.jpa.QueryCombinacionPeorPatron15m;
 
-@Component
+//@Component
 @SessionScoped
 @ManagedBean
-public class EstadisticasHelper {
+public class EstadisticasHelper implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2816122661508564512L;
 	private Calendar fechaHoy;
 	private Date fechaInicial;
 	private Date fechaFinal;

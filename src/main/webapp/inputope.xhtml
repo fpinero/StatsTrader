@@ -145,7 +145,7 @@
 						<h:outputLabel for="idBruto" value="Resultado Bruto: " />
 						<p:inputText id="idBruto" value="#{tradersOpes.brutoOpe}"
 							label="Resultado Bruto" required="true"
-							placeholder="usa la coma para decimales" styleClass="placeHolder">
+							placeholder="usa el punto para decimales" styleClass="placeHolder">
 							<f:convertNumber pattern="#,##0.00" />
 							<f:validateDoubleRange minimum="-999999" maximum="9999999" />
 						</p:inputText>
@@ -153,7 +153,7 @@
 						<h:outputLabel for="idNeto" value="Resultado Neto: " />
 						<p:inputText id="idNeto" value="#{tradersOpes.netoOpe}"
 							label="Resultado Neto" required="true"
-							placeholder="usa la coma para decimales" styleClass="placeHolder">
+							placeholder="usa el punto para decimales" styleClass="placeHolder">
 							<f:convertNumber pattern="#,##0.00" />
 							<f:validateDoubleRange minimum="-999999" maximum="9999999" />
 						</p:inputText>

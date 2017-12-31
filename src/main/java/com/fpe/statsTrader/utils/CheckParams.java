@@ -1,21 +1,26 @@
 package com.fpe.statsTrader.utils;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.Trader;
 
 @SessionScoped
 @ManagedBean
-@Component
-public class CheckParams {
+//@Component
+public class CheckParams implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Trader thisTrader;
 	
 	@ManagedProperty(value="#{trader}")

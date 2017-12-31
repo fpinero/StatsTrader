@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.Trader;
 
-@Component
+//@Component
 @ManagedBean
 @SessionScoped
 public class CreaCuentaTraderVerificado {

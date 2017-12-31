@@ -1,15 +1,19 @@
 package com.fpe.statsTrader.utils;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.springframework.stereotype.Component;
-
 @ManagedBean
-@Component
+//@Component
 @SessionScoped
-public class VersionApp {
+public class VersionApp implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6914085008597835321L;
 	private String versionApp;
 	
 	public VersionApp() {

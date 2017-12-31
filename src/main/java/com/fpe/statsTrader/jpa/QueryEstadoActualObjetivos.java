@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.faces.context.FacesContext;
 
@@ -38,10 +39,23 @@ public class QueryEstadoActualObjetivos {
 		fechaHoy = fechaNow.getTime();
 		
 		//Obtengamos el Lunes de esta semana
-		fechaNow = GregorianCalendar.getInstance();
-		while (fechaNow.get(Calendar.DAY_OF_WEEK) > fechaNow.getFirstDayOfWeek()) {
+		Locale locale = new Locale("Europe/Madrid");
+		fechaNow = GregorianCalendar.getInstance(locale);
+		Locale.setDefault(locale);
+		fechaNow.setFirstDayOfWeek(2); //monday
+//		System.out.println(Locale.getDefault() + ": " + fechaNow.getFirstDayOfWeek());
+//		System.out.println("Calendar.DAY_OF_WEEK" + ": " + Calendar.DAY_OF_WEEK);
+//		System.out.println("fechaNow.get(Calendar.DAY_OF_WEEK)" + ":" +fechaNow.get(Calendar.DAY_OF_WEEK)) ;
+		while (fechaNow.get(Calendar.DAY_OF_WEEK) != fechaNow.getFirstDayOfWeek()) { 
 			fechaNow.add(Calendar.DATE, -1); // Substract 1 day until first day of week.
+//			System.out.println("restando 1 dia a la semana..." + fechaNow.getTime());
 		}
+		
+		/*while (fechaNow.get(Calendar.DAY_OF_WEEK) > fechaNow.getFirstDayOfWeek()) { 
+			fechaNow.add(Calendar.DATE, -1); // Substract 1 day until first day of week.
+			System.out.println("restando 1 dia a la semana..." + fechaNow.getTime());
+		}*/
+		 
 		
 		fechaLunesEstaSemana = fechaNow.getTime();
 		System.out.println("++++++++++++++++++++++++++++++++++++++++");

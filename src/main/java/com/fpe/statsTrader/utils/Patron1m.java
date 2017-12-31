@@ -5,11 +5,9 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.jpa.QueryEstadisticas1m;
 
-@Component
+//@Component
 @ManagedBean
 @SessionScoped
 public class Patron1m {

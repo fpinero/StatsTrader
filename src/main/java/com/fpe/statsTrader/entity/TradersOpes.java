@@ -1,5 +1,6 @@
 package com.fpe.statsTrader.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ import com.fpe.statsTrader.jpa.UpdateDatosOpe;
 @Table(name = "traders_opes")
 @SessionScoped
 @ManagedBean
-public class TradersOpes {
+public class TradersOpes implements Serializable{
 
 	// annotate the class as an entity and map to db table
 
@@ -40,6 +41,11 @@ public class TradersOpes {
 	// genterate getter/seeters methods
 
 	// generate toString method
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 449080050224055599L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

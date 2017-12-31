@@ -1,21 +1,25 @@
 package com.fpe.statsTrader.utils;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.entity.Trader;
 import com.fpe.statsTrader.jpa.UpdateDatosCuentaTrader;
 
-@Component
+//@Component
 @ManagedBean
 @SessionScoped
-public class ModificaTrader {
+public class ModificaTrader implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7471867681769525337L;
 	@ManagedProperty(value="#{trader}")
 	Trader thisTrader;
 	

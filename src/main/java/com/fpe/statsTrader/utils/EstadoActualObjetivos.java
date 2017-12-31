@@ -3,11 +3,9 @@ package com.fpe.statsTrader.utils;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.springframework.stereotype.Component;
-
 import com.fpe.statsTrader.jpa.QueryEstadoActualObjetivos;
 
-@Component
+//@Component
 @ManagedBean
 @SessionScoped
 public class EstadoActualObjetivos {
