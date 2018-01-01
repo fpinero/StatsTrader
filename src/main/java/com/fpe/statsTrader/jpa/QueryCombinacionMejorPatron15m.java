@@ -173,7 +173,9 @@ public class QueryCombinacionMejorPatron15m {
 		} catch (Exception e) {
 			System.out.println("Excepción en obtenMejorCombinacion15m \n" + e);
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		beanCombinacionMejorPatron15m.setPatron15mLargo(patron15mLargo);
 		beanCombinacionMejorPatron15m.setPatron1mLargo(patron1mLargo);

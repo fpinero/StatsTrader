@@ -41,7 +41,9 @@ public class QueryEmailYaEnUso {
 		} catch (Exception e) {
 			System.out.println("Excepción en QueryEmailYaEnUso \n" + e.getMessage());
 			return true;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		return NombreEnUso;
 		

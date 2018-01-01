@@ -45,7 +45,9 @@ public class UpdateDatosOpe {
 		
 		}catch (Exception e) {
 			System.out.println("Excepción actualizando operación en la BD updateTraderOpe \n" + e.getMessage());
-		}
+		}finally{
+	        session.close();
+	    }
 	
 		return actualizacionExitosa;
 		

@@ -77,7 +77,9 @@ public class QueryEstadisticas1m {
 		} catch (Exception e) {
 			System.out.println("Excepción en obtenDatosDeStse1m \n" + e);
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		System.out.println("QueryEstadisticas1m " + side + " patronNegociado=" + patronNegociado);
 		System.out.println("QueryEstadisticas1m " + side + "  numeroBuenas=" + numeroBuenas);

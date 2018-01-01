@@ -187,7 +187,9 @@ public class QueryTraderRatio {
 		} catch (Exception e) {
 			System.out.println("Excepción en obtenRatio \n" + e);
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		DecimalFormat df = new DecimalFormat();
 		df.setMaximumFractionDigits(2);

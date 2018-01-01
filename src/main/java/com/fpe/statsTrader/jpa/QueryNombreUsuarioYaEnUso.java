@@ -41,7 +41,9 @@ public class QueryNombreUsuarioYaEnUso {
 		} catch (Exception e) {
 			System.out.println("Excepción en QueryNombreUsuarioYaEnUso \n" + e.getMessage());
 			return true;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		return NombreEnUso;
 		

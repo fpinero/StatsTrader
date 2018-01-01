@@ -45,7 +45,9 @@ public class QueryForbidenDomains {
 		} catch (Exception e) {
 			System.out.println("Excepción en QueryForbidenDomians \n" + e.getMessage());
 			return true;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		return disposalDomainPresent;
 		

@@ -53,7 +53,9 @@ public class QueryNombreUsuario {
 		} catch (Exception e) {
 			System.out.println("Excepción en QueryNombreUsuario \n" + e.getMessage());
 			return false;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		return usuarioExiste;
 		

@@ -36,7 +36,9 @@ public class UpdateDatosCuentaTrader {
 		
 		}catch (Exception e) {
 			System.out.println("Excepción actualizando trader en la BD UpdateDatosCuentaTrader \n" + e.getMessage());
-		}
+		}finally{
+	        session.close();
+	    }
 	
 		return actualizacionExitosa;
 		

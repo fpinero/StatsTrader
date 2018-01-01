@@ -50,7 +50,9 @@ public class QueryListaOpesTrader {
 		} catch (Exception e) {
 			System.out.println("Excepción en getTradersOpes \n" + e.getMessage());
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		return thisTradersOpes;
 		

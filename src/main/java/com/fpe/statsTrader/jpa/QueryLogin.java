@@ -66,8 +66,11 @@ public class QueryLogin {
 			
 		} catch (Exception e) {
 			System.out.println("Excepción en isUserPwdCorrecto \n" + e.getMessage());
-			return false;
-		}
+			
+		} finally{
+	        session.close();
+	    }
+		
 		
 		return credencialesValidas;
 		

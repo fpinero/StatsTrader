@@ -47,7 +47,9 @@ public class InsertaTraderOpe {
 		
 		}catch (Exception e) {
 			System.out.println("Excepción salvando trader a la BD \n" + e.getMessage());
-		}
+		}finally{
+	        session.close();
+	    }
 	
 		return exito;
 	}

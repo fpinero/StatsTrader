@@ -83,7 +83,9 @@ public class QueryRatioSideCortos {
 		} catch (Exception e) {
 			System.out.println("Excepción en obtenRatioSideOpesCortos \n" + e);
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		//calculemos el ratio
 		//(numeroBuenasCorto * 100) / numeroOpesCorto

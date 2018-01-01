@@ -96,7 +96,9 @@ public class QueryPieOpes {
 		} catch (Exception e) {
 			System.out.println("Excepción en buscaOPesBMB \n" + e);
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		beanPie.setOpesBuenas(opesBuenas);
 		beanPie.setOpesMalas(opesMalas);

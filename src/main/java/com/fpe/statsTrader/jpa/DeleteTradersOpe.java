@@ -36,7 +36,9 @@ public class DeleteTradersOpe {
 		
 		}catch (Exception e) {
 			System.out.println("Excepción elinando operacion en la BD deleteOpe \n" + e.getMessage());
-		}
+		}finally{
+	        session.close();
+	    }
 	
 		return eliminacionExitosa;
 		

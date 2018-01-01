@@ -83,7 +83,9 @@ public class QueryRatioSideLargos {
 		} catch (Exception e) {
 			System.out.println("Excepción en obtenRatioSideOpesLargo \n" + e);
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		//calculemos el ratio
 		//(numeroBuenasLargo * 100) / numeroOpesLargo

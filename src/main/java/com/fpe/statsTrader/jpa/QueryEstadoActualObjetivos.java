@@ -146,7 +146,9 @@ public class QueryEstadoActualObjetivos {
 		} catch (Exception e) {
 			System.out.println("Excepción en obtenEstadoActualObjetivos \n" + e);
 			return null;
-		}
+		}finally{
+	        session.close();
+	    }
 		
 		
 		
