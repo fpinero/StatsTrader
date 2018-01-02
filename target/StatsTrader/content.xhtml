@@ -106,7 +106,8 @@
 							
 					<p:commandButton value="Refrescar" onclick="toggle('rangofechas'); toggle('arrows');" 
 						oncomplete="toggle('rangofechas'); toggle('arrows');"
-						update="panelEstadisticas panelEstadisticas2 panelEstadisticas3 panelEstadisticas4 panelEstadisticas5" />  
+						update="panelEstadisticas panelEstadisticas2 panelEstadisticas3 
+							panelEstadisticas4 panelEstadisticas5 panelEstadisticas6" />  
 						
 				</div>
 					<br />
@@ -306,6 +307,34 @@
 						<span><strong>Trades Stops:</strong><h:outputText value="#{thisPeorCombinacion.numeroOpesStopsCorto}" styleClass="negrita"/></span>
 						<span><strong>Patrón 1m Corto:</strong><h:outputText value="#{thisPeorCombinacion.patron1mCorto}" styleClass="negrita"/></span>
 						<span><strong>Veces Usado:</strong><h:outputText value="#{thisPeorCombinacion.numeroVecesNegociadoCorto}" styleClass="negrita"/></span>
+					</h:panelGrid>
+				</p:panel>
+			</p:panelGrid>
+			<p:panelGrid columns="2" id="panelEstadisticas6" columnClasses="no-border"  layout="grid">  
+				<p:panel id="panel7left" header="Resultados Trades de 5c o menos" styleClass="no-border" >
+					<ui:param name="thisRatioMenor6c" value="#{estadisticasHelper.ratioOpesMenor6c}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Número Trades:</strong><h:outputText value="#{thisRatioMenor6c.numeroTrades}" styleClass="negrita"/></span>
+						<span><strong>Ratio:</strong><h:outputText value="#{thisRatioMenor6c.ratio}%" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos:</strong><h:outputText value="#{thisRatioMenor6c.tradesBuenos}" styleClass="negrita"/></span>
+						<span><strong>Trades Stops:</strong><h:outputText value="#{thisRatioMenor6c.tradesStops}" styleClass="negrita"/></span>
+						<span><strong>Trades en Largo:</strong><h:outputText value="#{thisRatioMenor6c.tradesLargos}" styleClass="negrita"/></span>
+						<span><strong>Trades en Corto:</strong><h:outputText value="#{thisRatioMenor6c.tradesCortos}" styleClass="negrita"/></span>
+						<span><strong>Bruto Generado:</strong><h:outputText value="$#{thisRatioMenor6c.brutoGenerado}" styleClass="negrita"/></span>
+						<span><strong>Neto Generado:</strong><h:outputText value="$#{thisRatioMenor6c.netoGenerado}" styleClass="negrita"/></span>
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="panel7right" header="Resultados Trades de mas de 5c" styleClass="no-border" >
+					<ui:param name="thisRatioMayor5c" value="#{estadisticasHelper.ratioOpesMayor5c}"></ui:param>
+					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
+						<span><strong>Número Trades:</strong><h:outputText value="#{thisRatioMayor5c.numeroTrades}" styleClass="negrita"/></span>
+						<span><strong>Ratio:</strong><h:outputText value="#{thisRatioMayor5c.ratio}%" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos:</strong><h:outputText value="#{thisRatioMayor5c.tradesBuenos}" styleClass="negrita"/></span>
+						<span><strong>Trades Stops:</strong><h:outputText value="#{thisRatioMayor5c.tradesStops}" styleClass="negrita"/></span>
+						<span><strong>Trades en Largo:</strong><h:outputText value="#{thisRatioMayor5c.tradesLargos}" styleClass="negrita"/></span>
+						<span><strong>Trades en Corto:</strong><h:outputText value="#{thisRatioMayor5c.tradesCortos}" styleClass="negrita"/></span>
+						<span><strong>Bruto Generado:</strong><h:outputText value="$#{thisRatioMayor5c.brutoGenerado}" styleClass="negrita"/></span>
+						<span><strong>Neto Generado:</strong><h:outputText value="$#{thisRatioMayor5c.netoGenerado}" styleClass="negrita"/></span>
 					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>

@@ -4,6 +4,7 @@ com/fpe/statsTrader/utils/RatioSideCorto.class
 com/fpe/statsTrader/jpa/QueryEmailYaEnUso.class
 com/fpe/statsTrader/utils/CheckLogin.class
 com/fpe/statsTrader/entity/ForbidenDomains.class
+com/fpe/statsTrader/utils/RatioOpesMayor5c.class
 com/fpe/statsTrader/utils/CerrarSesion.class
 com/fpe/statsTrader/utils/ConsultaOpesHelper.class
 com/fpe/statsTrader/jpa/QueryNombreUsuario.class
@@ -13,6 +14,7 @@ com/fpe/statsTrader/utils/ModificaTrader.class
 com/fpe/statsTrader/jpa/QueryLogin.class
 com/fpe/statsTrader/jpa/QueryEstadisticas1m.class
 com/fpe/statsTrader/utils/SimpleMail$1.class
+com/fpe/statsTrader/utils/MensajeRecopilandoDatos.class
 com/fpe/statsTrader/utils/SimpleMail.class
 com/fpe/statsTrader/utils/Patron1m.class
 com/fpe/statsTrader/utils/TraderRatio.class
@@ -21,6 +23,7 @@ com/fpe/statsTrader/utils/EstadisticasHelper.class
 com/fpe/statsTrader/jpa/QueryListaOpesTrader.class
 com/fpe/statsTrader/jpa/DeleteTradersOpe.class
 com/fpe/statsTrader/WebApplicationInitializer.class
+com/fpe/statsTrader/utils/RatioOpesMenor6c.class
 com/fpe/statsTrader/utils/VersionApp.class
 com/fpe/statsTrader/utils/RatioSideLargo.class
 com/fpe/statsTrader/jpa/QueryRatioSideLargos.class
@@ -34,6 +37,8 @@ com/fpe/statsTrader/jpa/QueryForbidenDomains.class
 com/fpe/statsTrader/jpa/UpdateDatosOpe.class
 com/fpe/statsTrader/utils/CombinacionPeorPatron15m.class
 com/fpe/statsTrader/jpa/UpdateDatosCuentaTrader.class
+com/fpe/statsTrader/jpa/QueryRatioOpesMenor6c.class
+com/fpe/statsTrader/jpa/QueryRatioOpesMayor5c.class
 com/fpe/statsTrader/entity/Trader.class
 com/fpe/statsTrader/jpa/CreaCuentaTraderVerificado.class
 com/fpe/statsTrader/jpa/QueryNombreUsuarioYaEnUso.class
