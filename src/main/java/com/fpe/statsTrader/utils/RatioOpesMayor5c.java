@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.fpe.statsTrader.jpa.QueryRatioOpesMayor5c;
-import com.fpe.statsTrader.jpa.QueryRatioOpesMenor6c;
 
 @ManagedBean
 @RequestScoped
@@ -27,6 +26,8 @@ public class RatioOpesMayor5c implements Serializable {
 	private int tradesStops;
 	private int tradesLargos;
 	private int tradesCortos;
+	private double brutoGenerado;
+	private double netoGenerado;
 	
 	public RatioOpesMayor5c() {
 		
@@ -80,6 +81,22 @@ public class RatioOpesMayor5c implements Serializable {
 		this.tradesCortos = tradesCortos;
 	}
 	
+	public double getBrutoGenerado() {
+		return brutoGenerado;
+	}
+
+	public void setBrutoGenerado(double brutoGenerado) {
+		this.brutoGenerado = brutoGenerado;
+	}
+
+	public double getNetoGenerado() {
+		return netoGenerado;
+	}
+
+	public void setNetoGenerado(double netoGenerado) {
+		this.netoGenerado = netoGenerado;
+	}
+
 	public RatioOpesMayor5c obtenRatioOpesMayor5c(Date desdeFecha, Date hastaFecha) {
 		
 		//llama a la query que busca las operaciones menores de 6c dado el rango de fechas especificado
@@ -93,6 +110,8 @@ public class RatioOpesMayor5c implements Serializable {
 		this.tradesStops = tmpRatioOpesmayor5c.getTradesStops();
 		this.tradesLargos = tmpRatioOpesmayor5c.getTradesLargos();
 		this.tradesCortos = tmpRatioOpesmayor5c.getTradesCortos();
+		this.brutoGenerado = tmpRatioOpesmayor5c.getBrutoGenerado();
+		this.netoGenerado = tmpRatioOpesmayor5c.getNetoGenerado();
 		
 		return this;
 		
@@ -102,11 +121,10 @@ public class RatioOpesMayor5c implements Serializable {
 	public String toString() {
 		return "RatioOpesMayor5c [numeroTrades=" + numeroTrades + ", ratio=" + ratio + ", tradesBuenos=" + tradesBuenos
 				+ ", tradesStops=" + tradesStops + ", tradesLargos=" + tradesLargos + ", tradesCortos=" + tradesCortos
-				+ "]";
+				+ ", brutoGenerado=" + brutoGenerado + ", netoGenerado=" + netoGenerado + "]";
 	}
 
 	
-	
-	
+
 
 }

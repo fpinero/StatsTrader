@@ -25,6 +25,8 @@ public class QueryRatioOpesMenor6c {
 	private int tradesStops = 0;
 	private int tradesLargos = 0;
 	private int tradesCortos = 0;
+	private double brutoGenerado = 0;
+	private double netoGenerado = 0;
 	
 	public RatioOpesMenor6c obtenRatioOpesMenor6c(Date desdeFecha, Date hastaFecha) {
 		
@@ -128,6 +130,35 @@ public class QueryRatioOpesMenor6c {
 			
 			System.out.println("ratio alcanzado en trades menores 6c=" + ratio);
 			
+			//obtengamos el bruto generado por las operaciones
+			double tmpBruto = 0d;
+			for (TradersOpes tr : thisTradersOpes) {
+				tmpBruto += tr.getBrutoOpe();
+			}
+			//System.out.println("tmpBruto=" + tmpBruto);
+			try {
+				brutoGenerado = Double.parseDouble(df.format(tmpBruto).replace(",", "")); //hay que quitar las , pq son miles en USA
+			} catch (Exception e){
+				System.out.println("excepcion parseando brutoGenerado " + tmpBruto + "en obtenRatioOpesMenor6c\n" + e);
+				brutoGenerado = 0d;
+			}
+			
+			System.out.println("bruto generado en trades menores 6c==" + ratio);
+			
+			//obtengamos el neto generado por las operaciones
+			double tmpNeto = 0d;
+			for (TradersOpes tr : thisTradersOpes) {
+				tmpNeto += tr.getNetoOpe();
+			}
+			System.out.println("tmpNeto=" + tmpNeto);
+			try {
+				netoGenerado = Double.parseDouble(df.format(tmpNeto).replace(",", "")); //hay que quitar las , pq son miles en USA
+			} catch(Exception e) {
+				System.out.println("excepcion parseando netoGenerado " + tmpBruto + "en obtenRatioOpesMenor6c\n" + e);
+				netoGenerado = 0d;
+			}
+			System.out.println("neto generado en trades menores 6c=" + ratio);
+			
 			
 			
 		} catch (Exception e) {
@@ -143,6 +174,8 @@ public class QueryRatioOpesMenor6c {
 		beanRatioOpesMenor6c.setTradesStops(tradesStops);
 		beanRatioOpesMenor6c.setTradesLargos(tradesLargos);
 		beanRatioOpesMenor6c.setTradesCortos(tradesCortos);
+		beanRatioOpesMenor6c.setBrutoGenerado(brutoGenerado);
+		beanRatioOpesMenor6c.setNetoGenerado(netoGenerado);
 		
 //		System.out.println("beanRatioOpesMenor6c=" + beanRatioOpesMenor6c.toString());
 		

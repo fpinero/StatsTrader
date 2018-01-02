@@ -25,6 +25,8 @@ public class QueryRatioOpesMayor5c {
 	private int tradesStops = 0;
 	private int tradesLargos = 0;
 	private int tradesCortos = 0;
+	private double brutoGenerado = 0;
+	private double netoGenerado = 0;
 	
 	public RatioOpesMayor5c obtenRatioOpesMayor5c(Date desdeFecha, Date hastaFecha) {
 		
@@ -128,6 +130,35 @@ public class QueryRatioOpesMayor5c {
 			
 			System.out.println("ratio alcanzado en trades mayores 5c=" + ratio);
 			
+			//obtengamos el bruto generado por las operaciones
+			double tmpBruto = 0d;
+			for (TradersOpes tr : thisTradersOpes) {
+				tmpBruto += tr.getBrutoOpe();
+			}
+			//System.out.println("tmpBruto=" + tmpBruto);
+			
+			try {
+				brutoGenerado = Double.parseDouble(df.format(tmpBruto).replace(",", "")); //hay que quitar las , pq son miles en USA
+			} catch (Exception e){
+				System.out.println("excepcion parseando tmpBruto " + tmpBruto + " en obtenRatioOpesMayor5c\n" + e);
+				brutoGenerado = 0d;
+			}
+			
+			System.out.println("bruto generado en trades mayores 5c=" + ratio);
+			
+			//obtengamos el neto generado por las operaciones
+			double tmpNeto = 0d;
+			for (TradersOpes tr : thisTradersOpes) {
+				tmpNeto += tr.getNetoOpe();
+			}
+			System.out.println("tmpNeto=" + tmpNeto);
+			try {
+				netoGenerado = Double.parseDouble(df.format(tmpNeto).replace(",", "")); // hay que quitar las , pq son miles en USA
+			} catch(Exception e) {
+				System.out.println("excepcion parseando tmpNeto " + tmpBruto + " en obtenRatioOpesMayor5c\n" + e);
+				netoGenerado = 0d;
+			}
+			System.out.println("neto generado en trades mayores 5c=" + ratio);
 			
 			
 		} catch (Exception e) {
@@ -143,6 +174,8 @@ public class QueryRatioOpesMayor5c {
 		beanRatioOpesMayor5c.setTradesStops(tradesStops);
 		beanRatioOpesMayor5c.setTradesLargos(tradesLargos);
 		beanRatioOpesMayor5c.setTradesCortos(tradesCortos);
+		beanRatioOpesMayor5c.setBrutoGenerado(brutoGenerado);
+		beanRatioOpesMayor5c.setNetoGenerado(netoGenerado);
 		
 //		System.out.println("beanRatioOpesMayor5c=" + beanRatioOpesMayor5c.toString());
 		

@@ -23,6 +23,8 @@ public class RatioOpesMenor6c implements Serializable {
 	private int tradesStops;
 	private int tradesLargos;
 	private int tradesCortos;
+	private double brutoGenerado;
+	private double netoGenerado;
 	
 	public RatioOpesMenor6c() {
 		
@@ -76,6 +78,22 @@ public class RatioOpesMenor6c implements Serializable {
 		this.tradesCortos = tradesCortos;
 	}
 	
+	public double getBrutoGenerado() {
+		return brutoGenerado;
+	}
+
+	public void setBrutoGenerado(double brutoGenerado) {
+		this.brutoGenerado = brutoGenerado;
+	}
+
+	public double getNetoGenerado() {
+		return netoGenerado;
+	}
+
+	public void setNetoGenerado(double netoGenerado) {
+		this.netoGenerado = netoGenerado;
+	}
+
 	public RatioOpesMenor6c obtenRatioOpesMenor6c(Date desdeFecha, Date hastaFecha) {
 		
 		//llama a la query que busca las operaciones menores de 6c dado el rango de fechas especificado
@@ -89,6 +107,8 @@ public class RatioOpesMenor6c implements Serializable {
 		this.tradesStops = tmpRatioOpesMenor6c.getTradesStops();
 		this.tradesLargos = tmpRatioOpesMenor6c.getTradesLargos();
 		this.tradesCortos = tmpRatioOpesMenor6c.getTradesCortos();
+		this.brutoGenerado = tmpRatioOpesMenor6c.getBrutoGenerado();
+		this.netoGenerado = tmpRatioOpesMenor6c.getNetoGenerado();
 		
 		return this;
 		
@@ -98,8 +118,10 @@ public class RatioOpesMenor6c implements Serializable {
 	public String toString() {
 		return "RatioOpesMenor6c [numeroTrades=" + numeroTrades + ", ratio=" + ratio + ", tradesBuenos=" + tradesBuenos
 				+ ", tradesStops=" + tradesStops + ", tradesLargos=" + tradesLargos + ", tradesCortos=" + tradesCortos
-				+ "]";
+				+ ", brutoGenerado=" + brutoGenerado + ", netoGenerado=" + netoGenerado + "]";
 	}
+
+	
 	
 	
 
