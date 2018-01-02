@@ -48,6 +48,7 @@ public class EstadisticasHelper implements Serializable{
 	private CombinacionPeorPatron15m combinacionPeorPatron15m;
 	
 	private RatioOpesMenor6c ratioOpesMenor6c;
+	private RatioOpesMayor5c ratioOpesMayor5c;
 	
 	public EstadisticasHelper() {
 		
@@ -193,6 +194,11 @@ public class EstadisticasHelper implements Serializable{
 	public RatioOpesMenor6c getRatioOpesMenor6c() {
 		obtenRatioOpesMenor6c();
 		return ratioOpesMenor6c;
+	}
+	
+	public RatioOpesMayor5c getRatioOpesMayor5c() {
+		obtenRatioOpesMayor5c();
+		return ratioOpesMayor5c;
 	}
 
 	public CombinacionMejorPatron15m getCombinacionMejorPatron15m() {
@@ -387,5 +393,17 @@ public class EstadisticasHelper implements Serializable{
 		
 		this.ratioOpesMenor6c = ratioOpesMenor6c;
 	}
+	
+	public void obtenRatioOpesMayor5c() {
+		RatioOpesMayor5c ratioOpesMayor5c = new RatioOpesMayor5c();
+		ratioOpesMayor5c = ratioOpesMayor5c.obtenRatioOpesMayor5c(fechaInicial, fechaFinal);
+		
+		System.out.println("*****************************************");
+		System.out.println("ratioOpesMayor5c=" + ratioOpesMayor5c.toString());
+		System.out.println("*****************************************");
+		
+		this.ratioOpesMayor5c = ratioOpesMayor5c;
+	}
+	
 	
 }

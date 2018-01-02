@@ -323,9 +323,14 @@
 					</h:panelGrid>
 				</p:panel>
 				<p:panel id="panel7right" header="Resultados Trades de mas de 5c" styleClass="no-border" >
-					<!-- <ui:param name="thisPeorCombinacion" value="#{estadisticasHelper.combinacionPeorPatron15m}"></ui:param> -->
+					<ui:param name="thisRatioMayor5c" value="#{estadisticasHelper.ratioOpesMayor5c}"></ui:param>
 					<h:panelGrid columns="4" style="width: 100%;" cellpadding="5">
-						to be done...
+						<span><strong>Número Trades:</strong><h:outputText value="#{thisRatioMayor5c.numeroTrades}" styleClass="negrita"/></span>
+						<span><strong>Ratio:</strong><h:outputText value="#{thisRatioMayor5c.ratio}%" styleClass="negrita"/></span>
+						<span><strong>Trades Buenos:</strong><h:outputText value="#{thisRatioMayor5c.tradesBuenos}" styleClass="negrita"/></span>
+						<span><strong>Trades Stops:</strong><h:outputText value="#{thisRatioMayor5c.tradesStops}" styleClass="negrita"/></span>
+						<span><strong>Trades en Largo:</strong><h:outputText value="#{thisRatioMayor5c.tradesLargos}" styleClass="negrita"/></span>
+						<span><strong>Trades en Corto:</strong><h:outputText value="#{thisRatioMayor5c.tradesCortos}" styleClass="negrita"/></span>
 					</h:panelGrid>
 				</p:panel>
 			</p:panelGrid>
