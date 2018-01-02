@@ -47,6 +47,8 @@ public class EstadisticasHelper implements Serializable{
 	private CombinacionMejorPatron15m combinacionMejorPatron15m;
 	private CombinacionPeorPatron15m combinacionPeorPatron15m;
 	
+	private RatioOpesMenor6c ratioOpesMenor6c;
+	
 	public EstadisticasHelper() {
 		
 	}
@@ -186,6 +188,11 @@ public class EstadisticasHelper implements Serializable{
 	public EstadoActualObjetivos getEstadoActualObjetivos() {
 		obtenEstadoActualObjetivos();
 		return estadoActualObjetivos;
+	}
+
+	public RatioOpesMenor6c getRatioOpesMenor6c() {
+		obtenRatioOpesMenor6c();
+		return ratioOpesMenor6c;
 	}
 
 	public CombinacionMejorPatron15m getCombinacionMejorPatron15m() {
@@ -368,6 +375,17 @@ public class EstadisticasHelper implements Serializable{
 		
 		this.estadoActualObjetivos = estadoActualObjetivos;
 		
+	}
+	
+	public void obtenRatioOpesMenor6c() {
+		RatioOpesMenor6c ratioOpesMenor6c = new RatioOpesMenor6c();
+		ratioOpesMenor6c = ratioOpesMenor6c.obtenRatioOpesMenor6c(fechaInicial, fechaFinal);
+		
+		System.out.println("*****************************************");
+		System.out.println("ratioOpesMenor6c=" + ratioOpesMenor6c.toString());
+		System.out.println("*****************************************");
+		
+		this.ratioOpesMenor6c = ratioOpesMenor6c;
 	}
 	
 }
