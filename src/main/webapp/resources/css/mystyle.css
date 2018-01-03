@@ -80,3 +80,13 @@
 	font-weight: bold;
 }
 
+/* para que la tabla de estadisticas mensuales salga con una fuente mayor y en una sola línea */
+.singleLineBold
+{
+    /* text-wrap:none; */
+    white-space:normal; 
+    overflow:scroll;
+    font-size: 14px;
+    font-weight: bold;
+}
+

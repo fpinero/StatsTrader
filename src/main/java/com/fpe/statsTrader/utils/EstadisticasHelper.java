@@ -17,6 +17,7 @@ import org.primefaces.model.chart.PieChartModel;
 
 import com.fpe.statsTrader.jpa.QueryCombinacionMejorPatron15m;
 import com.fpe.statsTrader.jpa.QueryCombinacionPeorPatron15m;
+import com.fpe.statsTrader.jpa.QueryEstadisticasMensuales;
 
 //@Component
 @SessionScoped
@@ -49,6 +50,8 @@ public class EstadisticasHelper implements Serializable{
 	
 	private RatioOpesMenor6c ratioOpesMenor6c;
 	private RatioOpesMayor5c ratioOpesMayor5c;
+	
+	private List<EstadisticasMensuales> estadisticasMensuales;
 	
 	public EstadisticasHelper() {
 		
@@ -199,6 +202,12 @@ public class EstadisticasHelper implements Serializable{
 	public RatioOpesMayor5c getRatioOpesMayor5c() {
 		obtenRatioOpesMayor5c();
 		return ratioOpesMayor5c;
+	}
+	
+	public List<EstadisticasMensuales> getEstadisticasMensuales() {
+		QueryEstadisticasMensuales qem = new QueryEstadisticasMensuales();
+		estadisticasMensuales = qem.obtenResultadosEstadisticaMensuales();
+		return estadisticasMensuales;
 	}
 
 	public CombinacionMejorPatron15m getCombinacionMejorPatron15m() {
@@ -404,6 +413,7 @@ public class EstadisticasHelper implements Serializable{
 		
 		this.ratioOpesMayor5c = ratioOpesMayor5c;
 	}
+	
 	
 	
 }
