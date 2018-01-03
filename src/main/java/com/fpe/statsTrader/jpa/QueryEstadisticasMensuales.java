@@ -1,5 +1,6 @@
 package com.fpe.statsTrader.jpa;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,6 +12,7 @@ public class QueryEstadisticasMensuales {
 	//para poder ejecutarlo manualmente
 	public static void main(String[] args) {
 		
+		SimpleDateFormat sdfMesAno = new SimpleDateFormat("MM/YYYY");
 		Calendar fechaNow = GregorianCalendar.getInstance();
 		int mesActual = fechaNow.get(Calendar.MONTH);
 		int anoActual = fechaNow.get(Calendar.YEAR);
@@ -44,6 +46,7 @@ public class QueryEstadisticasMensuales {
 			Date fechaIniBus = desdeFecha.getTime();
 			
 			System.out.println("***************************************************");
+			System.out.println("Mes/Año para la cabecera=" + sdfMesAno.format(fechaIniBus));
 			System.out.println("FechaIniBusqueda=" + convert.converDate(fechaIniBus));
 			System.out.println("FechaFinBusqueda=" + convert.converDate(fechaFinBus));
 			System.out.println("***************************************************");
@@ -73,6 +76,7 @@ public class QueryEstadisticasMensuales {
 		
 		System.out.println("----- busqueda extra -----");
 		System.out.println("***************************************************");
+		System.out.println("Mes/Año para la cabecera=" + sdfMesAno.format(fechaIni));
 		System.out.println("FechaIniBusqueda=" + convert.converDate(fechaIni));
 		System.out.println("FechaFinBusqueda=" + convert.converDate(fechaFin));
 		System.out.println("***************************************************");
