@@ -164,6 +164,7 @@ public class QueryEstadisticasMensuales {
 				for (TradersOpes tr : thisTradersOpes ) {
 					sharesMovidas += tr.getSharesTrade();
 				}
+				sharesMovidas = sharesMovidas * 2; // son el doble por la entrada y la salida
 				
 				//obtengamos el numero de operaciones buenas
 				numeroBuenas = 0;

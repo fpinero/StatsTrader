@@ -1,6 +1,7 @@
 com/fpe/statsTrader/jpa/QueryCombinacionMejorPatron15m.class
 com/fpe/statsTrader/utils/CheckParams.class
 com/fpe/statsTrader/utils/RatioSideCorto.class
+com/fpe/statsTrader/jpa/QueryEstadisticasMensuales.class
 com/fpe/statsTrader/jpa/QueryEmailYaEnUso.class
 com/fpe/statsTrader/utils/CheckLogin.class
 com/fpe/statsTrader/entity/ForbidenDomains.class
@@ -15,6 +16,7 @@ com/fpe/statsTrader/jpa/QueryLogin.class
 com/fpe/statsTrader/jpa/QueryEstadisticas1m.class
 com/fpe/statsTrader/utils/SimpleMail$1.class
 com/fpe/statsTrader/utils/MensajeRecopilandoDatos.class
+com/fpe/statsTrader/utils/EstadisticasMensuales.class
 com/fpe/statsTrader/utils/SimpleMail.class
 com/fpe/statsTrader/utils/Patron1m.class
 com/fpe/statsTrader/utils/TraderRatio.class

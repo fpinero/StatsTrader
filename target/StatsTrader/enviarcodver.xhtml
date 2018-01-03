@@ -19,6 +19,8 @@
 
 <h:body>
 
+	<h:outputScript library="js" name="common.js" target="body" />
+
 	<!-- Solo debe estar aquí si el objeto Trader ya existe, sino se le reenvía a login -->
 	<f:metadata>
 		<f:viewAction action="#{checkParams.checkTraderExists}" />
@@ -83,15 +85,19 @@
 			<p:panelGrid columns="1" styleClass="panelGridCenter">
 				<h:form>
 					<p:growl id="growl" showDetail="true" sticky="true" />
-					<div align="center">
+					<div id="btnsolcod" align="center" style="display: block">
 						<p:commandButton value="Solicitar Código"
 							actionListener="#{generaCodigoAleatorio.giveMetheCode}"
 							action="#{generaCodigoAleatorio.enviaCodigoPorEmail(traderEmail, user)}"
-							update="growl vericodform insidePanelCampoCodVer ">
+							update="growl vericodform insidePanelCampoCodVer "
+							onclick="toggle('btnsolcod'); toggle('prearrows');">
 						<!-- NO ES NECESARIO USAR AJAX, EL UPDATE DE insidePanelCampoCodVer DISPARA EL RENDERED DEL PANEL -->
 							<!-- <p:ajax event="click" update="toUpdate" /> -->
 							<!-- <f:ajax render="toUpdate" /> -->
 						</p:commandButton>
+					</div>
+					<div id="prearrows" align="center" style="margin-top:0; display: none">
+						<p:graphicImage id="wait" library="images" name="Spinner.gif" ></p:graphicImage>
 					</div>
 
 				</h:form>
@@ -114,9 +120,15 @@
 								<f:validateLength minimum="5" maximum="253" />
 							</p:inputText>
 							<br /> <br />
-							<p:commandButton value="Verificar Código"
-								action="#{generaCodigoAleatorio.verificaCodigo(inputcode.value)}"
-								update="growl2" />
+							<div id="waitdiv" style="display: block">
+								<p:commandButton value="Verificar Código"
+									action="#{generaCodigoAleatorio.verificaCodigo(inputcode.value)}"
+									update="growl2" onclick="toggle('waitdiv'); toggle('arrows');" 
+									 />  
+							</div>
+							<div id="arrows" align="center" style="margin-top:0; display: none">
+								<p:graphicImage id="wait" library="images" name="Spinner.gif" ></p:graphicImage>
+							</div>
 						</div>
 					</h:form>
 					</p:panel>

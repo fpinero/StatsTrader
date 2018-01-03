@@ -15,6 +15,7 @@
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/QueryRatioOpesMenor6c.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/QueryNombreUsuarioYaEnUso.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/GeneraCodigoAleatorio.java
+/Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/EstadisticasMensuales.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/UpdateDatosOpe.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/QueryPieOpes.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/QueryCombinacionMejorPatron15m.java
@@ -50,4 +51,5 @@
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/WebApplicationInitializer.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/WebMvcConfig.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/utils/ConvertToSqlDateFormatWithQuotes.java
+/Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/jpa/QueryEstadisticasMensuales.java
 /Users/fpinero/eclipse-neon-projects/StatsTrader/src/main/java/com/fpe/statsTrader/entity/ForbidenDomains.java
