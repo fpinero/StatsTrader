@@ -217,10 +217,10 @@ public class QueryEstadisticasMensuales {
 				}
 				
 				//calculemos el ratio
-				///(numeroOpesBuenas * 100) / totalOpes)
+				///(numeroOpesBuenas * 100) / totalOpes sin las breakeven)
 				
 				try {
-					ratioMes = Double.parseDouble(df.format(((numeroBuenas * 100) / numeroTrades)).replace("," , "."));
+					ratioMes = Double.parseDouble(df.format(((numeroBuenas * 100) / (numeroTrades - numeroBreakEven))).replace("," , "."));
 				} catch (Exception e) {
 					System.out.println("excepcion calculando el ratio en realizaLaQuery \n" +e);
 					ratioMes = 0;
