@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.fpe.statsTrader.GlobalVars;
 import com.fpe.statsTrader.entity.Trader;
 
 @ManagedBean

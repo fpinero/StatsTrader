@@ -37,7 +37,7 @@ public class QueryEstadisticasMensuales {
 		int finMesBusqueda = mesActual;
 		int finAnoBusqueda = anoActual;
 		
-		ConvertToSqlDateFormatWithQuotes convert = new ConvertToSqlDateFormatWithQuotes();
+//		ConvertToSqlDateFormatWithQuotes convert = new ConvertToSqlDateFormatWithQuotes();
 		
 		while((finMesBusqueda <= primerMesBusqueda) && (finAnoBusqueda <= anoActual)) {
 			
