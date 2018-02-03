@@ -30,83 +30,55 @@ public class QueryEstadisticasMensuales {
 		System.out.println("...id del trader logueado en QueryEstadisticasMensuales: " + idTrader);
 		
 		Calendar fechaNow = GregorianCalendar.getInstance();
-		int mesActual = fechaNow.get(Calendar.MONTH);
 		int anoActual = fechaNow.get(Calendar.YEAR);
-		int primerMesBusqueda = 0; //enero
-		int primerAnoBusqueda = 2017; 
-		int finMesBusqueda = mesActual;
-		int finAnoBusqueda = anoActual;
+		
+		ArrayList<Integer> todosLosMeses = new ArrayList<>();
+		ArrayList<Integer> todosLosAnyos = new ArrayList<>();
+		
+		//añadamos los meses
+		for (int m=0; m<=11; m++){
+			todosLosMeses.add(m);
+		}
+		//añadamos los años
+		for(int a=2017; a<=anoActual; a++){
+			todosLosAnyos.add(a);
+		}
 		
 //		ConvertToSqlDateFormatWithQuotes convert = new ConvertToSqlDateFormatWithQuotes();
 		
-		while((finMesBusqueda <= primerMesBusqueda) && (finAnoBusqueda <= anoActual)) {
-			
-			Calendar hastaFecha = GregorianCalendar.getInstance();
-			if (finMesBusqueda == 11) { //estamos en diciembre, hastaFecha debe ser 1 de Enero año siguiente
-				finMesBusqueda = 0;
-				hastaFecha.set(Calendar.DAY_OF_MONTH, 1);
-				hastaFecha.set(Calendar.MONTH, finMesBusqueda);
-				hastaFecha.set(Calendar.YEAR, primerAnoBusqueda + 1);
-			} else {
-				hastaFecha.set(Calendar.DAY_OF_MONTH, 1);
-				hastaFecha.set(Calendar.MONTH, finMesBusqueda + 1);
-				hastaFecha.set(Calendar.YEAR, primerAnoBusqueda);
-			}
-			Date fechaFinBus = hastaFecha.getTime();
-			
-			Calendar desdeFecha = GregorianCalendar.getInstance();
-			desdeFecha.set(Calendar.DAY_OF_MONTH, 1);
-			desdeFecha.set(Calendar.MONTH, primerMesBusqueda);
-			desdeFecha.set(Calendar.YEAR, primerAnoBusqueda);
-			Date fechaIniBus = desdeFecha.getTime();
-			
-//			System.out.println("***************************************************");
-//			System.out.println("FechaIniBusqueda=" + convert.converDate(fechaIniBus));
-//			System.out.println("FechaFinBusqueda=" + convert.converDate(fechaFinBus));
-//			System.out.println("***************************************************");
-			
-			EstadisticasMensuales thisEstadisticasMensuales;
-			thisEstadisticasMensuales = realizaLaQuery(idTrader, fechaIniBus, fechaFinBus);
-			if (thisEstadisticasMensuales != null) {
-				listEstadisticasMensuales.add(thisEstadisticasMensuales);
-			}
-			
-			//aumentemos los contadores para la siguiente fecha
-			primerMesBusqueda++;
-			if (primerMesBusqueda == 12) {  //si vale 12 acabamos de procesar diciembre
-				primerMesBusqueda = 0; //ponemos el mes de nuevo en Enero
-				primerAnoBusqueda++; //añadimos un año mas
+		for (int thisAnyo : todosLosAnyos){
+			for(int thisMes : todosLosMeses){
+				Calendar hastaFecha = new GregorianCalendar();
+				if (thisMes == 11){
+					hastaFecha.set(Calendar.DAY_OF_MONTH, 1);
+					hastaFecha.set(Calendar.MONTH, 0); //enero
+					hastaFecha.set(Calendar.YEAR, thisAnyo + 1);
+				} else {
+					hastaFecha.set(Calendar.DAY_OF_MONTH, 1);
+					hastaFecha.set(Calendar.MONTH, thisMes + 1); 
+					hastaFecha.set(Calendar.YEAR, thisAnyo);
+				}
+				Date fechaFinBus = hastaFecha.getTime();
+				
+				Calendar desdeFecha = GregorianCalendar.getInstance();
+				desdeFecha.set(Calendar.DAY_OF_MONTH, 1);
+				desdeFecha.set(Calendar.MONTH, thisMes);
+				desdeFecha.set(Calendar.YEAR, thisAnyo);
+				Date fechaIniBus = desdeFecha.getTime();
+				
+//				System.out.println("***************************************************");
+//				System.out.println("FechaIniBusqueda=" + convert.converDate(fechaIniBus));
+//				System.out.println("FechaFinBusqueda=" + convert.converDate(fechaFinBus));
+//				System.out.println("***************************************************");
+				
+				EstadisticasMensuales thisEstadisticasMensuales;
+				thisEstadisticasMensuales = realizaLaQuery(idTrader, fechaIniBus, fechaFinBus);
+				if (thisEstadisticasMensuales != null) {
+					listEstadisticasMensuales.add(thisEstadisticasMensuales);
+				}
+				
 			}
 			
-			finMesBusqueda++;
-			
-		}
-		
-		//hagamos ahora una búsqueda extra por el mes en curso para q muestre lo que lleva
-		
-		Calendar hastaFecha = GregorianCalendar.getInstance();
-		hastaFecha.set(Calendar.DAY_OF_MONTH, 1);
-		hastaFecha.set(Calendar.YEAR, anoActual);
-		hastaFecha.add(Calendar.MONTH, 1);  //eso es un add no un set
-		Date fechaFin = hastaFecha.getTime();
-		
-		Calendar desdeFecha = GregorianCalendar.getInstance();
-		desdeFecha.set(Calendar.DAY_OF_MONTH, 1);
-		desdeFecha.set(Calendar.MONTH, mesActual);
-		desdeFecha.set(Calendar.YEAR, anoActual);
-		Date fechaIni = desdeFecha.getTime();
-		
-//		System.out.println("----- busqueda extra -----");
-//		System.out.println("***************************************************");
-//		System.out.println("FechaIniBusqueda=" + convert.converDate(fechaIni));
-//		System.out.println("FechaFinBusqueda=" + convert.converDate(fechaFin));
-//		System.out.println("***************************************************");
-		
-		EstadisticasMensuales thisEstadisticasMensuales;
-		thisEstadisticasMensuales = realizaLaQuery(idTrader, fechaIni, fechaFin);
-		if (thisEstadisticasMensuales != null) {
-			listEstadisticasMensuales.add(thisEstadisticasMensuales);
-//			System.out.println("thisEstadisticasMensuales=" + thisEstadisticasMensuales.toString());
 		}
 		
 		return listEstadisticasMensuales;

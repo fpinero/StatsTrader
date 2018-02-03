@@ -23,6 +23,9 @@
 
 	<!-- Solo debe estar aquí si el objeto Trader NO existe, si existe se le reenvía a modificarcuenta -->
 	<f:metadata>
+		
+		<f:viewAction action="#{checkParams.inicializaParamVersionApp}" />
+		
 		<f:viewAction action="#{checkParams.checkTraderAlreadyExists}" />
 	</f:metadata>
 
